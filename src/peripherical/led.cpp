@@ -29,4 +29,4 @@ void Led::toggle() {
     digitalWrite(this->pin, this->value);
 }
 
-}
+} // rfidoor::peripherical
