@@ -1,18 +1,15 @@
 #include <peripherical/lcd.hpp>
 #include <task/blinky.hpp>
+#include <pinout.hpp>
 
-const uint8_t internal_led_pin{2};
+namespace rfidoor::main {
+
 const uint32_t blinky_frequency_ms{500};
-
-const uint8_t lcd_sda_pin{2};
-const uint8_t lcd_scl_pin{3};
-
-// Periphericals initializations
-rfidoor::peripherical::Led board_led(internal_led_pin);
-rfidoor::peripherical::Lcd lcd(lcd_sda_pin, lcd_scl_pin);
 
 // Tasks initializations
 rfidoor::task::BlinkyTask blinky_task(board_led, blinky_frequency_ms, "blinkyTask");
+
+}  // rfidoor::main
 
 void setup() {
   Serial.begin(115200);
