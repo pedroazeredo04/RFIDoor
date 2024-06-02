@@ -18,7 +18,7 @@ const uint32_t default_stack_size = 1000;  // words
 const task_priority_t default_priority = LOW_PRIORITY;
 
 
-Task::Task(const char* name, uint32_t stack_size, UBaseType_t priority) {
+Task::Task(const char* name, uint32_t stack_size, task_priority_t priority) {
     xTaskCreate(
         entry_function_wrapper,  // Task function
         name,                    // Name of the task (for debugging)

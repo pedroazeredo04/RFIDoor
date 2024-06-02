@@ -46,7 +46,7 @@ public:
      * @param stack_size Size of the stack reserved for task in words
      * @param priority The priority of the task that will be runned
      */
-    Task(const char* name = default_name, uint32_t stack_size = default_stack_size, UBaseType_t priority = default_priority);
+    Task(const char* name = default_name, uint32_t stack_size = default_stack_size, task_priority_t priority = default_priority);
 
     /**
      * @brief Init function to be overrided by inheriting classes

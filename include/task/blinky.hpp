@@ -29,7 +29,7 @@ public:
                uint32_t blinky_frequency_ms, 
                const char* name = default_name,
                uint32_t stack_size = default_stack_size,
-               UBaseType_t priority = default_priority);
+               task_priority_t priority = default_priority);
 
     /**
      * @brief Override of the mother class Task init function  
