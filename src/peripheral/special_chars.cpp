@@ -10,6 +10,8 @@
 
 #include <peripheral/special_chars.hpp>
 
+namespace rfidoor::peripheral {
+
 const char heart_bytemap[8] = {
 0b00000,
 0b01010,
@@ -111,3 +113,5 @@ const char* special_char_list[8] = {
     skull_bytemap,
     lock_bytemap
 };
+
+}  // rfidoor::peripheral
