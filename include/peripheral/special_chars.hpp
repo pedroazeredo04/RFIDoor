@@ -16,7 +16,7 @@ namespace rfidoor::peripheral {
 /**
  * @brief Enum containing the possible special chars
  */
-typedef enum special_char_t {
+enum special_char_t {
     HEART_SPECIAL_CHAR = 0,
     BELL_SPECIAL_CHAR,
     ALIEN_SPECIAL_CHAR,
@@ -26,7 +26,7 @@ typedef enum special_char_t {
     SKULL_SPECIAL_CHAR,
     LOCK_SPECIAL_CHAR,
     MAX_SPECIAL_CHAR_NUM
-} special_char_t;
+};
 
 extern const char heart_bytemap[8];
 

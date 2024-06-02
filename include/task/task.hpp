@@ -18,14 +18,14 @@ namespace rfidoor::task {
 /**
  * @brief Enum corresponding to the possible task priorities
  */
-typedef enum task_priority_t {
+enum task_priority_t {
     LOW_PRIORITY = 1,
     MEDIUM_LOW_PRIORITY,
     MEDIUM_PRIORITY,
     MEDIUM_HIGH_PRIORITY,
     HIGH_PRIORITY,
     REAL_TIME_PRIORITY
-} task_priority_t;
+};
 
 /**
  * @brief Public variables that correspond to the default values of the abstract Task class 
