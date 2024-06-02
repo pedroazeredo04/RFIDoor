@@ -11,6 +11,8 @@
 #ifndef __SPECIAL_CHARS_HPP__
 #define __SPECIAL_CHARS_HPP__
 
+namespace rfidoor::peripheral {
+
 /**
  * @brief Enum containing the possible special chars
  */
@@ -43,5 +45,7 @@ extern const char skull_bytemap[8];
 extern const char lock_bytemap[8];
 
 extern const char* special_char_list[8];
+
+}
 
 #endif //__SPECIAL_CHARS_HPP__

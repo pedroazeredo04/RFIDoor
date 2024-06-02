@@ -13,9 +13,9 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
-#include <peripherical/special_chars.hpp>
+#include <peripheral/special_chars.hpp>
 
-namespace rfidoor::peripherical {
+namespace rfidoor::peripheral {
 /**
  * @brief Class for controlling a Liquid Crystal Display
  */
@@ -73,6 +73,6 @@ private:
     LiquidCrystal_I2C lib_lcd;
 
 };
-}  // rfidoor::peripherical
+}  // rfidoor::peripheral
 
 #endif  // __LCD_HPP__

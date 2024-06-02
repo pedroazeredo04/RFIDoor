@@ -9,9 +9,9 @@
  */
 
 
-#include <peripherical/lcd.hpp>
+#include <peripheral/lcd.hpp>
 
-namespace rfidoor::peripherical {
+namespace rfidoor::peripheral {
 
 /**
  * @brief set the LCD address to 0x27 for a 16 chars and 2 line display 
@@ -48,4 +48,4 @@ void Lcd::write_special_char(special_char_t special_char) {
     this->lib_lcd.write(special_char);
 }
 
-} // rfidoor::peripherical
+} // rfidoor::peripheral

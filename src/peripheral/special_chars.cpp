@@ -8,7 +8,7 @@
  * @date 06/2024
  */
 
-#include <peripherical/special_chars.hpp>
+#include <peripheral/special_chars.hpp>
 
 const char heart_bytemap[8] = {
 0b00000,

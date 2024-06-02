@@ -1,4 +1,4 @@
-#include <peripherical/lcd.hpp>
+#include <peripheral/lcd.hpp>
 #include <task/blinky.hpp>
 #include <pinout.hpp>
 
