@@ -1,4 +1,3 @@
-#include <peripherical/led.hpp>
 #include <task/blinky.hpp>
 
 const uint8_t internal_led_pin{2};
