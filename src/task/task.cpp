@@ -36,15 +36,11 @@ void Task::task_sleep_ms(uint32_t time_to_sleep_ms) {
 void Task::entry_function_wrapper(void* params) {
     Task* p = static_cast<Task*>(params);
 
-    auto lambda_entry_function = [p]() {
-        p->init();
+    p->init();
 
-        while (true) {
-            p->spin();
-        }
-    };
-
-    lambda_entry_function();
+    while (true) {
+        p->spin();
+    }
 }
 
 } // rfidoor::task
