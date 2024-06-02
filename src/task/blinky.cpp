@@ -4,11 +4,18 @@
 
 namespace rfidoor::task {
 
-BlinkyTask::BlinkyTask(const char* task_name, rfidoor::peripherical::Led led, uint32_t blinky_frequency_ms) : Task(task_name), led{led}, blinky_frequency_ms{blinky_frequency_ms} {  }
+BlinkyTask::BlinkyTask(rfidoor::peripherical::Led led, uint32_t blinky_frequency_ms, const char* name, uint32_t stack_size, UBaseType_t priority) : 
+                       Task(name, stack_size, priority), 
+                       led{led}, 
+                       blinky_frequency_ms{blinky_frequency_ms} {  }
 
-void BlinkyTask::loop() {
+void BlinkyTask::init() {
+    //
+}
+
+void BlinkyTask::spin() {
     this->led.toggle();
-    vTaskDelay(pdMS_TO_TICKS(this->blinky_frequency_ms));
+    this->task_sleep_ms(this->blinky_frequency_ms);
 }
 
 } // rfidoor::task

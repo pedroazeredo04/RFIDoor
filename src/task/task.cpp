@@ -10,26 +10,33 @@
 
 namespace rfidoor::task {
 
-Task::Task(const char* name, uint32_t stack_size, task_priority_t priority) {
+Task::Task(const char* name, uint32_t stack_size, UBaseType_t priority) {
     xTaskCreate(
-        this->task_wrapper,   // Task function
-        name,                 // Name of the task (for debugging)
-        stack_size,           // Stack size (in words)
-        this,                 // Task input parameter
-        priority,             // Priority of the task
-        &(this->task_handle)  // Task handle
+        entry_function_wrapper,  // Task function
+        name,                    // Name of the task (for debugging)
+        stack_size,              // Stack size (in words)
+        this,                    // Task input parameter
+        priority,                // Priority of the task
+        &this->task_handle       // Task handle
     );
 }
 
-void Task::task_wrapper(void* pvParameters) {
-    Task* task = static_cast<Task*>(pvParameters);
-    while (true) {
-        task->loop();
-    }
+void Task::task_sleep_ms(uint32_t time_to_sleep_ms) {
+    vTaskDelay(pdMS_TO_TICKS(time_to_sleep_ms));
 }
 
-void task_sleep_ms(uint32_t time_to_sleep_ms) {
-    vTaskDelay(pdMS_TO_TICKS(time_to_sleep_ms));
+void Task::entry_function_wrapper(void* params) {
+    Task* p = static_cast<Task*>(params);
+
+    auto lambda_entry_function = [p]() {
+        p->init();
+
+        while (true) {
+            p->spin();
+        }
+    };
+
+    lambda_entry_function();
 }
 
 } // rfidoor::task

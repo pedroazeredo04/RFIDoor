@@ -27,8 +27,12 @@ typedef enum task_priority_t {
     REAL_TIME_PRIORITY
 } task_priority_t;
 
-const uint32_t default_stack_size{1000};  // words
-const task_priority_t default_priority{MEDIUM_PRIORITY};
+/**
+ * @brief Public variables that correspond to the default values of the abstract Task class 
+ */
+// const char* default_name{""};
+// const uint32_t default_stack_size{1000};  // words
+// const task_priority_t default_priority{LOW_PRIORITY};
 
 /**
  * @brief Class for a generic Task
@@ -42,32 +46,35 @@ public:
      * @param stack_size Size of the stack reserved for task in words
      * @param priority The priority of the task that will be runned
      */
-    Task(const char* name, uint32_t stack_size = default_stack_size, task_priority_t priority = default_priority);
+    Task(const char* name = "default_name", uint32_t stack_size = 1000, UBaseType_t priority = LOW_PRIORITY);
+
+    /**
+     * @brief Init function to be overrided by inheriting classes
+     */
+    virtual void init() = 0;
+
+    /**
+     * @brief Spin function to be overrided by inheriting classes
+     */
+    virtual void spin() = 0;
+
+    /**
+     * @brief RTOS wrapper to task sleep
+     *
+     * @param time_to_sleep_ms Time to task sleep in miliseconds
+     */
+    static void task_sleep_ms(uint32_t time_to_sleep_ms);
 
 protected:
     /**
-     * @brief Loop function to be overrided by inheriting classes
-     */
-    virtual void loop() = 0;
-
-private:
-    /**
-     * @brief Wrapper function that calls the loop function
+     * @brief Wrapper function to be passed to xTaskCreate
      * 
-     * @param pvParameters RTOS required parameters
+     * @param params RTOS required parameters
      */
-    static void task_wrapper(void* pvParameters);
+    static void entry_function_wrapper(void* params);
 
     TaskHandle_t task_handle;  // Handle for the task
 };
-
-
-/**
- * @brief RTOS wrapper to task sleep
- *
- * @param time_to_sleep_ms Time to task sleep in miliseconds
- */
-void task_sleep_ms(uint32_t time_to_sleep_ms);
 
 
 }  // rfidoor::task

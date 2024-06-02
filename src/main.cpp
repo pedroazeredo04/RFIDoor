@@ -2,13 +2,20 @@
 #include <task/blinky.hpp>
 
 const uint8_t internal_led_pin{2};
-const uint32_t blinky_frequency_ms{500};
+const uint32_t blinky_frequency_ms{1000};
+
+// Periphericals initializations
+rfidoor::peripherical::Led led(internal_led_pin);
+
+// Tasks initializations
+rfidoor::task::BlinkyTask blinky_task(led, blinky_frequency_ms, "blinkyTask");
 
 void setup() {
-  rfidoor::peripherical::Led led(internal_led_pin);
-  rfidoor::task::BlinkyTask blinky_task("Blinky", led, blinky_frequency_ms);
+  Serial.begin(115200);
+
+  // No need to initialize RTOS scheduler; ESP32 does it automatically
 }
 
 void loop() {
-  // Empty loop since we are using FreeRTOS tasks
+  // Loop empty, using RTOS;
 }
