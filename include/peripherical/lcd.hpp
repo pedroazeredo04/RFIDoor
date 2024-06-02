@@ -13,6 +13,7 @@
 
 #include <Arduino.h>
 #include <LiquidCrystal_I2C.h>
+#include <peripherical/special_chars.hpp>
 
 namespace rfidoor::peripherical {
 /**
@@ -47,6 +48,13 @@ public:
      * @param row Row to be setted by cursor
      */
     void set_cursor(const uint8_t col, const uint8_t row);
+
+    /**
+     * @brief Write a special defined by user at the current cursor position in the screen
+     * 
+     * @param special_char Char to be written (needs to be added to special_char_t ENUM)
+     */
+    void write_special_char(special_char_t special_char);
 
 private:
     /**
