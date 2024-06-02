@@ -4,7 +4,7 @@
 
 namespace rfidoor::task {
 
-BlinkyTask::BlinkyTask(rfidoor::peripherical::Led led, uint32_t blinky_frequency_ms, const char* name, uint32_t stack_size, UBaseType_t priority) : 
+BlinkyTask::BlinkyTask(const rfidoor::peripherical::Led& led, uint32_t blinky_frequency_ms, const char* name, uint32_t stack_size, UBaseType_t priority) : 
                        Task(name, stack_size, priority), 
                        led{led}, 
                        blinky_frequency_ms{blinky_frequency_ms} {  }

@@ -30,9 +30,9 @@ typedef enum task_priority_t {
 /**
  * @brief Public variables that correspond to the default values of the abstract Task class 
  */
-// const char* default_name{""};
-// const uint32_t default_stack_size{1000};  // words
-// const task_priority_t default_priority{LOW_PRIORITY};
+extern const char* default_name;
+extern const uint32_t default_stack_size;  // words
+extern const task_priority_t default_priority;
 
 /**
  * @brief Class for a generic Task
@@ -46,7 +46,7 @@ public:
      * @param stack_size Size of the stack reserved for task in words
      * @param priority The priority of the task that will be runned
      */
-    Task(const char* name = "default_name", uint32_t stack_size = 1000, UBaseType_t priority = LOW_PRIORITY);
+    Task(const char* name = default_name, uint32_t stack_size = default_stack_size, UBaseType_t priority = default_priority);
 
     /**
      * @brief Init function to be overrided by inheriting classes
@@ -73,7 +73,10 @@ protected:
      */
     static void entry_function_wrapper(void* params);
 
-    TaskHandle_t task_handle;  // Handle for the task
+    /**
+     * @brief Handle for the task, required by xTaskCreate RTOS function
+     */
+    TaskHandle_t task_handle;
 };
 
 

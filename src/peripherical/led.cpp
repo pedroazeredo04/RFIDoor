@@ -12,7 +12,7 @@ namespace rfidoor::peripherical {
 
 Led::Led(const uint8_t pin) : pin{pin} {
     pinMode(this->pin, OUTPUT);
- }
+}
 
 void Led::turn_on() {
     this->value = HIGH;

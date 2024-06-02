@@ -2,7 +2,7 @@
 #include <task/blinky.hpp>
 
 const uint8_t internal_led_pin{2};
-const uint32_t blinky_frequency_ms{1000};
+const uint32_t blinky_frequency_ms{500};
 
 // Periphericals initializations
 rfidoor::peripherical::Led led(internal_led_pin);

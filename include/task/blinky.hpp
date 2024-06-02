@@ -14,10 +14,6 @@
 
 namespace rfidoor::task {
 
-// extern char* default_name;
-// extern uint32_t default_stack_size;  // words
-// extern task_priority_t default_priority;
-
 /**
  * @brief Class for the blinky Task, that blinks the board LED continuously
  */
@@ -29,11 +25,11 @@ public:
      * @param led LED object to be blinked
      * @param blinky_frequency_ms Frequency to blink the LED in miliseconds
      */
-    BlinkyTask(rfidoor::peripherical::Led led,
+    BlinkyTask(const rfidoor::peripherical::Led& led,
                uint32_t blinky_frequency_ms, 
-               const char* name = "default_name",
-               uint32_t stack_size = 1000,
-               UBaseType_t priority = 1);
+               const char* name = default_name,
+               uint32_t stack_size = default_stack_size,
+               UBaseType_t priority = default_priority);
 
     /**
      * @brief Override of the mother class Task init function  
@@ -45,10 +41,15 @@ public:
      */
     virtual void spin() override;
 
-
-
 private:
+    /**
+     * @brief LED peripherical to be blinked  
+     */
     rfidoor::peripherical::Led led;
+
+    /**
+     * @brief Time in miliseconds to blink LED  
+     */
     const uint32_t blinky_frequency_ms;
 };
 

@@ -46,7 +46,7 @@ private:
     const uint8_t pin;
 
     /**
-     * @brief Value for the LED 
+     * @brief Current LED output value (HIGH or LOW) 
      */
     bool value = LOW;
 };
