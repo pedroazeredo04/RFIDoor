@@ -11,21 +11,24 @@
 namespace rfidoor::task {
 
 /**
- * @brief Public variables that correspond to the default values of the abstract Task class 
+ * @brief Public variable that correspond to the default values of the abstract Task class 
  */
-const char* default_name = "";
-const uint32_t default_stack_size = 1000;  // words
-const task_priority_t default_priority = LOW_PRIORITY;
+const task_config_t default_config = {
+    .name = "",
+    .stack_size = 1000,
+    .priority = LOW_PRIORITY
+};
 
+Task::Task(const task_config_t& config) : configuration{config} { }
 
-Task::Task(const char* name, uint32_t stack_size, task_priority_t priority) {
+const void Task::create_task() {
     xTaskCreate(
-        entry_function_wrapper,  // Task function
-        name,                    // Name of the task (for debugging)
-        stack_size,              // Stack size (in words)
-        this,                    // Task input parameter
-        priority,                // Priority of the task
-        &this->task_handle       // Task handle
+        entry_function_wrapper,          // Task function
+        this->configuration.name,        // Name of the task (for debugging)
+        this->configuration.stack_size,  // Stack size (in words)
+        this,                            // Task input parameter
+        this->configuration.priority,    // Priority of the task
+        &this->task_handle               // Task handle
     );
 }
 
