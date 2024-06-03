@@ -26,7 +26,7 @@ public:
      * @param blinky_frequency_ms Frequency to blink the LED in miliseconds
      */
     BlinkyTask(const rfidoor::peripheral::Led& led,
-               uint32_t blinky_frequency_ms, 
+               uint32_t blinky_frequency_ms,
                const task_config_t& config = default_config);
 
     /**

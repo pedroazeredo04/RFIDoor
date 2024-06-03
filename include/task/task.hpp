@@ -73,7 +73,7 @@ public:
      *
      * @param time_to_sleep_ms Time to task sleep in miliseconds
      */
-    static void task_sleep_ms(uint32_t time_to_sleep_ms);
+    static const void task_sleep_ms(const uint32_t& time_to_sleep_ms);
 
 protected:
     /**

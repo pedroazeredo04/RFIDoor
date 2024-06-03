@@ -32,7 +32,7 @@ const void Task::create_task() {
     );
 }
 
-void Task::task_sleep_ms(uint32_t time_to_sleep_ms) {
+const void Task::task_sleep_ms(const uint32_t& time_to_sleep_ms) {
     vTaskDelay(pdMS_TO_TICKS(time_to_sleep_ms));
 }
 
