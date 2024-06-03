@@ -11,7 +11,7 @@
 
 #include <Arduino.h>
 
-namespace rfidoor::peripherical {
+namespace rfidoor::peripheral {
 /**
  * @brief Class for controlling an LED
  */
@@ -50,6 +50,6 @@ private:
      */
     bool value = LOW;
 };
-}  // rfidoor::peripherical
+}  // rfidoor::peripheral
 
 #endif  // __LED_HPP__

@@ -10,7 +10,7 @@
 #define __BLINKY_HPP__
 
 #include "task/task.hpp"
-#include "peripherical/led.hpp"
+#include "peripheral/led.hpp"
 
 namespace rfidoor::task {
 
@@ -25,7 +25,7 @@ public:
      * @param led LED object to be blinked
      * @param blinky_frequency_ms Frequency to blink the LED in miliseconds
      */
-    BlinkyTask(const rfidoor::peripherical::Led& led,
+    BlinkyTask(const rfidoor::peripheral::Led& led,
                uint32_t blinky_frequency_ms, 
                const char* name = default_name,
                uint32_t stack_size = default_stack_size,
@@ -43,9 +43,9 @@ public:
 
 private:
     /**
-     * @brief LED peripherical to be blinked  
+     * @brief LED peripheral to be blinked  
      */
-    rfidoor::peripherical::Led led;
+    rfidoor::peripheral::Led led;
 
     /**
      * @brief Time in miliseconds to blink LED  

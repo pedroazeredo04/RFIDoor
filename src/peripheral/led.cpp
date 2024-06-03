@@ -6,9 +6,9 @@
  * @date 06/2024
  */
 
-#include <peripherical/led.hpp>
+#include <peripheral/led.hpp>
 
-namespace rfidoor::peripherical {
+namespace rfidoor::peripheral {
 
 Led::Led(const uint8_t pin) : pin{pin} {
     pinMode(this->pin, OUTPUT);
@@ -29,4 +29,4 @@ void Led::toggle() {
     digitalWrite(this->pin, this->value);
 }
 
-}
+} // rfidoor::peripheral
