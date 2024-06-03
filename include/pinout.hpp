@@ -12,7 +12,7 @@
 #include <peripheral/led.hpp>
 #include <peripheral/lcd.hpp>
 
-namespace rfidoor::main {
+namespace rfidoor::pinout {
 
 // LCD pinout
 const uint8_t lcd_sda_pin{21};
@@ -25,6 +25,6 @@ const uint8_t internal_led_pin{2};
 rfidoor::peripheral::Led board_led(internal_led_pin);
 rfidoor::peripheral::Lcd lcd(lcd_sda_pin, lcd_scl_pin);
 
-}  // rfidoor::main
+}  // rfidoor::pinout
 
 #endif // __PINOUT_HPP__

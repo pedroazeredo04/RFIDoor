@@ -1,22 +1,25 @@
-#include <peripheral/lcd.hpp>
 #include <task/blinky.hpp>
 #include <pinout.hpp>
 
-namespace rfidoor::main {
+namespace rfidoor::pinout {
 
 const uint32_t blinky_frequency_ms{500};
 
 // Tasks initializations
-rfidoor::task::BlinkyTask blinky_task(board_led, blinky_frequency_ms, "blinkyTask");
+ rfidoor::task::BlinkyTask blinky_task(board_led, blinky_frequency_ms, "blinkyTask");
 
-}  // rfidoor::main
+}  // rfidoor::pinout
 
 void setup() {
-  Serial.begin(115200);
-
-  // No need to initialize RTOS scheduler; ESP32 does it automatically
+  rfidoor::pinout::lcd.init();
+  rfidoor::pinout::lcd.setCursor(0,0);
+	rfidoor::pinout::lcd.print("Hello, world!");
+	rfidoor::pinout::lcd.setCursor(2,1);
+	rfidoor::pinout::lcd.print("Chupa Tsuzuki");
+  rfidoor::pinout::lcd.write_special_char(rfidoor::peripheral::SKULL_SPECIAL_CHAR);
 }
 
 void loop() {
-  // Loop empty, using RTOS;
+  rfidoor::pinout::board_led.toggle();
+  delay(500);
 }

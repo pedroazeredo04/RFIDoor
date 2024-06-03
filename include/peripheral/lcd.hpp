@@ -3,7 +3,7 @@
  *
  * @brief LCD display class header
  * 
- * @note This class is responsible to automate some configurations of the pre-made LiquidCrystal_I2C lib
+ * @note This class is responsible to automate some configurations from https://registry.platformio.org/libraries/iakop/LiquidCrystal_I2C_ESP32 lib
  *
  * @date 06/2024
  */
@@ -30,6 +30,11 @@ public:
     explicit Lcd(const uint8_t sda_pin, const uint8_t scl_pin);
 
     /**
+     * @brief Initializes LCD
+     */
+    void init();
+
+    /**
      * @brief Clear LCD screen
      */
     void clear();
@@ -47,7 +52,7 @@ public:
      * @param col Column to be setted by cursor
      * @param row Row to be setted by cursor
      */
-    void set_cursor(const uint8_t col, const uint8_t row);
+    void setCursor(const uint8_t col, const uint8_t row);
 
     /**
      * @brief Write a special defined by user at the current cursor position in the screen
