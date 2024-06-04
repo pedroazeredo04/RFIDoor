@@ -9,17 +9,27 @@ const uint32_t blinky_frequency_ms{500};
  rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms, rfidoor::task::blinky_config);
 
 void setup() {
+  blinky_task.create_task();
+
   rfidoor::pinout::lcd.init();
-  rfidoor::pinout::lcd.setCursor(0,0);
-	rfidoor::pinout::lcd.print("Hello, world!");
-	rfidoor::pinout::lcd.setCursor(2,1);
-	rfidoor::pinout::lcd.print("Chupa Tsuzuki");
+  rfidoor::pinout::lcd.set_cursor(0,0);
+	rfidoor::pinout::lcd.write("Hello, world!");
+	rfidoor::pinout::lcd.set_cursor(2,1);
+	rfidoor::pinout::lcd.write("Chupa Tsuzuki");
   rfidoor::pinout::lcd.write_special_char(rfidoor::peripheral::SKULL_SPECIAL_CHAR);
 
-  blinky_task.create_task();
+  delay(1000);
+  rfidoor::pinout::lcd.clear();
+  rfidoor::pinout::lcd.set_cursor(0, 0);
+  rfidoor::pinout::lcd.write("Digite a senha ");
+  rfidoor::pinout::lcd.write_special_char(rfidoor::peripheral::LOCK_SPECIAL_CHAR);
+  rfidoor::pinout::lcd.set_cursor(0, 1);
 }
 
 void loop() {
-  // rfidoor::pinout::board_led.toggle();
-  // delay(500);
+  char key = rfidoor::pinout::keyboard.getKey();
+
+  if (key){
+    rfidoor::pinout::lcd.write_char_with_increment(key);
+  }
 }

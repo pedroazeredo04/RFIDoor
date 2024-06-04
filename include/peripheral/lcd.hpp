@@ -16,6 +16,12 @@
 #include <peripheral/special_chars.hpp>
 
 namespace rfidoor::peripheral {
+
+typedef struct lcd_position_t {
+    uint8_t column;
+    uint8_t row;
+} lcd_position_t;
+
 /**
  * @brief Class for controlling a Liquid Crystal Display
  */
@@ -44,15 +50,21 @@ public:
      * 
      * @param str String to be printed in screen
      */
-    void print(const char* str);
+    void write(const char* str);
 
     /**
-     * @brief Set the LCD cursos at specified coordinates
+     * @brief Print a char at the current cursor position in the screen
      * 
-     * @param col Column to be setted by cursor
-     * @param row Row to be setted by cursor
+     * @param character Char to be printed in screen
      */
-    void setCursor(const uint8_t col, const uint8_t row);
+    void write(char character);
+
+    /**
+     * @brief Print a char at the current cursor position in the screen, and increment cursor
+     * 
+     * @param character Char to be printed in screen
+     */
+    void write_char_with_increment(char character);
 
     /**
      * @brief Write a special defined by user at the current cursor position in the screen
@@ -60,6 +72,19 @@ public:
      * @param special_char Char to be written (needs to be added to special_char_t ENUM)
      */
     void write_special_char(special_char_t special_char);
+
+    /**
+     * @brief Increment the position of the cursor
+     */
+    void cursor_increment_position();
+
+    /**
+     * @brief Set the LCD cursos at specified coordinates
+     * 
+     * @param col Column to be setted by cursor
+     * @param row Row to be setted by cursor
+     */
+    void set_cursor(const uint8_t col, const uint8_t row);
 
 private:
     /**
@@ -77,6 +102,10 @@ private:
      */
     LiquidCrystal_I2C lib_lcd;
 
+    /**
+     * @brief LCD object from prebuilt lib
+     */
+    lcd_position_t cursor_position;
 };
 }  // rfidoor::peripheral
 
