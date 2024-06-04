@@ -1,14 +1,12 @@
 #include <task/blinky.hpp>
 #include <pinout.hpp>
+#include <task_scheme.hpp>
 
-namespace rfidoor::pinout {
 
 const uint32_t blinky_frequency_ms{500};
 
 // Tasks initializations
- rfidoor::task::BlinkyTask blinky_task(board_led, blinky_frequency_ms, "blinkyTask");
-
-}  // rfidoor::pinout
+ rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms, rfidoor::task::blinky_config);
 
 void setup() {
   rfidoor::pinout::lcd.init();
@@ -17,9 +15,11 @@ void setup() {
 	rfidoor::pinout::lcd.setCursor(2,1);
 	rfidoor::pinout::lcd.print("Chupa Tsuzuki");
   rfidoor::pinout::lcd.write_special_char(rfidoor::peripheral::SKULL_SPECIAL_CHAR);
+
+  blinky_task.create_task();
 }
 
 void loop() {
-  rfidoor::pinout::board_led.toggle();
-  delay(500);
+  // rfidoor::pinout::board_led.toggle();
+  // delay(500);
 }

@@ -28,11 +28,18 @@ enum task_priority_t {
 };
 
 /**
- * @brief Public variables that correspond to the default values of the abstract Task class 
+ * @brief Struct to be passed to Task constructor
  */
-extern const char* default_name;
-extern const uint32_t default_stack_size;  // words
-extern const task_priority_t default_priority;
+typedef struct task_config_t {
+    const char* name;
+    uint32_t stack_size;
+    task_priority_t priority;
+} task_config_t;
+
+/**
+ * @brief Public variable that correspond to the default values of the abstract Task class 
+ */
+extern const task_config_t default_config;
 
 /**
  * @brief Class for a generic Task
@@ -42,11 +49,14 @@ public:
     /**
      * @brief Constructor for the generic Task class
      *
-     * @param name String that represents the name of the refered task
-     * @param stack_size Size of the stack reserved for task in words
-     * @param priority The priority of the task that will be runned
+     * @param task_config_t Configuration of the task
      */
-    Task(const char* name = default_name, uint32_t stack_size = default_stack_size, task_priority_t priority = default_priority);
+    Task(const task_config_t& config = default_config);
+
+    /**
+     * @brief Function that calls xTaskCreate from FreeRTOS
+     */
+    const void create_task();
 
     /**
      * @brief Init function to be overrided by inheriting classes
@@ -63,7 +73,7 @@ public:
      *
      * @param time_to_sleep_ms Time to task sleep in miliseconds
      */
-    static void task_sleep_ms(uint32_t time_to_sleep_ms);
+    static const void task_sleep_ms(const uint32_t& time_to_sleep_ms);
 
 protected:
     /**
@@ -72,6 +82,12 @@ protected:
      * @param params RTOS required parameters
      */
     static void entry_function_wrapper(void* params);
+
+private:
+    /**
+     * @brief Configuration type for class configuring
+     */
+    const task_config_t configuration;
 
     /**
      * @brief Handle for the task, required by xTaskCreate RTOS function
