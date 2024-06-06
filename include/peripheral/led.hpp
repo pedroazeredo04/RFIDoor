@@ -17,39 +17,39 @@ namespace rfidoor::peripheral {
  */
 class Led {
 public:
-    /**
-     * @brief Constructor for the Led class
-     *
-     * @param pin Pin of the referred LED
-     */
-    explicit Led(const uint8_t pin);
+  /**
+   * @brief Constructor for the Led class
+   *
+   * @param pin Pin of the referred LED
+   */
+  explicit Led(const uint8_t pin);
 
-    /**
-     * @brief Turn the LED on
-     */
-    void turn_on();
+  /**
+   * @brief Turn the LED on
+   */
+  void turn_on();
 
-    /**
-     * @brief Turn the LED off
-     */
-    void turn_off();
+  /**
+   * @brief Turn the LED off
+   */
+  void turn_off();
 
-    /**
-     * @brief Toggle the LED
-     */
-    void toggle();
+  /**
+   * @brief Toggle the LED
+   */
+  void toggle();
 
 private:
-    /**
-     * @brief Gpio pin for the LED
-     */
-    const uint8_t pin;
+  /**
+   * @brief Gpio pin for the LED
+   */
+  const uint8_t pin;
 
-    /**
-     * @brief Current LED output value (HIGH or LOW) 
-     */
-    bool value = LOW;
+  /**
+   * @brief Current LED output value (HIGH or LOW)
+   */
+  bool value = LOW;
 };
-}  // rfidoor::peripheral
+} // namespace rfidoor::peripheral
 
-#endif  // __LED_HPP__
+#endif // __LED_HPP__

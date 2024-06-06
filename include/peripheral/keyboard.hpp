@@ -20,10 +20,10 @@ extern const unsigned char keypad_cols;
 extern const char keyboard_keys[4][4];
 
 enum keyboard_chars_t {
-    A = 10,
-    B,
-    C,
-    D,
+  A = 10,
+  B,
+  C,
+  D,
 };
 
 /**
@@ -31,37 +31,37 @@ enum keyboard_chars_t {
  */
 class Keyboard {
 public:
-    /**
-     * @brief Constructor for the Keypad class
-     *
-     * @param config 
-     */
-    explicit Keyboard(unsigned char* row_pins, unsigned char* col_pins);
+  /**
+   * @brief Constructor for the Keypad class
+   *
+   * @param config
+   */
+  explicit Keyboard(unsigned char *row_pins, unsigned char *col_pins);
 
-    /**
-     * @brief Reads keypad current pressed key
-     * 
-     * @return Char that keypad has read
-     */
-    char getKey();
+  /**
+   * @brief Reads keypad current pressed key
+   *
+   * @return Char that keypad has read
+   */
+  char getKey();
 
 private:
-    /**
-     * @brief Keypad row pins
-     */
-    const uint8_t* row_pins;
+  /**
+   * @brief Keypad row pins
+   */
+  const uint8_t *row_pins;
 
-    /**
-     * @brief Keypad column pins
-     */
-    const uint8_t* col_pins;
+  /**
+   * @brief Keypad column pins
+   */
+  const uint8_t *col_pins;
 
-    /**
-     * @brief Keypad pins
-     */
-    Keypad lib_keypad;
+  /**
+   * @brief Keypad pins
+   */
+  Keypad lib_keypad;
 };
 
-}  // rfidoor::peripheral
+} // namespace rfidoor::peripheral
 
-#endif  // __KEYBOARD_HPP__
+#endif // __KEYBOARD_HPP__

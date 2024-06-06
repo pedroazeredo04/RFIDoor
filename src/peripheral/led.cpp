@@ -10,23 +10,21 @@
 
 namespace rfidoor::peripheral {
 
-Led::Led(const uint8_t pin) : pin{pin} {
-    pinMode(this->pin, OUTPUT);
-}
+Led::Led(const uint8_t pin) : pin{pin} { pinMode(this->pin, OUTPUT); }
 
 void Led::turn_on() {
-    this->value = HIGH;
-    digitalWrite(this->pin, this->value);
+  this->value = HIGH;
+  digitalWrite(this->pin, this->value);
 }
 
 void Led::turn_off() {
-    this->value = LOW;
-    digitalWrite(this->pin, this->value);
+  this->value = LOW;
+  digitalWrite(this->pin, this->value);
 }
 
 void Led::toggle() {
-    this->value = !(this->value);
-    digitalWrite(this->pin, this->value);
+  this->value = !(this->value);
+  digitalWrite(this->pin, this->value);
 }
 
-} // rfidoor::peripheral
+} // namespace rfidoor::peripheral
