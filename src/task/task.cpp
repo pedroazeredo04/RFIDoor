@@ -20,7 +20,7 @@ const task_config_t default_config = {
 Task::Task(const task_config_t &config) : configuration{config} {}
 
 const void Task::create_task() {
-  xTaskCreate(entry_function_wrapper,   // Task function
+  xTaskCreate(this->entry_function_wrapper,   // Task function
               this->configuration.name, // Name of the task (for debugging)
               this->configuration.stack_size, // Stack size (in words)
               this,                           // Task input parameter
