@@ -16,13 +16,12 @@ namespace rfidoor::peripheral {
 /**
  * @brief set the LCD address to 0x27 for a 16 chars and 2 line display
  */
-static const uint8_t lcd_addr{0x27};
-static const uint8_t lcd_cols{16};
-static const uint8_t lcd_rows{2};
+const uint8_t lcd_addr{0x27};
+const uint8_t lcd_cols{16};
+const uint8_t lcd_rows{2};
 
-Lcd::Lcd(const uint8_t sda_pin, const uint8_t scl_pin)
-    : lib_lcd(lcd_addr, lcd_cols, lcd_rows), sda_pin{sda_pin}, scl_pin{scl_pin},
-      cursor_position{0, 0} {}
+Lcd::Lcd(const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t address, const uint8_t columns, const uint8_t rows)
+    : lib_lcd(address, columns, rows), sda_pin{sda_pin}, scl_pin{scl_pin}, cursor_position{0, 0} { }
 
 void Lcd::init() {
   this->lib_lcd.init(this->sda_pin, this->scl_pin);

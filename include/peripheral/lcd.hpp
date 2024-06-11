@@ -18,6 +18,10 @@
 
 namespace rfidoor::peripheral {
 
+extern const uint8_t lcd_addr;
+extern const uint8_t lcd_cols;
+extern const uint8_t lcd_rows;
+
 typedef struct lcd_position_t {
   uint8_t column;
   uint8_t row;
@@ -33,8 +37,11 @@ public:
    *
    * @param sda_pin SDA pin for i2c communication
    * @param scl_pin SCL pin for i2c communication
+   * @param address Address of LCD for i2c communication
+   * @param columns Number of column of LCD 
+   * @param rows Number of row of LCD 
    */
-  explicit Lcd(const uint8_t sda_pin, const uint8_t scl_pin);
+  explicit Lcd(const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t address = lcd_addr, const uint8_t columns = lcd_cols, const uint8_t rows = lcd_rows);
 
   /**
    * @brief Initializes LCD
