@@ -34,7 +34,7 @@ public:
 
   /**
    * @brief Read the NFC ID
-   * 
+   *
    * @return true if the NFC ID was read successfully
    */
   bool read_nfcid();
@@ -50,10 +50,11 @@ private:
    */
   uint8_t uid[7];
 
-    /**
-   * @brief Pointer to the lenght of the UID (4 or 7 bytes depending on ISO14443A card type)
+  /**
+   * @brief Pointer to the lenght of the UID (4 or 7 bytes depending on
+   * ISO14443A card type)
    */
-  uint8_t* uidLength;
+  uint8_t *uidLength;
 };
 } // namespace rfidoor::peripheral
 

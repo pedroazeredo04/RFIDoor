@@ -38,10 +38,12 @@ public:
    * @param sda_pin SDA pin for i2c communication
    * @param scl_pin SCL pin for i2c communication
    * @param address Address of LCD for i2c communication
-   * @param columns Number of column of LCD 
-   * @param rows Number of row of LCD 
+   * @param columns Number of column of LCD
+   * @param rows Number of row of LCD
    */
-  explicit Lcd(const uint8_t sda_pin, const uint8_t scl_pin, const uint8_t address = lcd_addr, const uint8_t columns = lcd_cols, const uint8_t rows = lcd_rows);
+  explicit Lcd(const uint8_t sda_pin, const uint8_t scl_pin,
+               const uint8_t address = lcd_addr,
+               const uint8_t columns = lcd_cols, const uint8_t rows = lcd_rows);
 
   /**
    * @brief Initializes LCD
