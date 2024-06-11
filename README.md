@@ -26,5 +26,5 @@ O código está dividido em módulos, cada um com sua responsabilidade. A seguir
 O projeto usa o C-Lang para formatação. Para formatar o código, utilize o comando:
 
 ```bash
-./format.sh
+clang-format -i **.cpp **.hpp
 ```
