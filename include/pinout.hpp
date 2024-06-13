@@ -12,6 +12,7 @@
 #include <peripheral/keyboard.hpp>
 #include <peripheral/lcd.hpp>
 #include <peripheral/led.hpp>
+#include <peripheral/servo.hpp>
 
 namespace rfidoor::pinout {
 
@@ -27,7 +28,7 @@ uint8_t keypad_row_pins[4] = {14, 13, 12, 15};
 uint8_t keypad_col_pins[4] = {19, 23, 25, 26};
 
 // Servo pinout
-const uint8_t servoPin = 9;
+const uint8_t servoPin = 18;
 
 // peripheral initializations
 rfidoor::peripheral::Led board_led(internal_led_pin);

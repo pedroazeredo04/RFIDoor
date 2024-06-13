@@ -6,9 +6,6 @@ const uint32_t blinky_frequency_ms{500};
 // Tasks initializations
  rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms, rfidoor::task::blinky_config);
 
-// ServoController object
- rfidoor::peripheral::ServoController myServo(servoPin);
-
 void setup() {
   blinky_task.create_task();
 
@@ -27,7 +24,7 @@ void setup() {
   rfidoor::pinout::lcd.set_cursor(0, 1);
 
   // Initialize the servo to 0 degrees
-  rfidoor::pinout::ServoController.write(0);
+  rfidoor::pinout::servo.write(0);
   delay(1000); // Wait for 1 second
 }
 
@@ -36,13 +33,13 @@ void loop() {
 
   if (key){
     rfidoor::pinout::lcd.write_char_with_increment(key);
-  }
 
-  // Move the servo to 90 degrees when a key is pressed
-    myServo.write(90);
+    // Move the servo to 90 degrees when a key is pressed
+    rfidoor::pinout::servo.write(90);
     delay(2000); // Wait for 2 seconds
 
     // Move the servo back to 0 degrees
-    myServo.write(0);
+    rfidoor::pinout::servo.write(0);
     delay(2000); // Wait for 2 seconds
+  }
 }

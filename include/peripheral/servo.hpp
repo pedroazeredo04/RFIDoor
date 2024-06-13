@@ -6,11 +6,11 @@
  * @date 06/2024
  */
 
-#ifndef _SERVO_HPP_
-#define _SERVO_HPP_
+#ifndef __SERVO_HPP__
+#define __SERVO_HPP__
 
 #include <Arduino.h>
-#include <Servo.h> // Include the Servo library
+#include <ESP32Servo.h> 
 
 namespace rfidoor::peripheral {
 
@@ -24,14 +24,14 @@ public:
    *
    * @param pin
    */
-  explicit ServoController(uint8_t pin);
+  explicit ServoController(const uint8_t pin);
 
   /**
-   * @brief Writes a value to the servo
+   * @brief Writes a value to the servo, limited from 0 to 1000
    *
    * @param value
    */
-  void write(uint8_t value);
+  void write(uint16_t value);
 
 private:
   /**
@@ -42,9 +42,9 @@ private:
   /**
    * @brief Servo object
    */
-  Servo servo;
+  Servo lib_servo;
 };
 
 } // namespace rfidoor::peripheral
 
-#endif // _SERVO_HPP_
+#endif // __SERVO_HPP__
