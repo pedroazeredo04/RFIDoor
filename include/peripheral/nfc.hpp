@@ -51,7 +51,7 @@ private:
   uint8_t uid[7];
 
   /**
-   * @brief Pointer to the lenght of the UID (4 or 7 bytes depending on
+   * @brief Pointer to the length of the UID (4 or 7 bytes depending on
    * ISO14443A card type)
    */
   uint8_t *uidLength;
