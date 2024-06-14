@@ -38,7 +38,7 @@ public:
     /**
      * @brief Constructor for Button class
      *
-     * @param config Button configuration
+     * @param pin Button pin
      */
     explicit Button(const uint8_t pin);
 
@@ -84,6 +84,11 @@ private:
      * @return True if button was just released, false otherwise
      */
     bool is_falling_edge() const;
+
+    /**
+     * @brief Button pin
+     */
+    const uint8_t pin;
 
     /**
      * @brief Button pressing delays in ms

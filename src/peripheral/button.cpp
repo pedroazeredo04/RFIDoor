@@ -11,16 +11,16 @@
 
 namespace rfidoor::peripheral {
 
-Button::Button(const uint8_t pin) : pin{pin}, debounce_delay{20}, long_press_delay{1000}, extra_long_press_delay{5000}
+/**
+ * @brief Public variables related to the debouncing and button press time
+ */
+const uint8_t debounce_delay{20};
+const uint32_t long_press_delay{1000};
+const uint32_t extra_long_press_delay{5000};
+
+Button::Button(const uint8_t pin) : pin{pin}, debounce_delay{debounce_delay}, long_press_delay{long_press_delay}, extra_long_press_delay{extra_long_press_delay} {
     pinMode(this->pin, INPUT);
 }
-
-Button::Button(const Config& config) :
-    debounce_delay{config.debounce_delay},
-    long_press_delay{config.long_press_delay},
-    extra_long_press_delay{config.extra_long_press_delay},
-    gpio{config.gpio},
-    pull_resistor{config.pull_resistor} { }
 
 bool Button::is_pressed() {
     return this->update_state();
