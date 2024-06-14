@@ -6,13 +6,14 @@
 #include <task_scheme.hpp>
 // Tasks initializations
 rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led,
-                                      blinky_frequency_ms,
+                                      rfidoor::task::blinky_frequency_ms,
                                       rfidoor::task::blinky_config);
 
 rfidoor::task::StateMachineTask
     state_machine_task(rfidoor::task::state_machine_config);
 
-void setup() {
+void setup()
+{
   rfidoor::task::blinky_task.create_task();
   rfidoor::task::state_machine_task.create_task();
 
@@ -37,10 +38,12 @@ void setup() {
   delay(1000); // Wait for 1 second
 }
 
-void loop() {
+void loop()
+{
   char key = rfidoor::pinout::keyboard.getKey();
 
-  if (key) {
+  if (key)
+  {
     rfidoor::pinout::lcd.write_char_with_increment(key);
 
     // Move the servo to 90 degrees when a key is pressed
