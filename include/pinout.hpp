@@ -6,8 +6,8 @@
  * @date 06/2024
  */
 
-#ifndef _PINOUT_HPP_
-#define _PINOUT_HPP_
+#ifndef __PINOUT_HPP__
+#define __PINOUT_HPP__
 
 #include <peripheral/keyboard.hpp>
 #include <peripheral/lcd.hpp>
@@ -38,4 +38,4 @@ rfidoor::peripheral::ServoController servo(servoPin);
 
 } // namespace rfidoor::pinout
 
-#endif // _PINOUT_HPP_
+#endif // __PINOUT_HPP__
