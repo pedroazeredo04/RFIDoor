@@ -90,7 +90,7 @@ private:
    * @param params RTOS required parameters
    */
   static void entry_function_wrapper(void *params);
-  
+
   /**
    * @brief Configuration type for class configuring
    */

@@ -1,13 +1,15 @@
 #include <pinout.hpp>
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
-#include <pinout.hpp>
 #include <task_scheme.hpp>
 const uint32_t blinky_frequency_ms{500};
 
 // Tasks initializations
- rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms, rfidoor::task::blinky_config);
- rfidoor::task::StateMachineTask state_machine_task(rfidoor::task::state_machine_config);
+rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led,
+                                      blinky_frequency_ms,
+                                      rfidoor::task::blinky_config);
+rfidoor::task::StateMachineTask
+    state_machine_task(rfidoor::task::state_machine_config);
 
 void setup() {
   blinky_task.create_task();
