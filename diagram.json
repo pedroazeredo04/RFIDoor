@@ -1,39 +1,43 @@
 {
-    "version": 1,
-    "author": "Anonymous maker",
-    "editor": "wokwi",
-    "parts": [
-      { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -76.8, "left": 43.24, "attrs": {} },
-      {
-        "type": "wokwi-lcd1602",
-        "id": "lcd1",
-        "top": -70.4,
-        "left": 188,
-        "attrs": { "pins": "i2c" }
-      },
-      {
-        "type": "wokwi-membrane-keypad",
-        "id": "keypad1",
-        "top": -400.2,
-        "right": 197.6,
-        "attrs": {}
-      }
-    ],
-    "connections": [
-      [ "esp:TX0", "$serialMonitor:RX", "", [] ],
-      [ "esp:RX0", "$serialMonitor:TX", "", [] ],
-      [ "lcd1:SDA", "esp:D21", "green", [ "v-4.49", "h-28.8", "v23.89" ] ],
-      [ "lcd1:GND", "esp:GND.2", "black", [ "h-16.67", "v162.78" ] ],
-      [ "lcd1:VCC", "esp:3V3", "red", [ "h-9.6", "v-57.5", "h-134.55" ] ],
-      [ "lcd1:SCL", "esp:D22", "purple", [ "h-19.2", "v-18.9" ] ],
-      [ "esp:D13", "keypad1:R2", "#8f4814", [ "h-14.6", "v71.7", "h316.8" ] ],
-      [ "esp:D12", "keypad1:R3", "red", [ "h-24.2", "v90.4", "h336" ] ],
-      [ "esp:D14", "keypad1:R1", "orange", [ "h-33.8", "v110.4", "h326.4" ] ],
-      [ "esp:D26", "keypad1:C4", "gold", [ "h-43.4", "v139", "h422.4" ] ],
-      [ "esp:D25", "keypad1:C3", "green", [ "h-53", "v158.3", "h403.2" ] ],
-      [ "esp:D15", "keypad1:R4", "blue", [ "h13.9", "v62.1", "h211.2" ] ],
-      [ "esp:D19", "keypad1:C1", "violet", [ "h23.5", "v129.1", "h211.2" ] ],
-      [ "esp:D23", "keypad1:C2", "gray", [ "h33.1", "v158.4", "h211.2" ] ]
-    ],
-    "dependencies": {}
-  }
+  "version": 1,
+  "author": "Anonymous maker",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "wokwi-esp32-devkit-v1", "id": "esp", "top": -72.1, "left": 43, "attrs": {} },
+    {
+      "type": "wokwi-lcd1602",
+      "id": "lcd1",
+      "top": -70.4,
+      "left": 303.2,
+      "attrs": { "pins": "i2c" }
+    },
+    {
+      "type": "wokwi-membrane-keypad",
+      "id": "keypad1",
+      "top": -491.6,
+      "left": -186.4,
+      "attrs": {}
+    },
+    { "type": "wokwi-servo", "id": "servo1", "top": -232.4, "left": 249.6, "attrs": {} }
+  ],
+  "connections": [
+    [ "esp:TX0", "$serialMonitor:RX", "", [] ],
+    [ "esp:RX0", "$serialMonitor:TX", "", [] ],
+    [ "lcd1:SDA", "esp:D21", "green", [ "v-4.49", "h-28.8", "v23.89" ] ],
+    [ "lcd1:GND", "esp:GND.2", "black", [ "h-76.8", "v230.4", "h-220.8", "v-115.1" ] ],
+    [ "lcd1:VCC", "esp:3V3", "red", [ "h-115.2", "v115.3" ] ],
+    [ "lcd1:SCL", "esp:D22", "purple", [ "h-19.2", "v-38.1", "h-96", "v9.9" ] ],
+    [ "esp:D13", "keypad1:R2", "#8f4814", [ "h-14.6", "v-0.2", "h-109.8" ] ],
+    [ "esp:D12", "keypad1:R3", "red", [ "h-115.44", "v-5.6", "h0.3" ] ],
+    [ "esp:D14", "keypad1:R1", "orange", [ "h-134.4", "v-201.5" ] ],
+    [ "esp:D26", "keypad1:C4", "gold", [ "h-67.2", "v-9.7", "h0.3" ] ],
+    [ "esp:D25", "keypad1:C3", "green", [ "h-76.8", "v-4.9", "h0.15" ] ],
+    [ "esp:D15", "keypad1:R4", "blue", [ "h13.9", "v67", "h-215.6" ] ],
+    [ "esp:D19", "keypad1:C1", "violet", [ "h23.5", "v143.9", "h-215.7" ] ],
+    [ "esp:D23", "keypad1:C2", "gray", [ "h18.66", "v-81.6", "h-201.6" ] ],
+    [ "esp:D18", "servo1:PWM", "cyan", [ "h38.1", "v-173" ] ],
+    [ "esp:GND.2", "servo1:GND", "black", [ "h-38.4", "v-268.9" ] ],
+    [ "esp:3V3", "servo1:V+", "red", [ "v0", "h76.5", "v-259.2" ] ]
+  ],
+  "dependencies": {}
+}
