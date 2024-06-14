@@ -15,5 +15,5 @@ task_config_t blinky_config = {
 
 task_config_t state_machine_config = {
     .name = "stateMachineTask", .stack_size = 1000, .priority = LOW_PRIORITY};
-    
+
 }; // namespace rfidoor::task
