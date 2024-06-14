@@ -2,6 +2,8 @@
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
 #include <task_scheme.hpp>
+#include <queue_scheme.hpp>
+
 const uint32_t blinky_frequency_ms{500};
 
 // Tasks initializations
