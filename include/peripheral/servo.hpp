@@ -10,7 +10,7 @@
 #define __SERVO_HPP__
 
 #include <Arduino.h>
-#include <ESP32Servo.h> 
+#include <Servo.h>
 
 namespace rfidoor::peripheral {
 
@@ -27,11 +27,11 @@ public:
   explicit ServoController(const uint8_t pin);
 
   /**
-   * @brief Writes a value to the servo, limited from 0 to 1000
+   * @brief Writes a value to the servo, limited from 0 to 180
    *
    * @param value
    */
-  void write(uint16_t value);
+  void write_angular_position_degrees(uint8_t command);
 
 private:
   /**
