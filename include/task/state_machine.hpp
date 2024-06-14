@@ -87,7 +87,27 @@ public:
    */
   virtual void spin() override;
 
+  /**
+   * @brief Function to get the current state of the state machine
+   */
+  uint8_t get_state();
+
 private:
+  /**
+   * @brief Function to get the next state of the state machine from the table
+   */
+  uint8_t get_next_state();
+
+  /**
+   * @brief Function to get the action of the state machine from the table
+   */
+  uint8_t get_action();
+
+  /**
+   * @brief Function to execute the action of the state machine
+   */
+  void execute_action();
+
   /**
    * @brief Table of actions of the state machine [state][event]
    */
@@ -97,6 +117,21 @@ private:
    * @brief Table of next states of the state machine [state][event]
    */
   uint8_t next_state_state_machine_table[NUM_STATES][NUM_EVENTS];
+
+  /**
+   * @brief Current state of the state machine
+   */
+  uint8_t state;
+
+  /**
+   * @brief Current event of the state machine
+   */
+  uint8_t event;
+
+  /**
+   * @brief Action of the state machine
+   */
+  uint8_t action;
 };
 
 } // namespace rfidoor::task
