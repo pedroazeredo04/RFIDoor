@@ -10,10 +10,26 @@
 
 namespace rfidoor::task {
 
-task_config_t blinky_config = {
+const task_config_t blinky_config = {
     .name = "blinkyTask", .stack_size = 1000, .priority = LOW_PRIORITY};
 
-task_config_t state_machine_config = {
+const task_config_t state_machine_config = {
     .name = "stateMachineTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+
+/**
+ * @brief Frequency of the blinky task in miliseconds
+ */
+const uint32_t blinky_frequency_ms{500};
+
+/**
+ * @brief Instanciate the blinky task
+ */
+BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms,
+                       blinky_config);
+
+/**
+ * @brief Instanciate the state machine task
+ */
+StateMachineTask state_machine_task(state_machine_config);
 
 }; // namespace rfidoor::task
