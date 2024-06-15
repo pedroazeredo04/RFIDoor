@@ -27,7 +27,7 @@ const uint32_t default_length{5};
  * @note Each queue has a specific type attached to it. Thus, they are written,
  * in code, as a template
  */
-class Queue {
+template <typename T> class Queue {
 public:
   /**
    * @brief Constructor for the generic Queue class
@@ -39,22 +39,21 @@ public:
 
   /**
    * @brief Publish function
+   * 
    * @param message Message to be published
    */
-  void publish(uint8_t message);
+  void publish(T message);
 
   /**
    * @brief Function to read queue
-   * @param buffer_pointer Pointer to the buffer where the message will be
+   * 
+   * @param buffer Pointer to the buffer where the message will be stored
+   * 
+   * @return true if the message was successfully read, false otherwise
    */
-  uint8_t read(uint8_t* buffer_pointer);
+  bool read(T* buffer);
 
 private:
-  /**
-   * @brief Length of the queue
-   */
-  const uint32_t length;
-
   /**
    * @brief Handle for the queue, required by xQueueSend RTOS function
    */
@@ -62,5 +61,7 @@ private:
 };
 
 } // namespace rfidoor::queue
+
+#include "queue/queue.tpp"
 
 #endif // __QUEUE_HPP__
