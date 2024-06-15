@@ -9,7 +9,9 @@
 #ifndef __STATE_MACHINE_HPP__
 #define __STATE_MACHINE_HPP__
 
+#include "pinout.hpp"
 #include "task/task.hpp"
+#include "queue_scheme.hpp"
 
 namespace rfidoor::task {
 

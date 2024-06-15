@@ -1,5 +1,4 @@
 #include <pinout.hpp>
-#include <pinout.hpp>
 #include <queue_scheme.hpp>
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
@@ -36,15 +35,21 @@ void loop()
   char key = rfidoor::pinout::keyboard.getKey();
 
   if (key)
-  {
+  { 
     rfidoor::pinout::lcd.write_char_with_increment(key);
+    rfidoor::queue::events_queue.publish(rfidoor::task::TECLA);
 
-    // Move the servo to 90 degrees when a key is pressed
-    rfidoor::pinout::servo.write_angular_position_degrees(90);
-    delay(2000); // Wait for 2 seconds
+    if (key == '*')
+    {
+      rfidoor::queue::events_queue.publish(rfidoor::task::SENHA_INVALIDA);
+    }
 
-    // Move the servo back to 0 degrees
-    rfidoor::pinout::servo.write_angular_position_degrees(0);
-    delay(2000); // Wait for 2 seconds
+    // // Move the servo to 90 degrees when a key is pressed
+    // rfidoor::pinout::servo.write_angular_position_degrees(90);
+    // delay(2000); // Wait for 2 seconds
+
+    // // Move the servo back to 0 degrees
+    // rfidoor::pinout::servo.write_angular_position_degrees(0);
+    // delay(2000); // Wait for 2 seconds
   }
 }

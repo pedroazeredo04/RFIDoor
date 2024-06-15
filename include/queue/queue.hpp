@@ -39,11 +39,13 @@ public:
 
   /**
    * @brief Publish function
+   * @param message Message to be published
    */
   void publish(uint8_t message);
 
   /**
    * @brief Function to read queue
+   * @param buffer_pointer Pointer to the buffer where the message will be
    */
   uint8_t read(uint8_t* buffer_pointer);
 

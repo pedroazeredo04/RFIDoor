@@ -67,7 +67,11 @@ void StateMachineTask::init() {
 }
 
 void StateMachineTask::spin() {
-  
+    if (rfidoor::queue::events_queue.read(&(this->event)) == pdPASS) {
+        this->action = this->get_action();
+        this->state = this->get_next_state();
+        this->execute_action();  
+    }
 }
 
 uint8_t StateMachineTask::get_state() {
@@ -75,15 +79,11 @@ uint8_t StateMachineTask::get_state() {
 }
 
 uint8_t StateMachineTask::get_next_state() {
-    uint8_t next_state = this->next_state_state_machine_table[this->state][this->event];
-    this->state = next_state;
-  return next_state;
+  return this->next_state_state_machine_table[this->state][this->event];
 }
 
 uint8_t StateMachineTask::get_action() {
-    uint8_t action = this->action_state_machine_table[this->state][this->event];
-    this->action = action;
-  return action;
+  return this->action_state_machine_table[this->state][this->event];
 }
 
 void StateMachineTask::execute_action() {
@@ -93,6 +93,9 @@ void StateMachineTask::execute_action() {
         break;
     case A02:
         // display padrao senha e vai pro tratamento de senha
+        rfidoor::pinout::lcd.set_cursor(0, 0);
+        rfidoor::pinout::lcd.write("OMG SENHA!      ");
+        rfidoor::pinout::lcd.set_cursor(1, 1);
         break;
     case A03:
         // display sinal invalido
@@ -105,6 +108,16 @@ void StateMachineTask::execute_action() {
         break;
     case A06:
         // display senha invalida e display padrão
+        rfidoor::pinout::lcd.clear();
+        rfidoor::pinout::lcd.set_cursor(0, 0);
+        rfidoor::pinout::lcd.write("SENHA INVALIDA!");
+        delay(2000);
+        rfidoor::pinout::lcd.clear();
+        rfidoor::pinout::lcd.set_cursor(0, 0);
+        rfidoor::pinout::lcd.write("Digite a senha ");
+        rfidoor::pinout::lcd.write_special_char(
+            rfidoor::peripheral::LOCK_SPECIAL_CHAR);
+        rfidoor::pinout::lcd.set_cursor(0, 1);
         break;
     case A07:
         // destranca e display senha valida
