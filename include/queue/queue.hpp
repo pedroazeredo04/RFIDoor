@@ -19,7 +19,7 @@ namespace rfidoor::queue {
  * @brief Public variable that correspond to the default value of the length of
  * a generic queue
  */
-const uint32_t default_length{5};
+const uint32_t default_queue_length{10};
 
 /**
  * @brief Class for a generic Queue
@@ -35,7 +35,7 @@ public:
    * @param length The maximum number of items the queue can hold at any one
    * time
    */
-  Queue(const uint32_t length = default_length);
+  Queue(const uint32_t length = default_queue_length);
 
   /**
    * @brief Publish function

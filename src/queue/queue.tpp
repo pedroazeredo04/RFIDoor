@@ -11,12 +11,6 @@
 namespace rfidoor::queue {
 
 /**
- * @brief Public variable that correspond to the default value of the length of
- * a generic queue
- */
-const uint32_t default_length{10};
-
-/**
  * @brief Public variable that correspond to the default value of the wait ticks
  * to be passed to the send and receive RTOS functions
  */

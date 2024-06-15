@@ -11,7 +11,6 @@
 
 #include "pinout.hpp"
 #include "task/task.hpp"
-#include "queue_scheme.hpp"
 
 namespace rfidoor::task {
 
@@ -21,7 +20,7 @@ namespace rfidoor::task {
 /**
  * @brief Enum corresponding to the possible states of the state machine
  */
-enum states {
+enum state_t {
   TRANCADA_IDLE,
   DIGITANDO_SENHA,
   DESTRANCADA_FECHADA,
@@ -32,7 +31,7 @@ enum states {
 /**
  * @brief Enum corresponding to the possible events of the state machine
  */
-enum events {
+enum event_t {
   NENHUM_EVENTO = -1,
   SINAL_INVALIDO,
   SINAL_VALIDO,
@@ -51,7 +50,7 @@ enum events {
 /**
  * @brief Enum corresponding to the possible actions of the state machine
  */
-enum actions {
+enum action_t {
   NENHUMA_ACAO = -1,
   A01,
   A02,
@@ -92,18 +91,18 @@ public:
   /**
    * @brief Function to get the current state of the state machine
    */
-  uint8_t get_state();
+  state_t get_state();
 
 private:
   /**
    * @brief Function to get the next state of the state machine from the table
    */
-  uint8_t get_next_state();
+  state_t get_next_state();
 
   /**
    * @brief Function to get the action of the state machine from the table
    */
-  uint8_t get_action();
+  action_t get_action();
 
   /**
    * @brief Function to execute the action of the state machine
@@ -113,27 +112,27 @@ private:
   /**
    * @brief Table of actions of the state machine [state][event]
    */
-  uint8_t action_state_machine_table[NUM_STATES][NUM_EVENTS];
+  action_t action_state_machine_table[NUM_STATES][NUM_EVENTS];
 
   /**
    * @brief Table of next states of the state machine [state][event]
    */
-  uint8_t next_state_state_machine_table[NUM_STATES][NUM_EVENTS];
+  state_t next_state_state_machine_table[NUM_STATES][NUM_EVENTS];
 
   /**
    * @brief Current state of the state machine
    */
-  uint8_t state;
+  state_t state;
 
   /**
    * @brief Current event of the state machine
    */
-  uint8_t event;
+  event_t event;
 
   /**
    * @brief Action of the state machine
    */
-  uint8_t action;
+  action_t action;
 };
 
 } // namespace rfidoor::task

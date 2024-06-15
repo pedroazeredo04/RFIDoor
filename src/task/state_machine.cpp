@@ -1,3 +1,12 @@
+/**
+ * @file state_machine.cpp
+ *
+ * @brief StateMachine class source code, that implements the state machine
+ *
+ * @date 06/2024
+ */
+
+#include "queue_scheme.hpp"
 #include "task/state_machine.hpp"
 
 namespace rfidoor::task {
@@ -12,7 +21,7 @@ void StateMachineTask::init() {
   for (int state = 0; state < NUM_STATES; state++) {
     for (int event = 0; event < NUM_EVENTS; event++) {
       this->action_state_machine_table[state][event] = NENHUMA_ACAO;
-      this->next_state_state_machine_table[state][event] = state;
+      this->next_state_state_machine_table[state][event] = (state_t) state;
     }
   }
 
@@ -74,15 +83,15 @@ void StateMachineTask::spin() {
     }
 }
 
-uint8_t StateMachineTask::get_state() {
+state_t StateMachineTask::get_state() {
   return this->state;
 }
 
-uint8_t StateMachineTask::get_next_state() {
+state_t StateMachineTask::get_next_state() {
   return this->next_state_state_machine_table[this->state][this->event];
 }
 
-uint8_t StateMachineTask::get_action() {
+action_t StateMachineTask::get_action() {
   return this->action_state_machine_table[this->state][this->event];
 }
 

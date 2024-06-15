@@ -10,6 +10,6 @@
 
 namespace rfidoor::queue {
 
-Queue events_queue(default_length);
+Queue<rfidoor::task::event_t> events_queue;
 
 } // namespace rfidoor::queue

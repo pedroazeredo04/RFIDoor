@@ -10,13 +10,14 @@
 #define __QUEUE_SCHEME_HPP__
 
 #include "queue/queue.hpp"
+#include "task/state_machine.hpp"
 
 namespace rfidoor::queue {
 
 /**
  * @brief Queue used to send detected events
  */
-extern Queue events_queue;
+extern Queue<rfidoor::task::event_t> events_queue;
 
 } // namespace rfidoor::queue
 
