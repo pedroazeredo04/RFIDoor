@@ -6,6 +6,8 @@
 
 void setup()
 {
+  Serial.begin(9600);
+
   rfidoor::task::blinky_task.create_task();
   rfidoor::task::state_machine_task.create_task();
 
@@ -37,11 +39,12 @@ void loop()
   if (key)
   { 
     rfidoor::pinout::lcd.write_char_with_increment(key);
-    rfidoor::queue::events_queue.publish(rfidoor::task::TECLA);
 
     if (key == '*')
     {
       rfidoor::queue::events_queue.publish(rfidoor::task::SENHA_INVALIDA);
+    } else {
+      rfidoor::queue::events_queue.publish(rfidoor::task::TECLA);
     }
 
     // // Move the servo to 90 degrees when a key is pressed
@@ -51,5 +54,11 @@ void loop()
     // // Move the servo back to 0 degrees
     // rfidoor::pinout::servo.write_angular_position_degrees(0);
     // delay(2000); // Wait for 2 seconds
+  }
+
+  rfidoor::task::event_t evento;
+
+  if (rfidoor::queue::events_queue.read(&evento)) {
+    Serial.println(evento);
   }
 }
