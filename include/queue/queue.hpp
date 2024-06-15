@@ -15,7 +15,11 @@
 
 namespace rfidoor::queue {
 
-extern const uint32_t default_length;
+/**
+ * @brief Public variable that correspond to the default value of the length of
+ * a generic queue
+ */
+const uint32_t default_length{5};
 
 /**
  * @brief Class for a generic Queue
@@ -23,7 +27,7 @@ extern const uint32_t default_length;
  * @note Each queue has a specific type attached to it. Thus, they are written,
  * in code, as a template
  */
-template <typename T> class Queue {
+class Queue {
 public:
   /**
    * @brief Constructor for the generic Queue class
@@ -36,18 +40,18 @@ public:
   /**
    * @brief Publish function
    */
-  void publish(T message);
+  void publish(uint8_t message);
 
   /**
    * @brief Function to read queue
    */
-  T read();
+  uint8_t read();
 
 private:
   /**
-   * @brief Configuration type for class configuring
+   * @brief Length of the queue
    */
-  const uint32_t type_size;
+  const uint32_t length;
 
   /**
    * @brief Handle for the queue, required by xQueueSend RTOS function

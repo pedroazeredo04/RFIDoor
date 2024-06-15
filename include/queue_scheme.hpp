@@ -6,6 +6,18 @@
  * @date 06/2024
  */
 
+#ifndef __QUEUE_SCHEME_HPP__
+#define __QUEUE_SCHEME_HPP__
+
 #include "queue/queue.hpp"
 
-rfidoor::queue::Queue<uint32_t> example_queue();
+namespace rfidoor::queue {
+
+/**
+ * @brief Instanciate the events queue
+ */
+Queue events_queue(default_length);
+
+} // namespace rfidoor::queue
+
+#endif // __QUEUE_SCHEME_HPP__
