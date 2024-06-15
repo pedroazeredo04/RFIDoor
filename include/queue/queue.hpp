@@ -45,16 +45,13 @@ public:
 
 private:
   /**
-   * @brief Configuration type for class configuring
-   */
-  const uint32_t type_size;
-
-  /**
    * @brief Handle for the queue, required by xQueueSend RTOS function
    */
   QueueHandle_t queue_handle;
 };
 
 } // namespace rfidoor::queue
+
+#include "queue/queue.tpp"
 
 #endif // __QUEUE_HPP__
