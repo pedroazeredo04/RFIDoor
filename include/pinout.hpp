@@ -17,24 +17,24 @@
 namespace rfidoor::pinout {
 
 // LCD pinout
-const uint8_t lcd_sda_pin{21};
-const uint8_t lcd_scl_pin{22};
+extern const uint8_t lcd_sda_pin;
+extern const uint8_t lcd_scl_pin;
 
 // Internal LED pinout
-const uint8_t internal_led_pin{2};
+extern const uint8_t internal_led_pin;
 
 // Keypad pinout
-uint8_t keypad_row_pins[4] = {14, 13, 12, 15};
-uint8_t keypad_col_pins[4] = {19, 23, 25, 26};
+extern uint8_t keypad_row_pins[4];
+extern uint8_t keypad_col_pins[4];
 
 // Servo pinout
-const uint8_t servoPin = 18;
+extern const uint8_t servoPin;
 
 // peripheral initializations
-rfidoor::peripheral::Led board_led(internal_led_pin);
-rfidoor::peripheral::Lcd lcd(lcd_sda_pin, lcd_scl_pin);
-rfidoor::peripheral::Keyboard keyboard(keypad_row_pins, keypad_col_pins);
-rfidoor::peripheral::ServoController servo(servoPin);
+extern rfidoor::peripheral::Led board_led;
+extern rfidoor::peripheral::Lcd lcd;
+extern rfidoor::peripheral::Keyboard keyboard;
+extern rfidoor::peripheral::ServoController servo;
 
 } // namespace rfidoor::pinout
 
