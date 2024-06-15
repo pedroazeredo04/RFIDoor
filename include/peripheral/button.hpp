@@ -93,9 +93,9 @@ private:
     /**
      * @brief Button pressing delays in ms
      */
-    const uint16_t debounce_delay;
-    const uint16_t long_press_delay;
-    const uint16_t extra_long_press_delay;
+    const uint16_t debounce_delay_ms;
+    const uint16_t long_press_delay_ms;
+    const uint16_t extra_long_press_delay_ms;
 
 
     /**
@@ -106,12 +106,12 @@ private:
     /**
      * @brief Timer to check if button is debouncing
      */
-    hal::Timer debounce_timer;
+    uint32_t status_timer_start_ms;
 
     /**
      * @brief Timer to determine type of button press
      */
-    hal::Timer status_timer;
+    uint32_t debounce_timer_start_ms;
 
     /**
      * @brief Flag to know when button is debouncing
