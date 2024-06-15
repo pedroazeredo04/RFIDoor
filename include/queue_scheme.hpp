@@ -6,6 +6,11 @@
  * @date 06/2024
  */
 
+#ifndef __QUEUE_SCHEME_HPP__
+#define __QUEUE_SCHEME_HPP__
+
 #include "queue/queue.hpp"
 
-rfidoor::queue::Queue<uint32_t> example_queue();
+rfidoor::queue::Queue<int> intQueue(5);
+
+#endif // __QUEUE_SCHEME_HPP__

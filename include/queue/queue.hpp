@@ -40,15 +40,14 @@ public:
 
   /**
    * @brief Function to read queue
+   * 
+   * @param buffer Pointer to the buffer where the message will be stored
+   * 
+   * @return true if the message was successfully read, false otherwise
    */
-  T read();
+  bool read(T* buffer);
 
 private:
-  /**
-   * @brief Configuration type for class configuring
-   */
-  const uint32_t type_size;
-
   /**
    * @brief Handle for the queue, required by xQueueSend RTOS function
    */
@@ -56,5 +55,7 @@ private:
 };
 
 } // namespace rfidoor::queue
+
+#include "queue/queue.tpp"
 
 #endif // __QUEUE_HPP__
