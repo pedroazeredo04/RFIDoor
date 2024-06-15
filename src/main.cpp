@@ -1,16 +1,9 @@
 #include <pinout.hpp>
-#include <queue_scheme.hpp>
 #include <pinout.hpp>
+#include <queue_scheme.hpp>
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
 #include <task_scheme.hpp>
-// Tasks initializations
-rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led,
-                                      rfidoor::task::blinky_frequency_ms,
-                                      rfidoor::task::blinky_config);
-
-rfidoor::task::StateMachineTask
-    state_machine_task(rfidoor::task::state_machine_config);
 
 void setup()
 {
