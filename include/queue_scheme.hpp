@@ -14,9 +14,9 @@
 namespace rfidoor::queue {
 
 /**
- * @brief Instanciate the events queue
+ * @brief Queue used to send detected events
  */
-Queue events_queue(default_length);
+extern Queue events_queue;
 
 } // namespace rfidoor::queue
 
