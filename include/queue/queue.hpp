@@ -45,7 +45,7 @@ public:
   /**
    * @brief Function to read queue
    */
-  uint8_t read();
+  uint8_t read(uint8_t* buffer_pointer);
 
 private:
   /**

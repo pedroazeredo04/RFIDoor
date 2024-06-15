@@ -24,10 +24,8 @@ void Queue::publish(uint8_t message) {
   xQueueSend(this->queue_handle, &message, ticks_to_wait);
 }
 
-uint8_t Queue::read() {
-  uint8_t buffer;
-  xQueueReceive(this->queue_handle, &buffer, ticks_to_wait);
-  return buffer;
+uint8_t Queue::read(uint8_t* buffer_pointer) {
+  return xQueueReceive(this->queue_handle, buffer_pointer, ticks_to_wait);
 }
 
 } // namespace rfidoor::queue
