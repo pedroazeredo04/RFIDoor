@@ -1,8 +1,8 @@
 /**
  * @file pinout.cpp
- * 
+ *
  * @brief Define target specific configuration variables
- * 
+ *
  * @date 06/2024
  */
 

@@ -39,19 +39,19 @@ public:
 
   /**
    * @brief Publish function
-   * 
+   *
    * @param message Message to be published
    */
   void publish(T message);
 
   /**
    * @brief Function to read queue
-   * 
+   *
    * @param buffer Pointer to the buffer where the message will be stored
-   * 
+   *
    * @return true if the message was successfully read, false otherwise
    */
-  bool read(T* buffer);
+  bool read(T *buffer);
 
 private:
   /**
