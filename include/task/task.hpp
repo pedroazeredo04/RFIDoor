@@ -50,7 +50,7 @@ public:
   /**
    * @brief Constructor for the generic Task class
    *
-   * @param task_config_t Configuration of the task
+   * @param config Configuration of the task
    */
   Task(const task_config_t &config = default_config);
 

@@ -7,7 +7,7 @@
  */
 
 #include "task/state_machine.hpp"
-#include "queue_scheme.hpp"
+#include "blackboard/queue_blackboard.hpp"
 
 namespace rfidoor::task {
 
@@ -81,9 +81,10 @@ void StateMachineTask::init() {
 }
 
 void StateMachineTask::spin() {
-  if (rfidoor::queue::events_queue.read(&(this->event)) == pdPASS) {
+  if (rfidoor::queue::event_queue.read(&(this->event))) {
     this->action = this->get_action();
     this->state = this->get_next_state();
+    rfidoor::queue::state_queue.publish(this->state);
     this->execute_action();
   }
 }

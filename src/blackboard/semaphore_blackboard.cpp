@@ -1,15 +1,17 @@
 /**
- * @file semaphore_scheme.cpp
+ * @file semaphore_blackboard.cpp
  *
  * @brief Define configuration file of all semaphores variables
  *
  * @date 06/2024
  */
 
-#include "semaphore_scheme.hpp"
+#include "blackboard/semaphore_blackboard.hpp"
 
 namespace rfidoor::semaphore {
 
 BinarySemaphore binary_semaphore_example;
+
+MutexSemaphore registering_semaphore;
 
 } // namespace rfidoor::semaphore

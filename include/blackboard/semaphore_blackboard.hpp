@@ -1,15 +1,16 @@
 /**
- * @file semaphore_scheme.hpp
+ * @file semaphore_blackboard.hpp
  *
  * @brief Configuration file of all semaphores
  *
  * @date 06/2024
  */
 
-#ifndef __SEMAPHORE_SCHEME_HPP__
-#define __SEMAPHORE_SCHEME_HPP__
+#ifndef __SEMAPHORE_BLACKBOARD_HPP__
+#define __SEMAPHORE_BLACKBOARD_HPP__
 
 #include "semaphore/binary.hpp"
+#include "semaphore/mutex.hpp"
 #include "semaphore/semaphore.hpp"
 
 namespace rfidoor::semaphore {
@@ -19,6 +20,11 @@ namespace rfidoor::semaphore {
  */
 extern BinarySemaphore binary_semaphore_example;
 
+/**
+ * @brief Mutex semaphore for the registering state
+ */
+extern MutexSemaphore registering_semaphore;
+
 }; // namespace rfidoor::semaphore
 
-#endif // __SEMAPHORE_SCHEME_HPP__
+#endif // __SEMAPHORE_BLACKBOARD_HPP__

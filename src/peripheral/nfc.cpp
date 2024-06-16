@@ -23,9 +23,11 @@ void Nfc::init() {
   }
 }
 
-bool Nfc::read_nfcid() {
-  return lib_nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, this->uid,
+bool Nfc::read() {
+  return lib_nfc.readPassiveTargetID(PN532_MIFARE_ISO14443A, this->uid.bytes,
                                      this->uidLength);
 }
+
+ID_t Nfc::get_last_read_value() { return this->uid; }
 
 } // namespace rfidoor::peripheral

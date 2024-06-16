@@ -1,8 +1,8 @@
+#include <blackboard/queue_blackboard.hpp>
+#include <blackboard/task_blackboard.hpp>
 #include <pinout.hpp>
-#include <queue_scheme.hpp>
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
-#include <task_scheme.hpp>
 
 void setup() {
   Serial.begin(9600);
@@ -40,9 +40,9 @@ void loop() {
     rfidoor::pinout::lcd.write_char_with_increment(key);
 
     if (key == '*') {
-      rfidoor::queue::events_queue.publish(rfidoor::task::SENHA_INVALIDA);
+      rfidoor::queue::event_queue.publish(rfidoor::task::SENHA_INVALIDA);
     } else {
-      rfidoor::queue::events_queue.publish(rfidoor::task::TECLA);
+      rfidoor::queue::event_queue.publish(rfidoor::task::TECLA);
     }
 
     // // Move the servo to 90 degrees when a key is pressed
@@ -56,7 +56,7 @@ void loop() {
 
   rfidoor::task::event_t evento;
 
-  if (rfidoor::queue::events_queue.read(&evento)) {
+  if (rfidoor::queue::event_queue.read(&evento)) {
     Serial.println(evento);
   }
 }
