@@ -1,13 +1,13 @@
 /**
- * @file queue_scheme.hpp
+ * @file queue_blackboard.hpp
  *
  * @brief Configuration file of all queues
  *
  * @date 06/2024
  */
 
-#ifndef __QUEUE_SCHEME_HPP__
-#define __QUEUE_SCHEME_HPP__
+#ifndef __QUEUE_blackboard_HPP__
+#define __QUEUE_blackboard_HPP__
 
 #include "queue/queue.hpp"
 #include "task/state_machine_types.hpp"
@@ -23,4 +23,4 @@ extern Queue<rfidoor::task::input_device_state_t> input_device_state_queue;
 
 } // namespace rfidoor::queue
 
-#endif // __QUEUE_SCHEME_HPP__
+#endif // __QUEUE_blackboard_HPP__

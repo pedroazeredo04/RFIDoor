@@ -1,12 +1,12 @@
 /**
- * @file task_scheme.cpp
+ * @file task_blackboard.cpp
  *
  * @brief Configuration file of all tasks
  *
  * @date 06/2024
  */
 
-#include "scheme/task_scheme.hpp"
+#include "blackboard/task_blackboard.hpp"
 
 namespace rfidoor::task {
 

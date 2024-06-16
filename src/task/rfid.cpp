@@ -7,8 +7,8 @@
  */
 
 #include "task/rfid.hpp"
-#include "scheme/queue_scheme.hpp"
-#include "scheme/semaphore_scheme.hpp"
+#include "blackboard/queue_blackboard.hpp"
+#include "blackboard/semaphore_blackboard.hpp"
 
 namespace rfidoor::task {
 

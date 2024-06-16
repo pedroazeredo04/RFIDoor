@@ -16,7 +16,7 @@ O código está dividido em módulos, cada um com sua responsabilidade. A seguir
   - `task`: Classe abstrata para as tasks RTOS.
   - `blinky`: Tarefa de piscar o LED interno da ESP32, para conferir o funcionamento do RTOS.
 - `pinout`: Módulo responsável por declarar os pinos de conexão com os módulo e instanciar as classes de cada módulo.
-- `task_scheme`: Módulo responsável por instanciar as tarefas do sistema.
+- `task_blackboard`: Módulo responsável por instanciar as tarefas do sistema.
 - `main`: Módulo principal do sistema, contendo a função `setup` e `loop`.
   - A função `setup` é responsável por inicializar o sistema. Nela, devem ser inicializadas as tasks RTOS e os periféricos necessários.
   - A função `loop` é responsável por executar o loop principal do sistema. Ela deve ser deixada vazia, pois o loop é executado pelas tasks RTOS do sistema.

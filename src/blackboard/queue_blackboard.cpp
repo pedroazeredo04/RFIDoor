@@ -1,12 +1,12 @@
 /**
- * @file queue_scheme.cpp
+ * @file queue_blackboard.cpp
  *
  * @brief Define configuration file of all queues variables
  *
  * @date 06/2024
  */
 
-#include "scheme/queue_scheme.hpp"
+#include "blackboard/queue_blackboard.hpp"
 
 namespace rfidoor::queue {
 
