@@ -10,16 +10,18 @@ void setup()
 
   rfidoor::task::blinky_task.create_task();
   rfidoor::task::state_machine_task.create_task();
-
+  
   rfidoor::pinout::lcd.init();
-  rfidoor::pinout::lcd.set_cursor(0, 0);
-  rfidoor::pinout::lcd.write("Hello, world!");
-  rfidoor::pinout::lcd.set_cursor(2, 1);
-  rfidoor::pinout::lcd.write("Chupa Tsuzuki");
-  rfidoor::pinout::lcd.write_special_char(
-      rfidoor::peripheral::SKULL_SPECIAL_CHAR);
+  // rfidoor::pinout::lcd.set_cursor(0, 0);
+  // rfidoor::pinout::lcd.write("Hello, world!");
+  // rfidoor::pinout::lcd.set_cursor(2, 1);
+  // rfidoor::pinout::lcd.write("Chupa Tsuzuki");
+  // rfidoor::pinout::lcd.write_special_char(
+  //     rfidoor::peripheral::SKULL_SPECIAL_CHAR);
+  // delay(3000);
 
-  delay(5000);
+  Serial.begin(9600);
+
   rfidoor::pinout::lcd.clear();
   rfidoor::pinout::lcd.set_cursor(0, 0);
   rfidoor::pinout::lcd.write("Digite a senha ");

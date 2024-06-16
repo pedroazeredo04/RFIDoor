@@ -15,8 +15,8 @@ StateMachineTask::StateMachineTask(const task_config_t &config)
     : Task(config) {}
 
 void StateMachineTask::init() {
-    this->state = TRANCADA_IDLE;
-    this->event = NENHUM_EVENTO;
+  this->state = TRANCADA_IDLE;
+  this->event = NENHUM_EVENTO;
 
   for (int state = 0; state < NUM_STATES; state++) {
     for (int event = 0; event < NUM_EVENTS; event++) {
