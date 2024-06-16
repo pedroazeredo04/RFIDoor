@@ -19,6 +19,11 @@ namespace rfidoor::semaphore {
 class BinarySemaphore : public Semaphore {
 public:
     /**
+     * @brief Construct a new Binary Semaphore object
+     */
+    BinarySemaphore(void);    
+
+    /**
      * @brief Override of the mother class Semaphore create_semaphore function
      * 
      * @return SemaphoreHandle_t Handle for the semaphore

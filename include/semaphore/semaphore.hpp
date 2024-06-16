@@ -27,7 +27,7 @@ public:
    * 
    * @return SemaphoreHandle_t Handle for the semaphore
    */
-  virtual SemaphoreHandle_t create_semaphore() = 0;
+  virtual SemaphoreHandle_t create_semaphore() { return NULL; };
 
   /**
    * @brief Function that calls xSemaphoreGive from FreeRTOS
@@ -39,7 +39,7 @@ public:
    */
   const void take_semaphore();
 
-private:
+protected:
     /**
      * @brief Handle for the semaphore, required by xSemaphoreCreateBinary RTOS function
      */
