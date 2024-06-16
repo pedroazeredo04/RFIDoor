@@ -16,42 +16,26 @@
 #include <peripheral/servo.hpp>
 
 namespace rfidoor::pinout {
+  
+// LCD pinout
+extern const uint8_t lcd_sda_pin;
+extern const uint8_t lcd_scl_pin;
 
-/**
- * @brief LCD Pinout
- */
-const uint8_t lcd_sda_pin{21};
-const uint8_t lcd_scl_pin{22};
+// Internal LED pinout
+extern const uint8_t internal_led_pin;
 
-/**
- * @brief Internal LED Pinout
- */
-const uint8_t internal_led_pin{2};
+// Keypad pinout
+extern uint8_t keypad_row_pins[4];
+extern uint8_t keypad_col_pins[4];
 
-/**
- * @brief Keypad Pinout
- */
-uint8_t keypad_row_pins[4] = {14, 13, 12, 15};
-uint8_t keypad_col_pins[4] = {19, 23, 25, 26};
+// Servo pinout
+extern const uint8_t servoPin;
 
-/**
- * @brief Servo Pinout
- */
-const uint8_t servo_pin = 18;
-
-/**
- * @brief Button Pinout
- */
-const uint8_t button_pin = 5;
-
-/**
- * @brief Peripheral initializations
- */
-rfidoor::peripheral::Led board_led(internal_led_pin);
-rfidoor::peripheral::Lcd lcd(lcd_sda_pin, lcd_scl_pin);
-rfidoor::peripheral::Keyboard keyboard(keypad_row_pins, keypad_col_pins);
-rfidoor::peripheral::ServoController servo(servo_pin);
-rfidoor::peripheral::Button button(button_pin);
+// peripheral initializations
+extern rfidoor::peripheral::Led board_led;
+extern rfidoor::peripheral::Lcd lcd;
+extern rfidoor::peripheral::Keyboard keyboard;
+extern rfidoor::peripheral::ServoController servo;
 
 } // namespace rfidoor::pinout
 

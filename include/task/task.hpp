@@ -76,7 +76,14 @@ public:
    */
   static const void task_sleep_ms(const uint32_t &time_to_sleep_ms);
 
-protected:
+  /**
+   * @brief RTOS wrapper to task sleep
+   *
+   * @return task_handle handler to the task
+   */
+  const TaskHandle_t get_task_handle(void);
+
+private:
   /**
    * @brief Wrapper function to be passed to xTaskCreate
    *
@@ -84,7 +91,6 @@ protected:
    */
   static void entry_function_wrapper(void *params);
 
-private:
   /**
    * @brief Configuration type for class configuring
    */
