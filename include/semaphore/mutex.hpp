@@ -1,8 +1,8 @@
 /**
  * @file mutex.hpp
- * 
+ *
  * @brief Mutex Semaphore class header
- * 
+ *
  * @date 06/2024
  */
 
@@ -18,13 +18,13 @@ namespace rfidoor::semaphore {
  */
 class MutexSemaphore : public Semaphore {
 public:
-    /**
-     * @brief Override of the mother class Semaphore create_semaphore function
-     * 
-     * @return SemaphoreHandle_t Handle for the semaphore
-     */
-    virtual SemaphoreHandle_t create_semaphore() override;
+  /**
+   * @brief Override of the mother class Semaphore create_semaphore function
+   *
+   * @return SemaphoreHandle_t Handle for the semaphore
+   */
+  virtual SemaphoreHandle_t create_semaphore() override;
 };
-}
+} // namespace rfidoor::semaphore
 
 #endif // __MUTEX_HPP__

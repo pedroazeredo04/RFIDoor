@@ -1,8 +1,8 @@
 /**
  * @file semaphore.hpp
- * 
+ *
  * @brief Generic semaphore class header
- * 
+ *
  * @date 06/2024
  */
 
@@ -24,7 +24,7 @@ public:
 
   /**
    * @brief Create semaphore function to be overriden by the derived class
-   * 
+   *
    * @return SemaphoreHandle_t Handle for the semaphore
    */
   virtual SemaphoreHandle_t create_semaphore() { return NULL; };
@@ -40,12 +40,13 @@ public:
   const void take_semaphore();
 
 protected:
-    /**
-     * @brief Handle for the semaphore, required by xSemaphoreCreateBinary RTOS function
-     */
-    SemaphoreHandle_t semaphore_handle;
+  /**
+   * @brief Handle for the semaphore, required by xSemaphoreCreateBinary RTOS
+   * function
+   */
+  SemaphoreHandle_t semaphore_handle;
 };
-    
+
 } // namespace rfidoor::semaphore
 
 #endif // __SEMAPHORE_HPP__

@@ -4,13 +4,12 @@
 #include <task/state_machine.hpp>
 #include <task_scheme.hpp>
 
-void setup()
-{
+void setup() {
   Serial.begin(9600);
 
   rfidoor::task::blinky_task.create_task();
   rfidoor::task::state_machine_task.create_task();
-  
+
   rfidoor::pinout::lcd.init();
   // rfidoor::pinout::lcd.set_cursor(0, 0);
   // rfidoor::pinout::lcd.write("Hello, world!");
@@ -34,16 +33,13 @@ void setup()
   delay(1000); // Wait for 1 second
 }
 
-void loop()
-{
+void loop() {
   char key = rfidoor::pinout::keyboard.getKey();
 
-  if (key)
-  { 
+  if (key) {
     rfidoor::pinout::lcd.write_char_with_increment(key);
 
-    if (key == '*')
-    {
+    if (key == '*') {
       rfidoor::queue::events_queue.publish(rfidoor::task::SENHA_INVALIDA);
     } else {
       rfidoor::queue::events_queue.publish(rfidoor::task::TECLA);

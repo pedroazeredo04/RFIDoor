@@ -1,8 +1,8 @@
 /**
  * @file semaphore_scheme.cpp
- * 
+ *
  * @brief Define configuration file of all semaphores variables
- * 
+ *
  * @date 06/2024
  */
 

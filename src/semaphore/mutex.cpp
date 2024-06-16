@@ -1,8 +1,8 @@
 /**
  * @file mutex.cpp
- * 
+ *
  * @brief Mutex Semaphore class implementation
- * 
+ *
  * @date 06/2024
  */
 
@@ -11,7 +11,7 @@
 namespace rfidoor::semaphore {
 
 SemaphoreHandle_t MutexSemaphore::create_semaphore() {
-    return xSemaphoreCreateMutex();
+  return xSemaphoreCreateMutex();
 }
 
 } // namespace rfidoor::semaphore

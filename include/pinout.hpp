@@ -16,7 +16,7 @@
 #include <peripheral/servo.hpp>
 
 namespace rfidoor::pinout {
-  
+
 // LCD pinout
 extern const uint8_t lcd_sda_pin;
 extern const uint8_t lcd_scl_pin;

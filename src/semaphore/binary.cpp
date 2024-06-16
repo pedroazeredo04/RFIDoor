@@ -1,8 +1,8 @@
 /**
  * @file binary.cpp
- * 
+ *
  * @brief Binary Semaphore class implementation
- * 
+ *
  * @date 06/2024
  */
 
@@ -11,7 +11,7 @@
 namespace rfidoor::semaphore {
 
 SemaphoreHandle_t BinarySemaphore::create_semaphore() {
-    return xSemaphoreCreateBinary();
+  return xSemaphoreCreateBinary();
 }
 
 } // namespace rfidoor::semaphore
