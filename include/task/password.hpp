@@ -6,8 +6,8 @@
  * @date 06/2024
  */
 
-#ifndef __RFID_HPP__
-#define __RFID_HPP__
+#ifndef __PASSWORD_HPP__
+#define __PASSWORD_HPP__
 
 #include "peripheral/keyboard.hpp"
 #include "task/state_machine_types.hpp"
@@ -91,4 +91,4 @@ private:
 };
 
 } // namespace rfidoor::task
-#endif // __RFID_HPP__
+#endif // __PASSWORD_HPP__

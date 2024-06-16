@@ -14,6 +14,7 @@
 #include "task/rfid.hpp"
 #include "task/state_machine.hpp"
 #include "task/task.hpp"
+#include "task/password.hpp"
 
 namespace rfidoor::task {
 /**
