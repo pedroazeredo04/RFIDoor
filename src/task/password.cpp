@@ -48,20 +48,21 @@ void PasswordTask::read_password() {
       this->is_entering_password = true;
       this->current_password.password.clear();
       rfidoor::queue::event_queue.publish(event_t::TECLA);
-    } else {
-      this->current_password.password += key;
+      return;
+    }
 
-      if (this->current_password.password.length() >= password_length) {
-        this->is_entering_password = false;
+    this->current_password.password += key;
 
-        for (const auto &password : this->valid_passwords) {
-          if (password.password == this->current_password.password) {
-            rfidoor::queue::event_queue.publish(event_t::SENHA_VALIDA);
-            return;
-          }
+    if (this->current_password.password.length() >= password_length) {
+      this->is_entering_password = false;
 
-          rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
+      for (const auto &password : this->valid_passwords) {
+        if (password.password == this->current_password.password) {
+          rfidoor::queue::event_queue.publish(event_t::SENHA_VALIDA);
+          return;
         }
+
+        rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
       }
     }
   }
@@ -75,15 +76,16 @@ void PasswordTask::register_password() {
       rfidoor::semaphore::registering_semaphore.take();
       this->is_entering_password = true;
       this->current_password.password.clear();
-    } else {
-      this->current_password.password += key;
+      return;
+    }
+    
+    this->current_password.password += key;
 
-      if (this->current_password.password.length() >= password_length) {
-        this->is_entering_password = false;
-        this->valid_passwords.push_back(this->current_password);
-        rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);
-        rfidoor::semaphore::registering_semaphore.give();
-      }
+    if (this->current_password.password.length() >= password_length) {
+      this->is_entering_password = false;
+      this->valid_passwords.push_back(this->current_password);
+      rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);
+      rfidoor::semaphore::registering_semaphore.give();
     }
   }
 }
