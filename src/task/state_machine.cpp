@@ -81,7 +81,7 @@ void StateMachineTask::init() {
 }
 
 void StateMachineTask::spin() {
-  if (rfidoor::queue::events_queue.read(&(this->event)) == pdPASS) {
+  if (rfidoor::queue::event_queue.read(&(this->event)) == pdPASS) {
     this->action = this->get_action();
     this->state = this->get_next_state();
     this->execute_action();

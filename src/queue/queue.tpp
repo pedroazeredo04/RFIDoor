@@ -28,4 +28,8 @@ template <typename T> bool Queue<T>::read(T* buffer) {
   return (xQueueReceive(this->queue_handle, buffer, ticks_to_wait) == pdPASS);
 }
 
+template <typename T> bool Queue<T>::peek(T* buffer) {
+  return (xQueuePeek(this->queue_handle, buffer, ticks_to_wait) == pdPASS);
+}
+
 } // namespace rfidoor::queue

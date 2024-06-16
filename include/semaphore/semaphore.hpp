@@ -32,12 +32,12 @@ public:
   /**
    * @brief Function that calls xSemaphoreGive from FreeRTOS
    */
-  const void give_semaphore();
+  const void give();
 
   /**
    * @brief Function that calls xSemaphoreTake from FreeRTOS
    */
-  const void take_semaphore();
+  const void take();
 
 protected:
   /**

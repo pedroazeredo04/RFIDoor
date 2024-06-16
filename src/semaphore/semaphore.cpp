@@ -16,11 +16,9 @@ Semaphore::Semaphore(void) {
   this->semaphore_handle = this->create_semaphore();
 }
 
-const void Semaphore::give_semaphore() {
-  xSemaphoreGive(this->semaphore_handle);
-}
+const void Semaphore::give() { xSemaphoreGive(this->semaphore_handle); }
 
-const void Semaphore::take_semaphore() {
+const void Semaphore::take() {
   xSemaphoreTake(this->semaphore_handle, semaphore_delay);
 }
 

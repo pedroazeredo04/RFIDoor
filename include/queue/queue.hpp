@@ -53,6 +53,15 @@ public:
    */
   bool read(T *buffer);
 
+  /**
+   * @brief Function to peek at queue
+   *
+   * @param buffer Pointer to the buffer where the message will be stored
+   *
+   * @return true if the message was successfully peeked, false otherwise
+   */
+  bool peek(T *buffer);
+
 private:
   /**
    * @brief Handle for the queue, required by xQueueSend RTOS function

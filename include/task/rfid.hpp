@@ -10,6 +10,7 @@
 #define __RFID_HPP__
 
 #include "peripheral/nfc.hpp"
+#include "task/state_machine_types.hpp"
 #include "task/task.hpp"
 #include <vector>
 
@@ -41,6 +42,16 @@ public:
 
 private:
   /**
+   * @brief Read an id from the NFC peripheral
+   */
+  void read_id();
+
+  /**
+   * @brief Register a new id in the valid_ids vector
+   */
+  void register_id();
+
+  /**
    * @brief NFC peripheral to be controlled
    */
   rfidoor::peripheral::Nfc nfc;
@@ -49,6 +60,11 @@ private:
    * @brief Vector containing valid IDs
    */
   std::vector<rfidoor::peripheral::ID_t> valid_ids;
+
+  /**
+   * @brief State of the RFID task
+   */
+  input_device_state_t state;
 };
 
 } // namespace rfidoor::task

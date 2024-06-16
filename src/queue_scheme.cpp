@@ -10,6 +10,8 @@
 
 namespace rfidoor::queue {
 
-Queue<rfidoor::task::event_t> events_queue;
+Queue<rfidoor::task::event_t> event_queue;
+
+Queue<rfidoor::task::input_device_state_t> input_device_state_queue(1);
 
 } // namespace rfidoor::queue

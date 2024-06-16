@@ -10,63 +10,10 @@
 #define __STATE_MACHINE_HPP__
 
 #include "pinout.hpp"
+#include "task/state_machine_types.hpp"
 #include "task/task.hpp"
 
 namespace rfidoor::task {
-
-#define NUM_STATES 7
-#define NUM_EVENTS 12
-
-/**
- * @brief Enum corresponding to the possible states of the state machine
- */
-enum state_t {
-  TRANCADA_IDLE,
-  DIGITANDO_SENHA,
-  DESTRANCADA_FECHADA,
-  ABERTA,
-  REGISTRO
-};
-
-/**
- * @brief Enum corresponding to the possible events of the state machine
- */
-enum event_t {
-  NENHUM_EVENTO = -1,
-  SINAL_INVALIDO,
-  SINAL_VALIDO,
-  SINAL_CADASTRADO,
-  BOTAO,
-  TIMEOUT,
-  SENHA_INVALIDA,
-  SENHA_VALIDA,
-  SENHA_CADASTRADA,
-  TECLA,
-  FECHAR,
-  ABRIR,
-  SEGURAR_ASTERISCO
-};
-
-/**
- * @brief Enum corresponding to the possible actions of the state machine
- */
-enum action_t {
-  NENHUMA_ACAO = -1,
-  A01,
-  A02,
-  A03,
-  A04,
-  A05,
-  A06,
-  A07,
-  A08,
-  A09,
-  A10,
-  A11,
-  A12,
-  A13,
-  A14
-};
 
 /**
  * @brief Class for the state machine Task, that implements the state machine
@@ -75,7 +22,7 @@ class StateMachineTask : public Task {
 public:
   /**
    * @brief Constructor for the state machine Task
-   * 
+   *
    * @param config Configuration type for Task class
    */
   StateMachineTask(const task_config_t &config = default_config);
