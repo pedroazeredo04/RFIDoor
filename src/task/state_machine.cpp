@@ -7,7 +7,7 @@
  */
 
 #include "task/state_machine.hpp"
-#include "scheme/queue_scheme.hpp"
+#include "blackboard/queue_blackboard.hpp"
 
 namespace rfidoor::task {
 

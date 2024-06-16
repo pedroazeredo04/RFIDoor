@@ -1,13 +1,13 @@
 /**
- * @file semaphore_scheme.hpp
+ * @file semaphore_blackboard.hpp
  *
  * @brief Configuration file of all semaphores
  *
  * @date 06/2024
  */
 
-#ifndef __SEMAPHORE_SCHEME_HPP__
-#define __SEMAPHORE_SCHEME_HPP__
+#ifndef __SEMAPHORE_blackboard_HPP__
+#define __SEMAPHORE_blackboard_HPP__
 
 #include "semaphore/binary.hpp"
 #include "semaphore/mutex.hpp"
@@ -27,4 +27,4 @@ extern MutexSemaphore registering_semaphore;
 
 }; // namespace rfidoor::semaphore
 
-#endif // __SEMAPHORE_SCHEME_HPP__
+#endif // __SEMAPHORE_blackboard_HPP__
