@@ -6,8 +6,8 @@
  * @date 06/2024
  */
 
-#ifndef __TASK_blackboard_HPP__
-#define __TASK_blackboard_HPP__
+#ifndef __TASK_BLACKBOARD_HPP__
+#define __TASK_BLACKBOARD_HPP__
 
 #include "pinout.hpp"
 #include "task/task.hpp"
@@ -38,4 +38,4 @@ extern RFIDTask RFID_task;
 
 }; // namespace rfidoor::task
 
-#endif // __TASK_blackboard_HPP__
+#endif // __TASK_BLACKBOARD_HPP__
