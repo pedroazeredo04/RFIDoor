@@ -12,6 +12,20 @@
 #include <cstdint>
 
 namespace rfidoor::peripheral {
+
+/**
+ * @brief Enum for button pull resistor
+ */
+enum PullResistor : uint8_t {
+    PULL_UP,
+    PULL_DOWN,
+};
+    
+/**
+ * @brief Default pull resistor value
+ */
+extern const PullResistor default_pull_resistor;
+
 /**
  * @brief Class for acquiring a button data
  */
@@ -27,20 +41,14 @@ public:
         EXTRA_LONG_PRESS
     };
 
-    /**
-     * @brief Enum for button pull resistor
-     */
-    enum PullResistor : uint8_t {
-        PULL_UP,
-        PULL_DOWN,
-    };
+
 
     /**
      * @brief Constructor for Button class
      *
      * @param pin Button pin
      */
-    explicit Button(const uint8_t pin);
+    explicit Button(const uint8_t pin, const PullResistor pull_resistor = default_pull_resistor);
 
     /**
      * @brief Check if button is pressed

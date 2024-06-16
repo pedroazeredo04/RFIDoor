@@ -18,7 +18,22 @@
       "left": -186.4,
       "attrs": {}
     },
-    { "type": "wokwi-servo", "id": "servo1", "top": -232.4, "left": 249.6, "attrs": {} }
+    { "type": "wokwi-servo", "id": "servo1", "top": -232.4, "left": 249.6, "attrs": {} },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn1",
+      "top": 150.2,
+      "left": 297.6,
+      "attrs": { "color": "green", "label": "No-Bounce" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r1",
+      "top": 206.4,
+      "left": 239.45,
+      "rotate": 90,
+      "attrs": { "value": "10000" }
+    }
   ],
   "connections": [
     [ "esp:TX0", "$serialMonitor:RX", "", [] ],
@@ -37,7 +52,11 @@
     [ "esp:D23", "keypad1:C2", "gray", [ "h18.66", "v-81.6", "h-201.6" ] ],
     [ "esp:D18", "servo1:PWM", "cyan", [ "h38.1", "v-173" ] ],
     [ "esp:GND.2", "servo1:GND", "black", [ "h-38.4", "v-268.9" ] ],
-    [ "esp:3V3", "servo1:V+", "red", [ "v0", "h76.5", "v-259.2" ] ]
+    [ "esp:3V3", "servo1:V+", "red", [ "v0", "h76.5", "v-259.2" ] ],
+    [ "esp:D5", "r1:1", "green", [ "h124.5", "v105.6" ] ],
+    [ "btn1:2.l", "r1:1", "green", [ "h0" ] ],
+    [ "esp:3V3", "btn1:1.r", "red", [ "h220.5", "v76.8" ] ],
+    [ "esp:GND.1", "r1:2", "black", [ "h66.9", "v163.1" ] ]
   ],
   "dependencies": {}
 }

@@ -40,11 +40,10 @@ void loop() {
 
   if (rfidoor::pinout::button.get_status() == rfidoor::peripheral::Button::Status::EXTRA_LONG_PRESS) {
     rfidoor::pinout::board_led.toggle();
+    Serial.println("Button pressed");
   }
 
   if (key) {
     rfidoor::pinout::lcd.write_char_with_increment(key);
   }
-
-  delay(10);
 }

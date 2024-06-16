@@ -15,14 +15,19 @@ namespace rfidoor::peripheral {
 /**
  * @brief Public variables related to the debouncing and button press time
  */
-const int8_t debounce_delay_ms{20};
-const long long_press_delay_ms{999999999};
-const long extra_long_press_delay_ms{999999999};
+const uint16_t debounce_delay_ms_constant{50};
+const uint16_t long_press_delay_ms_constant{1000};
+const uint16_t extra_long_press_delay_ms_constant{3000};
+
+/**
+ * @brief Default value for the pull resistor
+ */
+const PullResistor default_pull_resistor{PullResistor::PULL_DOWN};
 
 /**
  * @brief Conversion constant from microseconds to milliseconds
  */
-const float microseconds_to_miliseconds{10e-3};
+const float microseconds_to_miliseconds{1e-3};
 
 /**
  * @brief Function to get the current time in milliseconds
@@ -31,14 +36,11 @@ float get_time_ms() {
     return esp_timer_get_time() * microseconds_to_miliseconds;
 }
 
-Button::Button(const uint8_t pin) : pin{pin}, debounce_delay_ms{debounce_delay_ms}, long_press_delay_ms{long_press_delay_ms}, extra_long_press_delay_ms{extra_long_press_delay_ms} {
+Button::Button(const uint8_t pin, const PullResistor pull_resistor) : pin{pin}, pull_resistor{pull_resistor}, debounce_delay_ms{debounce_delay_ms_constant}, long_press_delay_ms{long_press_delay_ms_constant}, extra_long_press_delay_ms{extra_long_press_delay_ms_constant} {
     pinMode(this->pin, INPUT);
     this->status_timer_start_ms = get_time_ms();
     this->debounce_timer_start_ms = get_time_ms();
-}
-
-bool Button::is_pressed() {
-    return this->update_state();
+    this->pull_resistor = PullResistor::PULL_DOWN;
 }
 
 Button::Status Button::get_status() {
@@ -49,13 +51,16 @@ Button::Status Button::get_status() {
         this->status_timer_start_ms = get_time_ms();
     } else if (this->is_falling_edge()) {
         float elapsed = get_time_ms() - this->status_timer_start_ms;
-        Serial.println(elapsed);
 
-        if (elapsed > extra_long_press_delay_ms) {
+        if (elapsed < this->debounce_delay_ms) {
+            return NO_PRESS;
+        }
+
+        if (elapsed > this->extra_long_press_delay_ms) {
             return EXTRA_LONG_PRESS;
         }
 
-        if (elapsed > long_press_delay_ms) {
+        if (elapsed > this->long_press_delay_ms) {
             return LONG_PRESS;
         }
 
@@ -66,24 +71,19 @@ Button::Status Button::get_status() {
 }
 
 bool Button::get_raw_reading() const {
-    return digitalRead(this->pin);
-}
-
-bool Button::update_state() {
-    bool raw_reading = this->get_raw_reading();
-
-    if ((raw_reading != this->current_state) and not this->is_debouncing) {
-        this->is_debouncing = true;
-        this->debounce_timer_start_ms = get_time_ms();
-    } else if ((get_time_ms() - this->debounce_timer_start_ms < debounce_delay_ms) and this->is_debouncing) {
-        if (this->current_state == raw_reading) {
-            this->is_debouncing = false;
+    switch (this->pull_resistor) {
+        case PullResistor::PULL_UP: {
+            return not digitalRead(this->pin);
+            break;
         }
-    } else {
-        return raw_reading;
+        case PullResistor::PULL_DOWN: {
+            return digitalRead(this->pin);
+            break;
+        }
+        default: {
+            return false;
+        }
     }
-
-    return this->current_state;
 }
 
 bool Button::is_rising_edge() const {
