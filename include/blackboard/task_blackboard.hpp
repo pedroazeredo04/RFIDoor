@@ -10,12 +10,11 @@
 #define __TASK_BLACKBOARD_HPP__
 
 #include "pinout.hpp"
-#include "task/task.hpp"
-#include "task/rfid.hpp"
 #include "task/blinky.hpp"
+#include "task/button.hpp"
 #include "task/rfid.hpp"
 #include "task/state_machine.hpp"
-#include "task/button.hpp"
+#include "task/task.hpp"
 
 namespace rfidoor::task {
 /**

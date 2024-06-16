@@ -13,9 +13,10 @@ namespace rfidoor::task {
 
 ButtonTask::ButtonTask(const rfidoor::peripheral::Button &button,
                        const task_config_t &config)
-    : Task(config), button{button}, button_status{rfidoor::peripheral::Button::Status::NO_PRESS} {}
+    : Task(config), button{button},
+      button_status{rfidoor::peripheral::Button::Status::NO_PRESS} {}
 
-void ButtonTask::init() { }
+void ButtonTask::init() {}
 
 void ButtonTask::spin() {
   this->button_status = this->button.get_status();
