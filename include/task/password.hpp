@@ -12,8 +12,8 @@
 #include "peripheral/keyboard.hpp"
 #include "task/state_machine_types.hpp"
 #include "task/task.hpp"
-#include <vector>
 #include <string>
+#include <vector>
 
 namespace rfidoor::task {
 
@@ -27,12 +27,12 @@ const uint8_t password_length{4};
  */
 class PasswordTask : public Task {
 public:
-    /**
-     * @brief Password type definition
-     */
-    struct password_t {
-        std::string password;
-    };
+  /**
+   * @brief Password type definition
+   */
+  struct password_t {
+    std::string password;
+  };
 
   /**
    * @brief Constructor for the blinky Task
@@ -40,8 +40,8 @@ public:
    * @param keyboard NFC object to be controlled
    * @param config Configuration type for Task class
    */
-  PasswordTask(rfidoor::peripheral::Keyboard& keyboard,
-           const task_config_t &config = default_config);
+  PasswordTask(rfidoor::peripheral::Keyboard &keyboard,
+               const task_config_t &config = default_config);
 
   /**
    * @brief Override of the mother class Task init function
@@ -79,14 +79,14 @@ private:
    */
   state_t current_state_machine_state{TRANCADA_IDLE};
 
-    /**
-     * @brief is entering password
-     */
+  /**
+   * @brief is entering password
+   */
   bool is_entering_password{false};
 
-    /**
-     * @brief Current password to be built
-     */
+  /**
+   * @brief Current password to be built
+   */
   password_t current_password;
 };
 

@@ -12,7 +12,8 @@
 
 namespace rfidoor::task {
 
-PasswordTask::PasswordTask(rfidoor::peripheral::Keyboard& keyboard, const task_config_t &config)
+PasswordTask::PasswordTask(rfidoor::peripheral::Keyboard &keyboard,
+                           const task_config_t &config)
     : Task(config), keyboard{keyboard} {}
 
 void PasswordTask::init() {
@@ -40,51 +41,51 @@ void PasswordTask::spin() {
 }
 
 void PasswordTask::read_password() {
-    char key = this->keyboard.getKey();
+  char key = this->keyboard.getKey();
 
-    if (key) {
-        if (not this->is_entering_password) {
-            this->is_entering_password = true;
-            this->current_password.password.clear();
-            rfidoor::queue::event_queue.publish(event_t::TECLA);
-        } else {
-            this->current_password.password += key;
+  if (key) {
+    if (not this->is_entering_password) {
+      this->is_entering_password = true;
+      this->current_password.password.clear();
+      rfidoor::queue::event_queue.publish(event_t::TECLA);
+    } else {
+      this->current_password.password += key;
 
-            if (this->current_password.password.length() >= password_length) {
-                this->is_entering_password = false;
+      if (this->current_password.password.length() >= password_length) {
+        this->is_entering_password = false;
 
-                for (const auto& password : this->valid_passwords) {
-                    if (password.password == this->current_password.password) {
-                        rfidoor::queue::event_queue.publish(event_t::SENHA_VALIDA);
-                        return;
-                    }
+        for (const auto &password : this->valid_passwords) {
+          if (password.password == this->current_password.password) {
+            rfidoor::queue::event_queue.publish(event_t::SENHA_VALIDA);
+            return;
+          }
 
-                    rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
-                }
-            }
+          rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
         }
+      }
     }
+  }
 }
 
 void PasswordTask::register_password() {
-    char key = this->keyboard.getKey();
+  char key = this->keyboard.getKey();
 
-    if (key) {
-        if (not this->is_entering_password) {
-            rfidoor::semaphore::registering_semaphore.take();
-            this->is_entering_password = true;
-            this->current_password.password.clear();
-        } else {
-            this->current_password.password += key;
+  if (key) {
+    if (not this->is_entering_password) {
+      rfidoor::semaphore::registering_semaphore.take();
+      this->is_entering_password = true;
+      this->current_password.password.clear();
+    } else {
+      this->current_password.password += key;
 
-            if (this->current_password.password.length() >= password_length) {
-                this->is_entering_password = false;
-                this->valid_passwords.push_back(this->current_password);
-                rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);
-                rfidoor::semaphore::registering_semaphore.give();
-            }
-        }
+      if (this->current_password.password.length() >= password_length) {
+        this->is_entering_password = false;
+        this->valid_passwords.push_back(this->current_password);
+        rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);
+        rfidoor::semaphore::registering_semaphore.give();
+      }
     }
+  }
 }
 
 } // namespace rfidoor::task
