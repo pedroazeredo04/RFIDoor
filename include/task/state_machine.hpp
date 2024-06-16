@@ -1,8 +1,8 @@
 /**
  * @file state_machine.hpp
- * 
+ *
  * @brief StateMachine class header, that implements the state machine
- * 
+ *
  * @date 06/2024
  */
 
@@ -20,51 +20,51 @@ namespace rfidoor::task {
  * @brief Enum corresponding to the possible states of the state machine
  */
 enum states {
-    TRANCADA_IDLE,
-    DIGITANDO_SENHA,
-    DESTRANCADA_FECHADA,
-    ABERTA,
-    REGISTRO
+  TRANCADA_IDLE,
+  DIGITANDO_SENHA,
+  DESTRANCADA_FECHADA,
+  ABERTA,
+  REGISTRO
 };
 
 /**
  * @brief Enum corresponding to the possible events of the state machine
  */
 enum events {
-    NENHUM_EVENTO = -1,
-    SINAL_INVALIDO,
-    SINAL_VALIDO,
-    SINAL_CADASTRADO,
-    BOTAO,
-    TIMEOUT,
-    SENHA_INVALIDA,
-    SENHA_VALIDA,
-    SENHA_CADASTRADA,
-    TECLA,
-    FECHAR,
-    ABRIR,
-    SEGURAR_ASTERISCO    
+  NENHUM_EVENTO = -1,
+  SINAL_INVALIDO,
+  SINAL_VALIDO,
+  SINAL_CADASTRADO,
+  BOTAO,
+  TIMEOUT,
+  SENHA_INVALIDA,
+  SENHA_VALIDA,
+  SENHA_CADASTRADA,
+  TECLA,
+  FECHAR,
+  ABRIR,
+  SEGURAR_ASTERISCO
 };
 
 /**
  * @brief Enum corresponding to the possible actions of the state machine
  */
 enum actions {
-    NENHUMA_ACAO = -1,
-    A01,
-    A02,
-    A03,
-    A04,
-    A05,
-    A06,
-    A07,
-    A08,
-    A09,
-    A10,
-    A11,
-    A12,
-    A13,
-    A14
+  NENHUMA_ACAO = -1,
+  A01,
+  A02,
+  A03,
+  A04,
+  A05,
+  A06,
+  A07,
+  A08,
+  A09,
+  A10,
+  A11,
+  A12,
+  A13,
+  A14
 };
 
 /**
@@ -72,31 +72,31 @@ enum actions {
  */
 class StateMachineTask : public Task {
 public:
-    /**
-     * @brief Constructor for the state machine Task
-     */
-    StateMachineTask(const task_config_t &config = default_config);
+  /**
+   * @brief Constructor for the state machine Task
+   */
+  StateMachineTask(const task_config_t &config = default_config);
 
-    /**
-     * @brief Override of the mother class Task init function
-     */
-    virtual void init() override;
+  /**
+   * @brief Override of the mother class Task init function
+   */
+  virtual void init() override;
 
-    /**
-     * @brief Override of the mother class Task spin function
-     */
-    virtual void spin() override;
+  /**
+   * @brief Override of the mother class Task spin function
+   */
+  virtual void spin() override;
 
 private:
-    /**
-     * @brief Table of actions of the state machine [state][event]
-     */
-    uint8_t action_state_machine_table[NUM_STATES][NUM_EVENTS];
+  /**
+   * @brief Table of actions of the state machine [state][event]
+   */
+  uint8_t action_state_machine_table[NUM_STATES][NUM_EVENTS];
 
-    /**
-     * @brief Table of next states of the state machine [state][event]
-     */
-    uint8_t next_state_state_machine_table[NUM_STATES][NUM_EVENTS];
+  /**
+   * @brief Table of next states of the state machine [state][event]
+   */
+  uint8_t next_state_state_machine_table[NUM_STATES][NUM_EVENTS];
 };
 
 } // namespace rfidoor::task

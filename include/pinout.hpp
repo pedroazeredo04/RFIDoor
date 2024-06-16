@@ -9,11 +9,11 @@
 #ifndef __PINOUT_HPP__
 #define __PINOUT_HPP__
 
+#include <peripheral/button.hpp>
 #include <peripheral/keyboard.hpp>
 #include <peripheral/lcd.hpp>
 #include <peripheral/led.hpp>
 #include <peripheral/servo.hpp>
-#include <peripheral/button.hpp>
 
 namespace rfidoor::pinout {
 

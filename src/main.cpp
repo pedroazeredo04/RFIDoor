@@ -1,16 +1,19 @@
+#include <pinout.hpp>
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
-#include <pinout.hpp>
 #include <task_scheme.hpp>
 const uint32_t blinky_frequency_ms{500};
 
 // Tasks initializations
- rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms, rfidoor::task::blinky_config);
- rfidoor::task::StateMachineTask state_machine_task(rfidoor::task::state_machine_config);
+rfidoor::task::BlinkyTask blinky_task(rfidoor::pinout::board_led,
+                                      blinky_frequency_ms,
+                                      rfidoor::task::blinky_config);
+rfidoor::task::StateMachineTask
+    state_machine_task(rfidoor::task::state_machine_config);
 
 void setup() {
   // blinky_task.create_task();
-  //state_machine_task.create_task();
+  // state_machine_task.create_task();
 
   rfidoor::pinout::lcd.init();
   // rfidoor::pinout::lcd.set_cursor(0, 0);
@@ -38,7 +41,8 @@ void setup() {
 void loop() {
   char key = rfidoor::pinout::keyboard.getKey();
 
-  if (rfidoor::pinout::button.get_status() == rfidoor::peripheral::Button::Status::EXTRA_LONG_PRESS) {
+  if (rfidoor::pinout::button.get_status() ==
+      rfidoor::peripheral::Button::Status::EXTRA_LONG_PRESS) {
     rfidoor::pinout::board_led.toggle();
     Serial.println("Button pressed");
   }
