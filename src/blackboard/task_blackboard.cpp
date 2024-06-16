@@ -17,7 +17,10 @@ const task_config_t state_machine_config = {
     .name = "stateMachineTask", .stack_size = 5000, .priority = HIGH_PRIORITY};
 
 const task_config_t rfid_config = {
-    .name = "RFIDTAsk", .stack_size = 1000, .priority = LOW_PRIORITY};
+    .name = "RFIDTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+
+const task_config_t button_config = {
+    .name = "ButtonTask", .stack_size = 1000, .priority = LOW_PRIORITY};
 
 /**
  * @brief Frequency of the blinky task in miliseconds
@@ -39,5 +42,7 @@ StateMachineTask state_machine_task(state_machine_config);
  * @brief Instanciate the state machine task
  */
 RFIDTask RFID_task(rfidoor::pinout::nfc, rfid_config);
+
+ButtonTask button_task(rfidoor::pinout::button, button_config);
 
 }; // namespace rfidoor::task
