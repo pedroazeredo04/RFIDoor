@@ -27,17 +27,13 @@ void RFIDTask::spin() {
   }
 
   switch (this->current_state_machine_state) {
-  case READING: {
-    this->read_id();
-    break;
-  }
-
-  case REGISTERING: {
+  case REGISTRO: {
     this->register_id();
     break;
   }
 
   default: {
+    this->read_id();
     break;
   }
   }
