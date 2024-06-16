@@ -13,20 +13,20 @@
 namespace rfidoor::task {
 
 RFIDTask::RFIDTask(rfidoor::peripheral::Nfc &nfc, const task_config_t &config)
-    : Task(config), nfc{nfc}, state{READING} {}
+    : Task(config), nfc{nfc}, current_state_machine_state{TRANCADA_IDLE} {}
 
 void RFIDTask::init() {
   //
 }
 
 void RFIDTask::spin() {
-  input_device_state_t queue_state;
+  state_t state_machine_state;
 
-  if (rfidoor::queue::input_device_state_queue.peek(&queue_state)) {
-    this->state = queue_state;
+  if (rfidoor::queue::state_queue.peek(&state_machine_state)) {
+    this->current_state_machine_state = state_machine_state;
   }
 
-  switch (this->state) {
+  switch (this->current_state_machine_state) {
   case READING: {
     this->read_id();
     break;

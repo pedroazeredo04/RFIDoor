@@ -6,14 +6,15 @@
  * @date 06/2024
  */
 
-#ifndef __TASK_blackboard_HPP__
-#define __TASK_blackboard_HPP__
+#ifndef __TASK_BLACKBOARD_HPP__
+#define __TASK_BLACKBOARD_HPP__
 
 #include "pinout.hpp"
+#include "task/task.hpp"
+#include "task/rfid.hpp"
 #include "task/blinky.hpp"
 #include "task/rfid.hpp"
 #include "task/state_machine.hpp"
-#include "task/task.hpp"
 #include "task/button.hpp"
 
 namespace rfidoor::task {
@@ -44,4 +45,4 @@ extern ButtonTask button_task;
 
 }; // namespace rfidoor::task
 
-#endif // __TASK_blackboard_HPP__
+#endif // __TASK_BLACKBOARD_HPP__

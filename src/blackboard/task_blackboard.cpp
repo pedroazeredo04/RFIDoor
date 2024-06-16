@@ -14,7 +14,7 @@ const task_config_t blinky_config = {
     .name = "blinkyTask", .stack_size = 1000, .priority = LOW_PRIORITY};
 
 const task_config_t state_machine_config = {
-    .name = "stateMachineTask", .stack_size = 5000, .priority = HIGH_PRIORITY};
+    .name = "stateMachineTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
 const task_config_t rfid_config = {
     .name = "RFIDTask", .stack_size = 1000, .priority = LOW_PRIORITY};

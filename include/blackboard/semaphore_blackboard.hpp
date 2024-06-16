@@ -6,8 +6,8 @@
  * @date 06/2024
  */
 
-#ifndef __SEMAPHORE_blackboard_HPP__
-#define __SEMAPHORE_blackboard_HPP__
+#ifndef __SEMAPHORE_BLACKBOARD_HPP__
+#define __SEMAPHORE_BLACKBOARD_HPP__
 
 #include "semaphore/binary.hpp"
 #include "semaphore/mutex.hpp"
@@ -27,4 +27,4 @@ extern MutexSemaphore registering_semaphore;
 
 }; // namespace rfidoor::semaphore
 
-#endif // __SEMAPHORE_blackboard_HPP__
+#endif // __SEMAPHORE_BLACKBOARD_HPP__
