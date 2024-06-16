@@ -75,6 +75,8 @@ class StateMachineTask : public Task {
 public:
   /**
    * @brief Constructor for the state machine Task
+   * 
+   * @param config Configuration type for Task class
    */
   StateMachineTask(const task_config_t &config = default_config);
 

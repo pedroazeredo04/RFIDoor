@@ -24,9 +24,10 @@ public:
    * @brief Constructor for the blinky Task
    *
    * @param nfc NFC object to be controlled
-   * @param 
+   * @param config Configuration type for Task class
    */
-  RFIDTask(rfidoor::peripheral::Nfc &nfc, const task_config_t &config = default_config);
+  RFIDTask(rfidoor::peripheral::Nfc &nfc,
+           const task_config_t &config = default_config);
 
   /**
    * @brief Override of the mother class Task init function

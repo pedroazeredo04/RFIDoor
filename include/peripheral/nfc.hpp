@@ -15,7 +15,7 @@
 
 namespace rfidoor::peripheral {
 struct ID_t {
-    uint8_t bytes[7];
+  uint8_t bytes[7];
 };
 
 /**

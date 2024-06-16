@@ -9,9 +9,9 @@
 #ifndef __TASK_SCHEME_HPP__
 #define __TASK_SCHEME_HPP__
 
-#include "task/task.hpp"
 #include "pinout.hpp"
 #include "task/rfid.hpp"
+#include "task/task.hpp"
 
 namespace rfidoor::task {
 

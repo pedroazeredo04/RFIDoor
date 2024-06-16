@@ -18,8 +18,8 @@ const uint8_t lcd_scl_pin{22};
 const uint8_t internal_led_pin{2};
 
 // Keypad pinout
-uint8_t keypad_row_pins[4] {14, 13, 12, 15};
-uint8_t keypad_col_pins[4] {19, 23, 25, 26};
+uint8_t keypad_row_pins[4]{14, 13, 12, 15};
+uint8_t keypad_col_pins[4]{19, 23, 25, 26};
 
 // Servo pinout
 const uint8_t servoPin{18};

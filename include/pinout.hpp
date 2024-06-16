@@ -13,8 +13,8 @@
 #include "peripheral/keyboard.hpp"
 #include "peripheral/lcd.hpp"
 #include "peripheral/led.hpp"
-#include "peripheral/servo.hpp"
 #include "peripheral/nfc.hpp"
+#include "peripheral/servo.hpp"
 
 namespace rfidoor::pinout {
 
