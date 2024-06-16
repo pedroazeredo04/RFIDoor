@@ -1,17 +1,12 @@
 /**
- * @file task_scheme.hpp
+ * @file task_scheme.cpp
  *
  * @brief Configuration file of all tasks
  *
  * @date 06/2024
  */
 
-#ifndef __TASK_SCHEME_HPP__
-#define __TASK_SCHEME_HPP__
-
-#include "pinout.hpp"
-#include "task/rfid.hpp"
-#include "task/task.hpp"
+#include "scheme/task_scheme.hpp"
 
 namespace rfidoor::task {
 
@@ -46,5 +41,3 @@ StateMachineTask state_machine_task(state_machine_config);
 RFIDTask RFID_task(rfidoor::pinout::nfc, rfid_config);
 
 }; // namespace rfidoor::task
-
-#endif // __TASK_SCHEME_HPP__

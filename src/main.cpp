@@ -1,8 +1,8 @@
 #include <pinout.hpp>
-#include <queue_scheme.hpp>
+#include <scheme/queue_scheme.hpp>
 #include <task/blinky.hpp>
 #include <task/state_machine.hpp>
-#include <task_scheme.hpp>
+#include <scheme/task_scheme.hpp>
 
 void setup() {
   Serial.begin(9600);

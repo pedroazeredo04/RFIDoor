@@ -6,7 +6,7 @@
  * @date 06/2024
  */
 
-#include "queue_scheme.hpp"
+#include "scheme/queue_scheme.hpp"
 
 namespace rfidoor::queue {
 

@@ -6,7 +6,7 @@
  * @date 06/2024
  */
 
-#include "semaphore_scheme.hpp"
+#include "scheme/semaphore_scheme.hpp"
 
 namespace rfidoor::semaphore {
 
