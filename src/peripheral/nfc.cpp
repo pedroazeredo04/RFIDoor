@@ -28,10 +28,8 @@ bool Nfc::read() {
                                      this->uidLength);
 }
 
-
 ID_t Nfc::get_last_read_value() {
   return this->uid;
 }
-
 
 } // namespace rfidoor::peripheral
