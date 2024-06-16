@@ -1,3 +1,11 @@
+/**
+ * @file state_machine.cpp
+ *
+ * @brief Blinky class source code
+ *
+ * @date 06/2024
+ */
+
 #include "task/blinky.hpp"
 
 namespace rfidoor::task {

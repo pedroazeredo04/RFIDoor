@@ -14,6 +14,10 @@
 #include <Wire.h>
 
 namespace rfidoor::peripheral {
+struct ID_t {
+    uint8_t bytes[7];
+};
+
 /**
  * @brief Class for controlling an NfcReader
  */
@@ -37,7 +41,14 @@ public:
    *
    * @return true if the NFC ID was read successfully
    */
-  bool read_nfcid();
+  bool read();
+
+  /**
+   * @brief Last ID the NFC read
+   *
+   * @return last value NFC read
+   */
+  ID_t get_last_read_value();
 
 private:
   /**
@@ -48,7 +59,7 @@ private:
   /**
    * @brief Buffer to store the returned UID
    */
-  uint8_t uid[7];
+  ID_t uid;
 
   /**
    * @brief Pointer to the length of the UID (4 or 7 bytes depending on
