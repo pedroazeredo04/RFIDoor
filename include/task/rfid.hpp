@@ -64,7 +64,7 @@ private:
   /**
    * @brief State of the RFID task
    */
-  input_device_state_t state;
+  state_t current_state_machine_state;
 };
 
 } // namespace rfidoor::task

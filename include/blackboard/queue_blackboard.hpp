@@ -19,7 +19,10 @@ namespace rfidoor::queue {
  */
 extern Queue<rfidoor::task::event_t> event_queue;
 
-extern Queue<rfidoor::task::input_device_state_t> input_device_state_queue;
+/**
+ * @brief Queue used to send the current state machine state
+ */
+extern Queue<rfidoor::task::state_t> state_queue;
 
 } // namespace rfidoor::queue
 
