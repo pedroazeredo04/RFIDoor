@@ -45,13 +45,6 @@ public:
                   const PullResistor pull_resistor = default_pull_resistor);
 
   /**
-   * @brief Check if button is pressed
-   *
-   * @return bool True if button is pressed, false otherwise
-   */
-  bool is_pressed();
-
-  /**
    * @brief Get button status
    *
    * @return Status Button status
@@ -65,13 +58,6 @@ private:
    * @return bool Button reading without debounce
    */
   bool get_raw_reading() const;
-
-  /**
-   * @brief Update button state
-   *
-   * @return Current state of the button
-   */
-  bool update_state();
 
   /**
    * @brief Check if button was just pressed
