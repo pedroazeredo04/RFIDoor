@@ -18,28 +18,42 @@
 
 namespace rfidoor::pinout {
 
-// LCD pinout
+/**
+ * @brief LCD pinout
+ */
 extern const uint8_t lcd_sda_pin;
 extern const uint8_t lcd_scl_pin;
 
-// Internal LED pinout
+/**
+ * @brief Internal LED Pinout
+ */
 extern const uint8_t internal_led_pin;
 
-// Keypad pinout
+/**
+ * @brief Keypad pinout
+ */
 extern uint8_t keypad_row_pins[4];
 extern uint8_t keypad_col_pins[4];
 
-// Servo pinout
+/**
+ * @brief Servo pinout
+ */
 extern const uint8_t servoPin;
 
-// NFC pinout
+/**
+ * @brief NFC pinout
+ */
 extern const uint8_t irq_pin;
 extern const uint8_t rst_pin;
 
-// Button pinout
+/**
+ * @brief Button pin
+ */
 extern const uint8_t button_pin;
 
-// peripheral initializations
+/**
+ * @brief Peripheral Initializations
+ */
 extern rfidoor::peripheral::Led board_led;
 extern rfidoor::peripheral::Lcd lcd;
 extern rfidoor::peripheral::Keyboard keyboard;

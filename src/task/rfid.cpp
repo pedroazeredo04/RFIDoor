@@ -9,6 +9,7 @@
 #include "task/rfid.hpp"
 #include "blackboard/queue_blackboard.hpp"
 #include "blackboard/semaphore_blackboard.hpp"
+#include "blackboard/task_blackboard.hpp"
 
 namespace rfidoor::task {
 
@@ -20,24 +21,17 @@ void RFIDTask::init() {
 }
 
 void RFIDTask::spin() {
-  state_t state_machine_state;
-
-  if (rfidoor::queue::state_queue.peek(&state_machine_state)) {
-    this->current_state_machine_state = state_machine_state;
-  }
+  this->current_state_machine_state =
+      blackboard::state_machine_task.get_state();
 
   switch (this->current_state_machine_state) {
-  case READING: {
-    this->read_id();
-    break;
-  }
-
-  case REGISTERING: {
+  case REGISTRO: {
     this->register_id();
     break;
   }
 
   default: {
+    this->read_id();
     break;
   }
   }
@@ -45,23 +39,23 @@ void RFIDTask::spin() {
 
 void RFIDTask::read_id() {
   if (this->nfc.read()) {
-    for (auto id : this->valid_ids) {
+    for (const auto &id : this->valid_ids) {
       if (id.bytes == this->nfc.get_last_read_value().bytes) {
-        rfidoor::queue::event_queue.publish(SINAL_VALIDO);
+        rfidoor::queue::blackboard::event_queue.publish(SINAL_VALIDO);
       }
     }
-    rfidoor::queue::event_queue.publish(SINAL_INVALIDO);
+    rfidoor::queue::blackboard::event_queue.publish(SINAL_INVALIDO);
   }
 }
 
 void RFIDTask::register_id() {
   if (this->nfc.read()) {
-    rfidoor::semaphore::registering_semaphore.take();
+    rfidoor::semaphore::blackboard::registering_semaphore.take();
 
     this->valid_ids.push_back(this->nfc.get_last_read_value());
-    rfidoor::queue::event_queue.publish(SINAL_CADASTRADO);
+    rfidoor::queue::blackboard::event_queue.publish(SINAL_CADASTRADO);
 
-    rfidoor::semaphore::registering_semaphore.give();
+    rfidoor::semaphore::blackboard::registering_semaphore.give();
   }
 }
 

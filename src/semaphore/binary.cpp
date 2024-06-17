@@ -10,6 +10,10 @@
 
 namespace rfidoor::semaphore {
 
+BinarySemaphore::BinarySemaphore(void) {
+  this->semaphore_handle = this->create_semaphore();
+}
+
 SemaphoreHandle_t BinarySemaphore::create_semaphore() {
   return xSemaphoreCreateBinary();
 }

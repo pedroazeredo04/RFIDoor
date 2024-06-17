@@ -12,14 +12,17 @@ namespace rfidoor::semaphore {
 
 const uint32_t semaphore_delay{portMAX_DELAY};
 
-Semaphore::Semaphore(void) {
-  this->semaphore_handle = this->create_semaphore();
-}
+Semaphore::Semaphore(void) {}
 
 const void Semaphore::give() { xSemaphoreGive(this->semaphore_handle); }
 
 const void Semaphore::take() {
-  xSemaphoreTake(this->semaphore_handle, semaphore_delay);
+  if (this->semaphore_handle != NULL) {
+    xSemaphoreTake(this->semaphore_handle, semaphore_delay);
+    return;
+  }
+
+  Serial.println("Erro: Semáforo não inicializado.");
 }
 
 } // namespace rfidoor::semaphore

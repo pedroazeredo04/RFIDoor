@@ -6,8 +6,8 @@
  * @date 06/2024
  */
 
-#ifndef _BUTTON_TASK_HPP_
-#define _BUTTON_TASK_HPP_
+#ifndef __BUTTON_TASK_HPP__
+#define __BUTTON_TASK_HPP__
 
 #include "peripheral/button.hpp"
 #include "task/task.hpp"
@@ -51,4 +51,4 @@ private:
 };
 
 } // namespace rfidoor::task
-#endif // _BUTTON_TASK_HPP_
+#endif // __BUTTON_TASK_HPP__

@@ -12,11 +12,12 @@
 #include "pinout.hpp"
 #include "task/blinky.hpp"
 #include "task/button.hpp"
+#include "task/password.hpp"
 #include "task/rfid.hpp"
 #include "task/state_machine.hpp"
 #include "task/task.hpp"
 
-namespace rfidoor::task {
+namespace rfidoor::task::blackboard {
 /**
  * @brief Frequency of the blinky task in miliseconds
  */
@@ -38,10 +39,15 @@ extern StateMachineTask state_machine_task;
 extern RFIDTask RFID_task;
 
 /**
+ * @brief Password task
+ */
+extern PasswordTask password_task;
+
+/**
  * @brief Instanciate the button task
  */
 extern ButtonTask button_task;
 
-}; // namespace rfidoor::task
+}; // namespace rfidoor::task::blackboard
 
 #endif // __TASK_BLACKBOARD_HPP__

@@ -7,8 +7,8 @@
 void setup() {
   Serial.begin(9600);
 
-  rfidoor::task::blinky_task.create_task();
-  rfidoor::task::state_machine_task.create_task();
+  rfidoor::task::blackboard::blinky_task.create_task();
+  rfidoor::task::blackboard::password_task.create_task();
 
   rfidoor::pinout::lcd.init();
   // rfidoor::pinout::lcd.set_cursor(0, 0);
@@ -30,33 +30,37 @@ void setup() {
 
   // Initialize the servo to 0 degrees
   rfidoor::pinout::servo.write_angular_position_degrees(0);
+
+  rfidoor::queue::blackboard::state_queue.publish(
+      rfidoor::task::state_t::TRANCADA_IDLE);
+
   delay(1000); // Wait for 1 second
 }
 
 void loop() {
-  char key = rfidoor::pinout::keyboard.getKey();
+  static bool is_registro{false};
 
-  if (key) {
-    rfidoor::pinout::lcd.write_char_with_increment(key);
+  // Pega o estado do botão
+  rfidoor::peripheral::Button::Status button_status =
+      rfidoor::pinout::button.get_status();
 
-    if (key == '*') {
-      rfidoor::queue::event_queue.publish(rfidoor::task::SENHA_INVALIDA);
+  if (button_status == rfidoor::peripheral::Button::Status::SHORT_PRESS) {
+    is_registro = not is_registro;
+    Serial.println("flipou o registro");
+    if (not is_registro) {
+      rfidoor::queue::blackboard::state_queue.publish(
+          rfidoor::task::state_t::TRANCADA_IDLE);
+      Serial.println("Ta registrando n");
     } else {
-      rfidoor::queue::event_queue.publish(rfidoor::task::TECLA);
+      rfidoor::queue::blackboard::state_queue.publish(
+          rfidoor::task::state_t::REGISTRO);
+      Serial.println("Ta registrando");
     }
-
-    // // Move the servo to 90 degrees when a key is pressed
-    // rfidoor::pinout::servo.write_angular_position_degrees(90);
-    // delay(2000); // Wait for 2 seconds
-
-    // // Move the servo back to 0 degrees
-    // rfidoor::pinout::servo.write_angular_position_degrees(0);
-    // delay(2000); // Wait for 2 seconds
   }
 
-  rfidoor::task::event_t evento;
+  rfidoor::task::event_t evento = rfidoor::task::event_t::NENHUM_EVENTO;
 
-  if (rfidoor::queue::event_queue.read(&evento)) {
+  if (rfidoor::queue::blackboard::event_queue.read(&evento)) {
     Serial.println(evento);
   }
 }

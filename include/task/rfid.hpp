@@ -17,12 +17,12 @@
 namespace rfidoor::task {
 
 /**
- * @brief Class for the blinky Task, that blinks the board LED continuously
+ * @brief Class for the RFID Task, that reads and validates a RFID card
  */
 class RFIDTask : public Task {
 public:
   /**
-   * @brief Constructor for the blinky Task
+   * @brief Constructor for the RFID Task
    *
    * @param nfc NFC object to be controlled
    * @param config Configuration type for Task class

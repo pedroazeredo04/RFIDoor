@@ -8,7 +8,7 @@
 
 #include "blackboard/task_blackboard.hpp"
 
-namespace rfidoor::task {
+namespace rfidoor::task::blackboard {
 
 const task_config_t blinky_config = {
     .name = "blinkyTask", .stack_size = 1000, .priority = LOW_PRIORITY};
@@ -21,6 +21,9 @@ const task_config_t rfid_config = {
 
 const task_config_t button_config = {
     .name = "ButtonTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+
+const task_config_t password_config = {
+    .name = "passwordTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
 /**
  * @brief Frequency of the blinky task in miliseconds
@@ -43,6 +46,11 @@ StateMachineTask state_machine_task(state_machine_config);
  */
 RFIDTask RFID_task(rfidoor::pinout::nfc, rfid_config);
 
+/**
+ * @brief Instanciate the state machine task
+ */
+PasswordTask password_task(rfidoor::pinout::keyboard, password_config);
+
 ButtonTask button_task(rfidoor::pinout::button, button_config);
 
-}; // namespace rfidoor::task
+}; // namespace rfidoor::task::blackboard

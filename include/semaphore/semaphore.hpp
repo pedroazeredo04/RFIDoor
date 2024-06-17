@@ -27,7 +27,7 @@ public:
    *
    * @return SemaphoreHandle_t Handle for the semaphore
    */
-  virtual SemaphoreHandle_t create_semaphore() { return NULL; };
+  virtual SemaphoreHandle_t create_semaphore() = 0;
 
   /**
    * @brief Function that calls xSemaphoreGive from FreeRTOS
