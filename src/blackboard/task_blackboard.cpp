@@ -20,7 +20,7 @@ const task_config_t rfid_config = {
     .name = "RFIDTAsk", .stack_size = 1000, .priority = LOW_PRIORITY};
 
 const task_config_t password_config = {
-    .name = "passwordTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+    .name = "passwordTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
 /**
  * @brief Frequency of the blinky task in miliseconds

@@ -45,27 +45,35 @@ void PasswordTask::read_password() {
 
   if (key) {
     if (not this->is_entering_password) {
+      if (not (key >= '0' and key <= '9')) return;  // First letter must be a number
+
       this->is_entering_password = true;
       this->current_password.password.clear();
       rfidoor::queue::event_queue.publish(event_t::TECLA);
-      return;
+      Serial.println("Primeira!! Tecla numérica pressionada");
     }
 
     if (key >= '0' and key <= '9') {
         this->current_password.password += key;
+        Serial.println("Senha:");
+        Serial.println(this->current_password.password.c_str());
     }
 
     if ((this->current_password.password.length() >= password_max_length) or key == '#') {
       this->is_entering_password = false;
 
+      Serial.println("Acabo. A senha tentada foi:");
+      Serial.println(this->current_password.password.c_str());
+
       for (const auto &password : this->valid_passwords) {
         if (password.password == this->current_password.password) {
           rfidoor::queue::event_queue.publish(event_t::SENHA_VALIDA);
+          Serial.println("Deu bonski");
           return;
         }
-
-        rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
       }
+      Serial.println("Deu bom nãoski");
+      rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
     }
   }
 }
@@ -75,10 +83,13 @@ void PasswordTask::register_password() {
 
   if (key) {
     if (not this->is_entering_password) {
+      if (not (key >= '0' and key <= '9')) return;  // First letter must be a number
+
+      Serial.println("Ta registrando senhaski");
       rfidoor::semaphore::registering_semaphore.take();
+      Serial.println("Pós semáforo taking");
       this->is_entering_password = true;
       this->current_password.password.clear();
-      return;
     }
     
     if (key >= '0' and key <= '9') {
@@ -86,6 +97,8 @@ void PasswordTask::register_password() {
     }
 
     if ((this->current_password.password.length() >= password_max_length) or key == '#') {
+      Serial.print("Senhaski registradaski");
+      Serial.println(this->current_password.password.c_str());
       this->is_entering_password = false;
       this->valid_passwords.push_back(this->current_password);
       rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);

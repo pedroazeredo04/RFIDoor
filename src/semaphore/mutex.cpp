@@ -10,6 +10,10 @@
 
 namespace rfidoor::semaphore {
 
+MutexSemaphore::MutexSemaphore(void) {
+  this->semaphore_handle = this->create_semaphore();
+}
+
 SemaphoreHandle_t MutexSemaphore::create_semaphore() {
   return xSemaphoreCreateMutex();
 }

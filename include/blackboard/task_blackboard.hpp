@@ -37,6 +37,11 @@ extern StateMachineTask state_machine_task;
  */
 extern RFIDTask RFID_task;
 
+/**
+ * @brief Password task
+ */
+extern PasswordTask password_task;
+
 }; // namespace rfidoor::task
 
 #endif // __TASK_BLACKBOARD_HPP__

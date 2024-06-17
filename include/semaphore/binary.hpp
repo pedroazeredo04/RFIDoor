@@ -18,6 +18,12 @@ namespace rfidoor::semaphore {
  */
 class BinarySemaphore : public Semaphore {
 public:
+
+  /**
+   * @brief Constructor for the BinarySemaphore class
+   */
+  explicit BinarySemaphore(void);
+
   /**
    * @brief Override of the mother class Semaphore create_semaphore function
    *
