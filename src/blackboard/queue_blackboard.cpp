@@ -12,6 +12,6 @@ namespace rfidoor::queue {
 
 Queue<rfidoor::task::event_t> event_queue;
 
-Queue<rfidoor::task::state_t> state_queue(1);
+Queue<rfidoor::task::state_t> state_queue;
 
 } // namespace rfidoor::queue
