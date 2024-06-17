@@ -21,7 +21,8 @@ void ButtonTask::init() {}
 void ButtonTask::spin() {
   this->button_status = this->button.get_status();
   if (this->button_status == rfidoor::peripheral::Button::Status::SHORT_PRESS) {
-    rfidoor::queue::blackboard::event_queue.publish(rfidoor::task::event_t::BOTAO);
+    rfidoor::queue::blackboard::event_queue.publish(
+        rfidoor::task::event_t::BOTAO);
   }
 }
 

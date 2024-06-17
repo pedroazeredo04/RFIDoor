@@ -15,6 +15,7 @@
 #include "peripheral/led.hpp"
 #include "peripheral/nfc.hpp"
 #include "peripheral/servo.hpp"
+#include <BluetoothSerial.h>
 
 namespace rfidoor::pinout {
 
@@ -60,6 +61,8 @@ extern rfidoor::peripheral::Keyboard keyboard;
 extern rfidoor::peripheral::ServoController servo;
 extern rfidoor::peripheral::Nfc nfc;
 extern rfidoor::peripheral::Button button;
+
+extern BluetoothSerial SerialBT;
 
 } // namespace rfidoor::pinout
 

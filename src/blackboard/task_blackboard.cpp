@@ -25,6 +25,9 @@ const task_config_t button_config = {
 const task_config_t password_config = {
     .name = "passwordTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
+const task_config_t bluetooth_config = {
+    .name = "bluetoothTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+
 /**
  * @brief Frequency of the blinky task in miliseconds
  */
@@ -42,15 +45,23 @@ BlinkyTask blinky_task(rfidoor::pinout::board_led, blinky_frequency_ms,
 StateMachineTask state_machine_task(state_machine_config);
 
 /**
- * @brief Instanciate the state machine task
+ * @brief Instanciate the RFID task
  */
 RFIDTask RFID_task(rfidoor::pinout::nfc, rfid_config);
 
 /**
- * @brief Instanciate the state machine task
+ * @brief Instanciate the password task
  */
 PasswordTask password_task(rfidoor::pinout::keyboard, password_config);
 
+/**
+ * @brief Instanciate the state machine task
+ */
 ButtonTask button_task(rfidoor::pinout::button, button_config);
+
+/**
+ * @brief Instanciate the button task
+ */
+BluetoothTask bluetooth_task(rfidoor::pinout::SerialBT, bluetooth_config);
 
 }; // namespace rfidoor::task::blackboard

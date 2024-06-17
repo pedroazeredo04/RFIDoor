@@ -38,6 +38,11 @@ void PasswordTask::spin() {
   }
 }
 
+std::vector<PasswordTask::password_t>
+PasswordTask::get_valid_passwords() const {
+  return this->valid_passwords;
+}
+
 void PasswordTask::read_password() {
   char key = this->keyboard.getKey();
 
