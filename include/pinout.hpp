@@ -36,12 +36,16 @@ extern const uint8_t servoPin;
 extern const uint8_t irq_pin;
 extern const uint8_t rst_pin;
 
+// Button pinout
+extern const uint8_t button_pin;
+
 // peripheral initializations
 extern rfidoor::peripheral::Led board_led;
 extern rfidoor::peripheral::Lcd lcd;
 extern rfidoor::peripheral::Keyboard keyboard;
 extern rfidoor::peripheral::ServoController servo;
 extern rfidoor::peripheral::Nfc nfc;
+extern rfidoor::peripheral::Button button;
 
 } // namespace rfidoor::pinout
 
