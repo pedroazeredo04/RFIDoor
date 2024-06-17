@@ -53,6 +53,7 @@ void PasswordTask::read_password() {
     if (key >= '0' and key <= '9') {
       this->current_password += key;
       rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
+      
     }
 
     if ((this->current_password.length() >= password_max_length) or

@@ -111,13 +111,6 @@ void StateMachineTask::execute_action() {
     set_lock_state(UNLOCKED);
     // destranca e display botao
     break;
-  case A02:
-    // display padrao senha e vai pro tratamento de senha
-    rfidoor::pinout::lcd.set_cursor(0, 0);
-    rfidoor::pinout::lcd.write("OMG SENHA!      ");
-    rfidoor::pinout::lcd.set_cursor(1, 1);
-
-    break;
   case A03:
     // display sinal invalido
     break;
