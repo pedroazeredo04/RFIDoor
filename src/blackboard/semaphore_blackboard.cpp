@@ -8,7 +8,7 @@
 
 #include "blackboard/semaphore_blackboard.hpp"
 
-namespace rfidoor::semaphore {
+namespace rfidoor::semaphore::blackboard {
 
 BinarySemaphore binary_semaphore_example;
 

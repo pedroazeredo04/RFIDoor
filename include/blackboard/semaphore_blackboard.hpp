@@ -13,7 +13,7 @@
 #include "semaphore/mutex.hpp"
 #include "semaphore/semaphore.hpp"
 
-namespace rfidoor::semaphore {
+namespace rfidoor::semaphore::blackboard {
 
 /**
  * @brief Binary semaphore example

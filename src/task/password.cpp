@@ -9,6 +9,7 @@
 #include "task/password.hpp"
 #include "blackboard/queue_blackboard.hpp"
 #include "blackboard/semaphore_blackboard.hpp"
+#include "blackboard/task_blackboard.hpp"
 
 namespace rfidoor::task {
 
@@ -21,11 +22,7 @@ void PasswordTask::init() {
 }
 
 void PasswordTask::spin() {
-  state_t new_state_machine_state;
-
-  if (rfidoor::queue::state_queue.read(&new_state_machine_state)) {
-    this->current_state_machine_state = new_state_machine_state;
-  }
+  this->current_state_machine_state = blackboard::state_machine_task.get_state();
 
   switch (this->current_state_machine_state) {
   case REGISTRO: {
@@ -49,7 +46,7 @@ void PasswordTask::read_password() {
 
       this->is_entering_password = true;
       this->current_password.password.clear();
-      rfidoor::queue::event_queue.publish(event_t::TECLA);
+      rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
     if (key >= '0' and key <= '9') {
@@ -61,11 +58,11 @@ void PasswordTask::read_password() {
 
       for (const auto &password : this->valid_passwords) {
         if (password.password == this->current_password.password) {
-          rfidoor::queue::event_queue.publish(event_t::SENHA_VALIDA);
+          rfidoor::queue::blackboard::event_queue.publish(event_t::SENHA_VALIDA);
           return;
         }
       }
-      rfidoor::queue::event_queue.publish(event_t::SENHA_INVALIDA);
+      rfidoor::queue::blackboard::event_queue.publish(event_t::SENHA_INVALIDA);
     }
   }
 }
@@ -77,7 +74,7 @@ void PasswordTask::register_password() {
     if (not this->is_entering_password) {
       if (not (key >= '0' and key <= '9')) return;  // First letter must be a number
 
-      rfidoor::semaphore::registering_semaphore.take();
+      rfidoor::semaphore::blackboard::registering_semaphore.take();
       this->is_entering_password = true;
       this->current_password.password.clear();
     }
@@ -89,8 +86,8 @@ void PasswordTask::register_password() {
     if ((this->current_password.password.length() >= password_max_length) or key == '#') {
       this->is_entering_password = false;
       this->valid_passwords.push_back(this->current_password);
-      rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);
-      rfidoor::semaphore::registering_semaphore.give();
+      rfidoor::queue::blackboard::event_queue.publish(event_t::SENHA_CADASTRADA);
+      rfidoor::semaphore::blackboard::registering_semaphore.give();
     }
   }
 }

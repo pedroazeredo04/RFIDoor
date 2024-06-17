@@ -16,7 +16,7 @@
 #include "task/task.hpp"
 #include "task/password.hpp"
 
-namespace rfidoor::task {
+namespace rfidoor::task::blackboard {
 /**
  * @brief Frequency of the blinky task in miliseconds
  */

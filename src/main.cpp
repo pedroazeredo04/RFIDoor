@@ -7,8 +7,8 @@
 void setup() {
   Serial.begin(9600);
 
-  rfidoor::task::blinky_task.create_task();
-  rfidoor::task::password_task.create_task();
+  rfidoor::task::blackboard::blinky_task.create_task();
+  rfidoor::task::blackboard::password_task.create_task();
 
   rfidoor::pinout::lcd.init();
   // rfidoor::pinout::lcd.set_cursor(0, 0);
@@ -31,7 +31,7 @@ void setup() {
   // Initialize the servo to 0 degrees
   rfidoor::pinout::servo.write_angular_position_degrees(0);
 
-  rfidoor::queue::state_queue.publish(rfidoor::task::state_t::TRANCADA_IDLE);
+  rfidoor::queue::blackboard::state_queue.publish(rfidoor::task::state_t::TRANCADA_IDLE);
 
   delay(1000); // Wait for 1 second
 }
@@ -47,17 +47,17 @@ void loop() {
     is_registro = not is_registro;
     Serial.println("flipou o registro");
     if (not is_registro) {
-      rfidoor::queue::state_queue.publish(rfidoor::task::state_t::TRANCADA_IDLE);
+      rfidoor::queue::blackboard::state_queue.publish(rfidoor::task::state_t::TRANCADA_IDLE);
       Serial.println("Ta registrando n");
     } else {
-      rfidoor::queue::state_queue.publish(rfidoor::task::state_t::REGISTRO);
+      rfidoor::queue::blackboard::state_queue.publish(rfidoor::task::state_t::REGISTRO);
       Serial.println("Ta registrando");
     }
   }
 
   rfidoor::task::event_t evento = rfidoor::task::event_t::NENHUM_EVENTO;
 
-  if (rfidoor::queue::event_queue.read(&evento)) {
+  if (rfidoor::queue::blackboard::event_queue.read(&evento)) {
     Serial.println(evento);
   }
 }

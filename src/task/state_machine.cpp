@@ -81,10 +81,10 @@ void StateMachineTask::init() {
 }
 
 void StateMachineTask::spin() {
-  if (rfidoor::queue::event_queue.read(&(this->event))) {
+  if (rfidoor::queue::blackboard::event_queue.read(&(this->event))) {
     this->action = this->get_action();
     this->state = this->get_next_state();
-    rfidoor::queue::state_queue.publish(this->state);
+    rfidoor::queue::blackboard::state_queue.publish(this->state);
     this->execute_action();
   }
 }

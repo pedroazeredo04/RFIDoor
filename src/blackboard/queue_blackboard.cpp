@@ -8,7 +8,7 @@
 
 #include "blackboard/queue_blackboard.hpp"
 
-namespace rfidoor::queue {
+namespace rfidoor::queue::blackboard {
 
 Queue<rfidoor::task::event_t> event_queue;
 

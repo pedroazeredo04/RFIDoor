@@ -8,7 +8,7 @@
 
 #include "blackboard/task_blackboard.hpp"
 
-namespace rfidoor::task {
+namespace rfidoor::task::blackboard {
 
 const task_config_t blinky_config = {
     .name = "blinkyTask", .stack_size = 1000, .priority = LOW_PRIORITY};

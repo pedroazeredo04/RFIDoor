@@ -12,7 +12,7 @@
 #include "queue/queue.hpp"
 #include "task/state_machine_types.hpp"
 
-namespace rfidoor::queue {
+namespace rfidoor::queue::blackboard {
 
 /**
  * @brief Queue used to send detected events
