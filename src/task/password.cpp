@@ -51,9 +51,11 @@ void PasswordTask::read_password() {
       return;
     }
 
-    this->current_password.password += key;
+    if (key >= '0' and key <= '9') {
+        this->current_password.password += key;
+    }
 
-    if (this->current_password.password.length() >= password_length) {
+    if ((this->current_password.password.length() >= password_max_length) or key == '#') {
       this->is_entering_password = false;
 
       for (const auto &password : this->valid_passwords) {
@@ -79,9 +81,11 @@ void PasswordTask::register_password() {
       return;
     }
     
-    this->current_password.password += key;
+    if (key >= '0' and key <= '9') {
+        this->current_password.password += key;
+    }
 
-    if (this->current_password.password.length() >= password_length) {
+    if ((this->current_password.password.length() >= password_max_length) or key == '#') {
       this->is_entering_password = false;
       this->valid_passwords.push_back(this->current_password);
       rfidoor::queue::event_queue.publish(event_t::SENHA_CADASTRADA);

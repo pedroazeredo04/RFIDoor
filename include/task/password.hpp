@@ -20,7 +20,7 @@ namespace rfidoor::task {
 /**
  * @brief Length of the password
  */
-const uint8_t password_length{4};
+const uint8_t password_max_length{15};
 
 /**
  * @brief Class for the password Task, that reads and validates a password
