@@ -41,7 +41,7 @@ void RFIDTask::spin() {
 
 void RFIDTask::read_id() {
   if (this->nfc.read()) {
-    for (auto id : this->valid_ids) {
+    for (const auto &id : this->valid_ids) {
       if (id.bytes == this->nfc.get_last_read_value().bytes) {
         rfidoor::queue::event_queue.publish(SINAL_VALIDO);
       }
