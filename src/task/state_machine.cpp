@@ -8,6 +8,7 @@
 
 #include "task/state_machine.hpp"
 #include "blackboard/queue_blackboard.hpp"
+#include "blackboard/semaphore_blackboard.hpp"
 
 namespace rfidoor::task {
 
@@ -136,8 +137,7 @@ void StateMachineTask::execute_action() {
     rfidoor::pinout::lcd.clear();
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("Digite a senha ");
-    rfidoor::pinout::lcd.write_special_char(
-        rfidoor::peripheral::LOCK_SPECIAL_CHAR);
+    rfidoor::pinout::lcd.write_special_char(rfidoor::peripheral::LOCK_SPECIAL_CHAR);
     rfidoor::pinout::lcd.set_cursor(0, 1);
     break;
   case A07:
@@ -169,6 +169,8 @@ void StateMachineTask::execute_action() {
   default:
     break;
   }
+
+  rfidoor::semaphore::blackboard::display_semaphore.give();
 }
 
 void StateMachineTask::set_lock_state(lock_state_t lock_state) {

@@ -44,17 +44,23 @@ public:
 
   /**
    * @brief Function to get the current state of the state machine
+   * 
+   * @return state_t Current state of the state machine
    */
   state_t get_state();
 
 private:
   /**
    * @brief Function to get the next state of the state machine from the table
+   * 
+   * @return state_t Next state of the state machine
    */
   state_t get_next_state();
 
   /**
    * @brief Function to get the action of the state machine from the table
+   * 
+   * @return action_t Action of the state machine
    */
   action_t get_action();
 

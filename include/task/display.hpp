@@ -32,6 +32,13 @@ public:
    */
   virtual void spin() override;
 
+  /**
+   * @brief Function to display a temporary message on the display
+   * 
+   * @param message Message to be displayed
+   */
+  static void temporary_display(std::string message);
+
 private:
   /**
    * @brief Function to display the message on the display

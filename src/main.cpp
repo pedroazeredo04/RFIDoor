@@ -14,7 +14,7 @@ void setup() {
 
   rfidoor::pinout::lcd.init();
 
-  default_display(rfidoor::task::state_t::TRANCADA_IDLE);
+  
 }
 
 void loop() {
