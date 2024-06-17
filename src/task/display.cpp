@@ -15,6 +15,7 @@ DisplayTask::DisplayTask(const task_config_t &config)
     : Task(config) {}
 
 void DisplayTask::init() {
+    // current_password = blackboard::password_task.get_current_password().c_str();
 }
 
 void DisplayTask::spin() {
@@ -34,7 +35,6 @@ void DisplayTask::default_display(state_t state) {
         Serial.println("PADRAO TRANCADA_IDLE");
         break;
     case state_t::DIGITANDO_SENHA:
-        const char* current_password = blackboard::password_task.get_current_password().c_str();
         this->default_display(state_t::TRANCADA_IDLE);
         rfidoor::pinout::lcd.set_cursor(0, 1);
         rfidoor::pinout::lcd.write(current_password);
@@ -43,29 +43,25 @@ void DisplayTask::default_display(state_t state) {
         break;
     case state_t::DESTRANCADA_FECHADA:
         rfidoor::pinout::lcd.write("Porta destrancada");
+
+        Serial.println("PADRAO DESTRANCADA_FECHADA");
         break;
     case state_t::ABERTA:
         rfidoor::pinout::lcd.write("Segure o botão");
         rfidoor::pinout::lcd.set_cursor(0, 1);
         rfidoor::pinout::lcd.write("para registrar!");
+
+        Serial.println("PADRAO ABERTA");
         break;
     case state_t::REGISTRO:
         this->default_display(state_t::DIGITANDO_SENHA);
+
+        Serial.println("PADRAO REGISTRO");
         break;
   }
 }
 
 void DisplayTask::temporary_display(std::string message) {
-    rfidoor::pinout::lcd.clear();
-    rfidoor::pinout::lcd.set_cursor(0, 0);
-
-    if (message.lenght() > 16) {
-        message.
-    }
-
-    rfidoor::pinout::lcd.write(message.c_str());
-
-    delay(2000);
 }
 
 }; // namespace rfidoor::task

@@ -10,6 +10,7 @@
 #define __DISPLAY_HPP__
 
 #include "pinout.hpp"
+#include "blackboard/task_blackboard.hpp"
 
 namespace rfidoor::task {
 
@@ -44,6 +45,8 @@ private:
    * @brief Function to display the message on the display
    */
   void default_display(rfidoor::task::state_t state);
+
+  const char* current_password{"oi"};
 };
 
 }; // namespace rfidoor::task
