@@ -23,21 +23,19 @@ namespace rfidoor::task {
 const uint8_t password_max_length{15};
 
 /**
+ * @brief Password type definition
+ */
+typedef std::string password_t;
+
+/**
  * @brief Class for the password Task, that reads and validates a password
  */
 class PasswordTask : public Task {
 public:
   /**
-   * @brief Password type definition
-   */
-  struct password_t {
-    std::string password;
-  };
-
-  /**
-   * @brief Constructor for the blinky Task
+   * @brief Constructor for the Password Task
    *
-   * @param keyboard NFC object to be controlled
+   * @param keyboard keyboard object to be controlled
    * @param config Configuration type for Task class
    */
   PasswordTask(rfidoor::peripheral::Keyboard &keyboard,
@@ -53,9 +51,14 @@ public:
    */
   virtual void spin() override;
 
+  /**
+  * @brief Override of the mother class Task spin function
+  */
+  password_t get_current_password();
+
 private:
   /**
-   * @brief Read an id from the NFC peripheral
+   * @brief Read an id from the keyboard peripheral
    */
   void read_password();
 
@@ -65,7 +68,7 @@ private:
   void register_password();
 
   /**
-   * @brief NFC peripheral to be controlled
+   * @brief keyboard peripheral to be controlled
    */
   rfidoor::peripheral::Keyboard keyboard;
 
@@ -75,7 +78,7 @@ private:
   std::vector<password_t> valid_passwords;
 
   /**
-   * @brief State of the RFID task
+   * @brief State of the keyboard task
    */
   state_t current_state_machine_state{TRANCADA_IDLE};
 

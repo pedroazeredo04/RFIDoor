@@ -9,32 +9,12 @@ void setup() {
 
   rfidoor::task::blackboard::blinky_task.create_task();
   rfidoor::task::blackboard::password_task.create_task();
+  rfidoor::task::blackboard::state_machine_task.create_task();
+  rfidoor::task::blackboard::button_task.create_task();
 
   rfidoor::pinout::lcd.init();
-  // rfidoor::pinout::lcd.set_cursor(0, 0);
-  // rfidoor::pinout::lcd.write("Hello, world!");
-  // rfidoor::pinout::lcd.set_cursor(2, 1);
-  // rfidoor::pinout::lcd.write("Chupa Tsuzuki");
-  // rfidoor::pinout::lcd.write_special_char(
-  //     rfidoor::peripheral::SKULL_SPECIAL_CHAR);
-  // delay(3000);
 
-  Serial.begin(9600);
-
-  rfidoor::pinout::lcd.clear();
-  rfidoor::pinout::lcd.set_cursor(0, 0);
-  rfidoor::pinout::lcd.write("Digite a senha ");
-  rfidoor::pinout::lcd.write_special_char(
-      rfidoor::peripheral::LOCK_SPECIAL_CHAR);
-  rfidoor::pinout::lcd.set_cursor(0, 1);
-
-  // Initialize the servo to 0 degrees
-  rfidoor::pinout::servo.write_angular_position_degrees(0);
-
-  rfidoor::queue::blackboard::state_queue.publish(
-      rfidoor::task::state_t::TRANCADA_IDLE);
-
-  delay(1000); // Wait for 1 second
+  default_display(rfidoor::task::state_t::TRANCADA_IDLE);
 }
 
 void loop() {

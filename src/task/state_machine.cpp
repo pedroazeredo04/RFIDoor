@@ -11,8 +11,13 @@
 
 namespace rfidoor::task {
 
-StateMachineTask::StateMachineTask(const task_config_t &config)
-    : Task(config) {}
+const uint8_t open_position{90};
+const uint8_t close_position{0};
+
+const uint16_t LCD_timeout_ms{3000};
+
+StateMachineTask::StateMachineTask(rfidoor::peripheral::ServoController& servo, const task_config_t &config)
+    : servo{servo}, Task(config) {}
 
 void StateMachineTask::init() {
   this->state = TRANCADA_IDLE;
@@ -102,6 +107,7 @@ action_t StateMachineTask::get_action() {
 void StateMachineTask::execute_action() {
   switch (this->action) {
   case A01:
+    set_lock_state(UNLOCKED);
     // destranca e display botao
     break;
   case A02:
@@ -109,11 +115,13 @@ void StateMachineTask::execute_action() {
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("OMG SENHA!      ");
     rfidoor::pinout::lcd.set_cursor(1, 1);
+
     break;
   case A03:
     // display sinal invalido
     break;
   case A04:
+    set_lock_state(UNLOCKED);
     // destranca e display sinal valido
     break;
   case A05:
@@ -124,7 +132,7 @@ void StateMachineTask::execute_action() {
     rfidoor::pinout::lcd.clear();
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("SENHA INVALIDA!");
-    delay(2000);
+    delay(LCD_timeout_ms);
     rfidoor::pinout::lcd.clear();
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("Digite a senha ");
@@ -133,16 +141,18 @@ void StateMachineTask::execute_action() {
     rfidoor::pinout::lcd.set_cursor(0, 1);
     break;
   case A07:
+    set_lock_state(UNLOCKED);
     // destranca e display senha valida
     break;
   case A08:
+    set_lock_state(LOCKED);
     // tranca e display padrão
     break;
   case A09:
-    // desativa timeout e display porta aberta
+    // corta a contagem do timeout e display porta aberta
     break;
   case A10:
-    // ativa timeout e display porta destrancada fechada
+    // comeca contagem do timeout e display porta destrancada fechada
     break;
   case A11:
     // habilitar registro e display registro
@@ -158,6 +168,24 @@ void StateMachineTask::execute_action() {
     break;
   default:
     break;
+  }
+}
+
+void StateMachineTask::set_lock_state(lock_state_t lock_state) {
+  switch (lock_state) {
+    case LOCKED: {
+      this->servo.write_angular_position_degrees(open_position);
+      break;
+    }
+
+    case UNLOCKED: {
+      this->servo.write_angular_position_degrees(close_position);
+      break;
+    }
+
+    default: {
+      break;
+    }
   }
 }
 

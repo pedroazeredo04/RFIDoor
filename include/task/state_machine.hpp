@@ -15,6 +15,11 @@
 
 namespace rfidoor::task {
 
+enum lock_state_t : uint8_t {
+  LOCKED, 
+  UNLOCKED
+};
+
 /**
  * @brief Class for the state machine Task, that implements the state machine
  */
@@ -25,7 +30,7 @@ public:
    *
    * @param config Configuration type for Task class
    */
-  StateMachineTask(const task_config_t &config = default_config);
+  StateMachineTask(rfidoor::peripheral::ServoController& servo, const task_config_t &config = default_config);
 
   /**
    * @brief Override of the mother class Task init function
@@ -59,6 +64,13 @@ private:
   void execute_action();
 
   /**
+   * @brief Function to set the current lock state
+   *
+   * @param lock_state locked or unlocked
+   */
+  void set_lock_state(lock_state_t lock_state);
+
+  /**
    * @brief Table of actions of the state machine [state][event]
    */
   action_t action_state_machine_table[NUM_STATES][NUM_EVENTS];
@@ -82,6 +94,11 @@ private:
    * @brief Action of the state machine
    */
   action_t action;
+
+  /**
+   * @brief Servo object to be controlled
+   */
+  rfidoor::peripheral::ServoController servo;
 };
 
 } // namespace rfidoor::task
