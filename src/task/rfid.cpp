@@ -21,7 +21,8 @@ void RFIDTask::init() {
 }
 
 void RFIDTask::spin() {
-  this->current_state_machine_state = blackboard::state_machine_task.get_state();
+  this->current_state_machine_state =
+      blackboard::state_machine_task.get_state();
 
   switch (this->current_state_machine_state) {
   case REGISTRO: {

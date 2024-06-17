@@ -14,4 +14,4 @@ BinarySemaphore binary_semaphore_example;
 
 MutexSemaphore registering_semaphore;
 
-} // namespace rfidoor::semaphore
+} // namespace rfidoor::semaphore::blackboard

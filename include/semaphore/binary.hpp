@@ -18,7 +18,6 @@ namespace rfidoor::semaphore {
  */
 class BinarySemaphore : public Semaphore {
 public:
-
   /**
    * @brief Constructor for the BinarySemaphore class
    */

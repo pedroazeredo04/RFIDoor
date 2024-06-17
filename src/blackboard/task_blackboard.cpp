@@ -17,7 +17,10 @@ const task_config_t state_machine_config = {
     .name = "stateMachineTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
 const task_config_t rfid_config = {
-    .name = "RFIDTAsk", .stack_size = 1000, .priority = LOW_PRIORITY};
+    .name = "RFIDTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+
+const task_config_t button_config = {
+    .name = "ButtonTask", .stack_size = 1000, .priority = LOW_PRIORITY};
 
 const task_config_t password_config = {
     .name = "passwordTask", .stack_size = 5000, .priority = LOW_PRIORITY};
@@ -48,4 +51,6 @@ RFIDTask RFID_task(rfidoor::pinout::nfc, rfid_config);
  */
 PasswordTask password_task(rfidoor::pinout::keyboard, password_config);
 
-}; // namespace rfidoor::task
+ButtonTask button_task(rfidoor::pinout::button, button_config);
+
+}; // namespace rfidoor::task::blackboard
