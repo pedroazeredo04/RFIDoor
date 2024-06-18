@@ -11,9 +11,9 @@ void setup() {
   rfidoor::pinout::lcd.init();
   rfidoor::task::blackboard::blinky_task.create_task();
   rfidoor::task::blackboard::bluetooth_task.create_task();
+  rfidoor::task::blackboard::password_task.create_task();
+  rfidoor::task::blackboard::state_machine_task.create_task();
   // rfidoor::task::blackboard::RFID_task.create_task();
-  // rfidoor::task::blackboard::password_task.create_task();
-  // rfidoor::task::blackboard::state_machine_task.create_task();
 
   // rfidoor::pinout::lcd.set_cursor(0, 0);
   // rfidoor::pinout::lcd.write("Hello, world!");

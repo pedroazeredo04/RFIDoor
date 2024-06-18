@@ -18,22 +18,18 @@ BluetoothTask::BluetoothTask(BluetoothSerial &bluetooth,
 void BluetoothTask::init() { }
 
 void BluetoothTask::spin() {
-  // if (this->bluetooth.available()) {
-  //   String command = this->bluetooth.readStringUntil('\n');
-  //   command.trim();
+  if (this->bluetooth.available()) {
+    String command = this->bluetooth.readStringUntil('\n');
+    command.trim();
 
-  //   if (command) {
-  //    this->bluetooth.println(command.c_str());
-  //   }
-
-  //   // if (command.startsWith("read_passwords")) {
-  //   //   // Envia a lista de senhas
-  //   //   for (PasswordTask::password_t &password :
-  //   //        rfidoor::task::blackboard::password_task.get_valid_passwords()) {
-  //   //     this->bluetooth.println(password.password.c_str());
-  //   //   }
-  //   // }
-  // }
+    if (command.startsWith("see_passwords")) {
+      // Envia a lista de senhas
+      for (PasswordTask::password_t &password :
+           rfidoor::task::blackboard::password_task.get_valid_passwords()) {
+        this->bluetooth.println(password.password.c_str());
+      }
+    }
+  }
 }
 
 } // namespace rfidoor::task
