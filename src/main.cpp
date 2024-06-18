@@ -5,7 +5,7 @@
 void setup() {
   Serial.begin(9600);
   rfidoor::pinout::lcd.init();
-  rfidoor::pinout::SerialBT.begin("RFIDoor");
+  // rfidoor::pinout::SerialBT.begin("RFIDoor");
 
   rfidoor::task::blackboard::display_task.create_task();
   // rfidoor::task::blackboard::blinky_task.create_task();

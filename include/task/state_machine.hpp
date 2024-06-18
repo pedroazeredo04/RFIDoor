@@ -105,6 +105,16 @@ private:
    * @brief Servo object to be controlled
    */
   rfidoor::peripheral::ServoController servo;
+
+  /**
+  * @brief Timer for timeout
+  */
+  uint32_t timeout_timer_start_ms;
+
+  /**
+  * @brief True if timeout timer must be considered, false otherwise
+  */
+  bool is_timeout_timer_running{false};
 };
 
 } // namespace rfidoor::task

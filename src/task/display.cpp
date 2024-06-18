@@ -47,7 +47,9 @@ void DisplayTask::default_display(state_t state) {
     case state_t::DESTRANCADA_FECHADA:
         rfidoor::pinout::lcd.clear();
         rfidoor::pinout::lcd.set_cursor(0, 0);
-        rfidoor::pinout::lcd.write("Porta destrancada");
+        rfidoor::pinout::lcd.write("     Porta     ");
+        rfidoor::pinout::lcd.set_cursor(1, 1);
+        rfidoor::pinout::lcd.write("  destrancada  ");
 
         Serial.println("PADRAO DESTRANCADA_FECHADA");
         break;
@@ -69,6 +71,10 @@ void DisplayTask::default_display(state_t state) {
 }
 
 void DisplayTask::temporary_display(std::string message) {
+    rfidoor::pinout::lcd.clear();
+    rfidoor::pinout::lcd.set_cursor(0, 0);
+    rfidoor::pinout::lcd.write(message.c_str());
+    delay(2000);
 }
 
 }; // namespace rfidoor::task
