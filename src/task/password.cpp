@@ -38,7 +38,7 @@ void PasswordTask::spin() {
   }
 }
 
-std::vector<PasswordTask::password_t>
+std::vector<password_t>
 PasswordTask::get_valid_passwords() const {
   return this->valid_passwords;
 }
