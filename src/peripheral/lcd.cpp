@@ -67,8 +67,7 @@ void Lcd::cursor_increment_position() {
 }
 
 void Lcd::set_cursor(const uint8_t col, const uint8_t row) {
-  this->lib_lcd.setCursor(
-      col - 1, row); // -1 because lib_lcd count starts at -1 for some reason
+  this->lib_lcd.setCursor(col - 1, row); // -1 because lib_lcd count starts at -1 for some reason
   this->cursor_position = {col, row};
 }
 

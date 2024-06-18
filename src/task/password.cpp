@@ -6,7 +6,6 @@
  * @date 06/2024
  */
 
-#include "task/password.hpp"
 #include "blackboard/queue_blackboard.hpp"
 #include "blackboard/semaphore_blackboard.hpp"
 #include "blackboard/task_blackboard.hpp"
@@ -39,7 +38,7 @@ void PasswordTask::spin() {
   }
 }
 
-std::vector<PasswordTask::password_t>
+std::vector<password_t>
 PasswordTask::get_valid_passwords() const {
   return this->valid_passwords;
 }
@@ -53,20 +52,22 @@ void PasswordTask::read_password() {
         return; // First letter must be a number
 
       this->is_entering_password = true;
-      this->current_password.password.clear();
+      this->current_password.clear();
       rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
     if (key >= '0' and key <= '9') {
-      this->current_password.password += key;
+      this->current_password += key;
+      rfidoor::queue::blackboard::password_queue.publish(key);      
+      rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
-    if ((this->current_password.password.length() >= password_max_length) or
+    if ((this->current_password.length() >= password_max_length) or
         key == '#') {
       this->is_entering_password = false;
 
       for (const auto &password : this->valid_passwords) {
-        if (password.password == this->current_password.password) {
+        if (password == this->current_password) {
           rfidoor::queue::blackboard::event_queue.publish(
               event_t::SENHA_VALIDA);
           return;
@@ -87,14 +88,17 @@ void PasswordTask::register_password() {
 
       rfidoor::semaphore::blackboard::registering_semaphore.take();
       this->is_entering_password = true;
-      this->current_password.password.clear();
+      this->current_password.clear();
+      rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
     if (key >= '0' and key <= '9') {
-      this->current_password.password += key;
+      this->current_password += key;
+      rfidoor::queue::blackboard::password_queue.publish(key);
+      rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
-    if ((this->current_password.password.length() >= password_max_length) or
+    if ((this->current_password.length() >= password_max_length) or
         key == '#') {
       this->is_entering_password = false;
       this->valid_passwords.push_back(this->current_password);
@@ -104,5 +108,7 @@ void PasswordTask::register_password() {
     }
   }
 }
+
+password_t PasswordTask::get_current_password() { return this->current_password; }
 
 } // namespace rfidoor::task

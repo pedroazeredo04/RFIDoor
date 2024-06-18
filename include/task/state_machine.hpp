@@ -15,6 +15,11 @@
 
 namespace rfidoor::task {
 
+enum lock_state_t : uint8_t {
+  LOCKED, 
+  UNLOCKED
+};
+
 /**
  * @brief Class for the state machine Task, that implements the state machine
  */
@@ -25,7 +30,7 @@ public:
    *
    * @param config Configuration type for Task class
    */
-  StateMachineTask(const task_config_t &config = default_config);
+  StateMachineTask(rfidoor::peripheral::ServoController& servo, const task_config_t &config = default_config);
 
   /**
    * @brief Override of the mother class Task init function
@@ -39,17 +44,23 @@ public:
 
   /**
    * @brief Function to get the current state of the state machine
+   * 
+   * @return state_t Current state of the state machine
    */
   state_t get_state();
 
 private:
   /**
    * @brief Function to get the next state of the state machine from the table
+   * 
+   * @return state_t Next state of the state machine
    */
   state_t get_next_state();
 
   /**
    * @brief Function to get the action of the state machine from the table
+   * 
+   * @return action_t Action of the state machine
    */
   action_t get_action();
 
@@ -57,6 +68,13 @@ private:
    * @brief Function to execute the action of the state machine
    */
   void execute_action();
+
+  /**
+   * @brief Function to set the current lock state
+   *
+   * @param lock_state locked or unlocked
+   */
+  void set_lock_state(lock_state_t lock_state);
 
   /**
    * @brief Table of actions of the state machine [state][event]
@@ -84,14 +102,19 @@ private:
   action_t action;
 
   /**
-   * @brief Timer to count to timeout
+   * @brief Servo object to be controlled
    */
+  rfidoor::peripheral::ServoController servo;
+
+  /**
+  * @brief Timer for timeout
+  */
   uint32_t timeout_timer_start_ms;
 
   /**
-   * @brief Flag to indicate if is to count timeout or not
-   */
-  bool is_to_timeout;  
+  * @brief True if timeout timer must be considered, false otherwise
+  */
+  bool is_timeout_timer_running{false};
 };
 
 } // namespace rfidoor::task

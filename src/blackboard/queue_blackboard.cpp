@@ -12,6 +12,6 @@ namespace rfidoor::queue::blackboard {
 
 Queue<rfidoor::task::event_t> event_queue;
 
-Queue<rfidoor::task::state_t> state_queue;
+Queue<char> password_queue;
 
 } // namespace rfidoor::queue::blackboard

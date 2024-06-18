@@ -10,7 +10,7 @@
 
 namespace rfidoor::semaphore::blackboard {
 
-BinarySemaphore binary_semaphore_example;
+BinarySemaphore display_semaphore;
 
 MutexSemaphore registering_semaphore;
 

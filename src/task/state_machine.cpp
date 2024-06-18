@@ -6,8 +6,9 @@
  * @date 06/2024
  */
 
-#include "task/state_machine.hpp"
+#include "blackboard/task_blackboard.hpp"
 #include "blackboard/queue_blackboard.hpp"
+#include "blackboard/semaphore_blackboard.hpp"
 #include <esp_timer.h>
 
 namespace rfidoor::task {
@@ -24,15 +25,21 @@ float get_time_ms() {
   return esp_timer_get_time() * microseconds_to_miliseconds;
 }
 
-const uint32_t timeout_ms{15000};
+/**
+ * @brief Timeout to be given to the state machine
+ */
+const uint32_t timeout_ms{1000};
 
-StateMachineTask::StateMachineTask(const task_config_t &config)
-    : Task(config) {}
+/**
+ * @brief Open and closed servo motor position
+ */
+const uint8_t open_position{90};
+const uint8_t close_position{0};
+
+StateMachineTask::StateMachineTask(rfidoor::peripheral::ServoController& servo, const task_config_t &config)
+    : servo{servo}, Task(config) {}
 
 void StateMachineTask::init() {
-  this->state = TRANCADA_IDLE;
-  this->event = NENHUM_EVENTO;
-
   for (int state = 0; state < NUM_STATES; state++) {
     for (int event = 0; event < NUM_EVENTS; event++) {
       this->action_state_machine_table[state][event] = NENHUMA_ACAO;
@@ -72,6 +79,8 @@ void StateMachineTask::init() {
   this->next_state_state_machine_table[DIGITANDO_SENHA][SENHA_VALIDA] =
       DESTRANCADA_FECHADA;
   this->action_state_machine_table[DIGITANDO_SENHA][SENHA_VALIDA] = A07;
+  this->next_state_state_machine_table[DIGITANDO_SENHA][TECLA] = DIGITANDO_SENHA;
+  this->action_state_machine_table[DIGITANDO_SENHA][TECLA] = A02;
 
   // Set the actions and next states for each event for DESTRANCADA_FECHADA
   this->next_state_state_machine_table[DESTRANCADA_FECHADA][TIMEOUT] =
@@ -93,18 +102,24 @@ void StateMachineTask::init() {
   this->action_state_machine_table[REGISTRO][SENHA_CADASTRADA] = A13;
   this->next_state_state_machine_table[REGISTRO][SEGURAR_ASTERISCO] = ABERTA;
   this->action_state_machine_table[REGISTRO][SEGURAR_ASTERISCO] = A14;
+
+  this->state = TRANCADA_IDLE;
+  this->event = NENHUM_EVENTO;
+  this->action = NENHUMA_ACAO;
+  this->execute_action();
 }
 
 void StateMachineTask::spin() {
-  if (this->is_to_timeout and (get_time_ms() - this->timeout_timer_start_ms > timeout_ms)) {
-    rfidoor::queue::blackboard::event_queue.publish(TIMEOUT);
-    this->is_to_timeout = false;
+  if (this->is_timeout_timer_running) {
+    if (get_time_ms() - this->timeout_timer_start_ms > timeout_ms) {
+      rfidoor::queue::blackboard::event_queue.publish(TIMEOUT);
+      this->is_timeout_timer_running = false;
+    }
   }
 
   if (rfidoor::queue::blackboard::event_queue.read(&(this->event))) {
     this->action = this->get_action();
     this->state = this->get_next_state();
-    rfidoor::queue::blackboard::state_queue.publish(this->state);
     this->execute_action();
   }
 }
@@ -122,82 +137,89 @@ action_t StateMachineTask::get_action() {
 void StateMachineTask::execute_action() {
   switch (this->action) {
   case A01:
+    this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
-    this->is_to_timeout = true;
-    // destranca e display botao
+    set_lock_state(UNLOCKED);
     break;
   case A02:
+    this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
-    this->is_to_timeout = true;
-    // display padrao senha e vai pro tratamento de senha
-    rfidoor::pinout::lcd.set_cursor(0, 0);
-    rfidoor::pinout::lcd.write("OMG SENHA!      ");
-    rfidoor::pinout::lcd.set_cursor(1, 1);
     break;
   case A03:
+    blackboard::display_task.temporary_display("Sinal invalido!");
+    this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
-    this->is_to_timeout = true;
-    // display sinal invalido
     break;
   case A04:
+    blackboard::display_task.temporary_display(" Sinal valido! ");
+    set_lock_state(UNLOCKED);
+    this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
-    this->is_to_timeout = true;
-    // destranca e display sinal valido
     break;
   case A05:
-    this->is_to_timeout = false;
-    // apaga display
+    this->is_timeout_timer_running = false;
     break;
   case A06:
-    this->is_to_timeout = false;
-    // display senha invalida e display padrão
-    rfidoor::pinout::lcd.clear();
-    rfidoor::pinout::lcd.set_cursor(0, 0);
-    rfidoor::pinout::lcd.write("SENHA INVALIDA!");
-    delay(2000);
-    rfidoor::pinout::lcd.clear();
-    rfidoor::pinout::lcd.set_cursor(0, 0);
-    rfidoor::pinout::lcd.write("Digite a senha ");
-    rfidoor::pinout::lcd.write_special_char(
-        rfidoor::peripheral::LOCK_SPECIAL_CHAR);
-    rfidoor::pinout::lcd.set_cursor(0, 1);
+    this->is_timeout_timer_running = false;
+    blackboard::display_task.temporary_display("Senha invalida!");
     break;
   case A07:
+    set_lock_state(UNLOCKED);
+    blackboard::display_task.temporary_display(" Senha valida! ");
+    this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
-    this->is_to_timeout = true;
-    // destranca e display senha valida
     break;
   case A08:
-    this->is_to_timeout = false;
+    set_lock_state(LOCKED);
+    this->is_timeout_timer_running = false;
     // tranca e display padrão
     break;
   case A09:
-    this->is_to_timeout = false;
-    // desativa timeout e display porta aberta
+    this->is_timeout_timer_running = false;
     break;
   case A10:
+    // comeca contagem do timeout e display porta destrancada fechada
+    this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
-    this->is_to_timeout = true;
-    // ativa timeout e display porta destrancada fechada
     break;
   case A11:
-    this->is_to_timeout = false;
+    this->is_timeout_timer_running = false;
     // habilitar registro e display registro
     break;
   case A12:
-    this->is_to_timeout = false;
+    this->is_timeout_timer_running = false;
     // desabilita registro e display sinal cadastrado
     break;
   case A13:
-    this->is_to_timeout = false;
+    this->is_timeout_timer_running = false;
     // desabilita registro e display senha cadastrado
     break;
   case A14:
-    this->is_to_timeout = false;
+    this->is_timeout_timer_running = false;
     // desabilita registro e display registro cancelado
     break;
   default:
     break;
+  }
+
+  rfidoor::semaphore::blackboard::display_semaphore.give();
+}
+
+void StateMachineTask::set_lock_state(lock_state_t lock_state) {
+  switch (lock_state) {
+    case LOCKED: {
+      this->servo.write_angular_position_degrees(open_position);
+      break;
+    }
+
+    case UNLOCKED: {
+      this->servo.write_angular_position_degrees(close_position);
+      break;
+    }
+
+    default: {
+      break;
+    }
   }
 }
 
