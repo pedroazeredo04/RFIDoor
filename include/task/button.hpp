@@ -22,10 +22,12 @@ public:
   /**
    * @brief Constructor for the button Task
    *
-   * @param button Button object to be monitored
+   * @param inside_button Button object to be monitored from the inside
+   * @param door_button Button object to be monitored from the door
    * @param config Configuration type for Task class
    */
-  ButtonTask(const rfidoor::peripheral::Button &button,
+  ButtonTask(const rfidoor::peripheral::Button &inside_button,
+             const rfidoor::peripheral::Button &door_button,
              const task_config_t &config = default_config);
 
   /**
@@ -40,14 +42,24 @@ public:
 
 private:
   /**
-   * @brief Button object to be monitored
+   * @brief Button object to be monitored for the inside
    */
-  rfidoor::peripheral::Button button;
+  rfidoor::peripheral::Button inside_button;
+
+  /**
+   * @brief Button object to be monitored for the door
+   */
+  rfidoor::peripheral::Button door_button;
 
   /**
    * @brief Current button status
    */
-  rfidoor::peripheral::Button::Status button_status;
+  rfidoor::peripheral::Button::Status inside_button_status;
+
+  /**
+   * @brief Current button status
+   */
+  rfidoor::peripheral::Button::Status door_button_status;
 };
 
 } // namespace rfidoor::task

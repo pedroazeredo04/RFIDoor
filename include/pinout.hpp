@@ -48,9 +48,14 @@ extern const uint8_t irq_pin;
 extern const uint8_t rst_pin;
 
 /**
- * @brief Button pin
+ * @brief Inside button pin
  */
-extern const uint8_t button_pin;
+extern const uint8_t inside_button_pin;
+
+/**
+ * @brief Door button pin
+ */
+extern const uint8_t door_button_pin;
 
 /**
  * @brief Peripheral Initializations
@@ -60,7 +65,8 @@ extern rfidoor::peripheral::Lcd lcd;
 extern rfidoor::peripheral::Keyboard keyboard;
 extern rfidoor::peripheral::ServoController servo;
 extern rfidoor::peripheral::Nfc nfc;
-extern rfidoor::peripheral::Button button;
+extern rfidoor::peripheral::Button inside_button;
+extern rfidoor::peripheral::Button door_button;
 
 extern BluetoothSerial SerialBT;
 

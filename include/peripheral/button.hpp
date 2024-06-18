@@ -51,6 +51,13 @@ public:
    */
   Status get_status();
 
+  /**
+   * @brief is button pressed or not
+   *
+   * @return bool true if button is pressed, false otherwise
+   */
+  bool is_pressed();
+
 private:
   /**
    * @brief Get raw button reading
@@ -62,16 +69,22 @@ private:
   /**
    * @brief Check if button was just pressed
    *
+   * @param current_state Current button state
+   * @param previous_state Previous button state
+   * 
    * @return True if button was just pressed, false otherwise
    */
-  bool is_rising_edge() const;
+  bool is_rising_edge(bool current_state, bool previous_state) const;
 
   /**
    * @brief Check if button was just released
    *
+   * @param current_state Current button state
+   * @param previous_state Previous button state
+   * 
    * @return True if button was just released, false otherwise
    */
-  bool is_falling_edge() const;
+  bool is_falling_edge(bool current_state, bool previous_state) const;
 
   /**
    * @brief Button pin
@@ -104,6 +117,16 @@ private:
    * @brief Flag to know when button is debouncing
    */
   bool is_debouncing{false};
+
+  /**
+   * @brief Flag to know when button is debouncing
+   */
+  bool current_read{false};
+
+  /**
+   * @brief Flag to know when button is debouncing
+   */
+  bool previous_read{false};
 
   /**
    * @brief Flag to know if button was being pressed

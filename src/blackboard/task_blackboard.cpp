@@ -15,20 +15,30 @@ namespace rfidoor::task::blackboard {
  */
 const uint32_t blinky_frequency_ms{500};
 
-const task_config_t blinky_config = {
-    .name = "blinkyTask", .stack_size = 1000, .priority = HIGH_PRIORITY, .delay_ms = blinky_frequency_ms};
+const task_config_t blinky_config = {.name = "blinkyTask",
+                                     .stack_size = 1000,
+                                     .priority = HIGH_PRIORITY,
+                                     .delay_ms = blinky_frequency_ms};
 
-const task_config_t state_machine_config = {
-    .name = "stateMachineTask", .stack_size = 5000, .priority = LOW_PRIORITY, .delay_ms = 10};
+const task_config_t state_machine_config = {.name = "stateMachineTask",
+                                            .stack_size = 5000,
+                                            .priority = LOW_PRIORITY,
+                                            .delay_ms = 10};
 
-const task_config_t rfid_config = {
-    .name = "RFIDTask", .stack_size = 1000, .priority = LOW_PRIORITY, .delay_ms = 10};
+const task_config_t rfid_config = {.name = "RFIDTask",
+                                   .stack_size = 1000,
+                                   .priority = LOW_PRIORITY,
+                                   .delay_ms = 10};
 
-const task_config_t button_config = {
-    .name = "ButtonTask", .stack_size = 1000, .priority = LOW_PRIORITY, .delay_ms = 10};
+const task_config_t button_config = {.name = "ButtonTask",
+                                     .stack_size = 1000,
+                                     .priority = LOW_PRIORITY,
+                                     .delay_ms = 10};
 
-const task_config_t password_config = {
-    .name = "passwordTask", .stack_size = 5000, .priority = LOW_PRIORITY, .delay_ms = 10};
+const task_config_t password_config = {.name = "passwordTask",
+                                       .stack_size = 5000,
+                                       .priority = LOW_PRIORITY,
+                                       .delay_ms = 10};
 
 const task_config_t display_config = {
     .name = "displayTask", .stack_size = 5000, .priority = LOW_PRIORITY};
@@ -60,7 +70,7 @@ PasswordTask password_task(rfidoor::pinout::keyboard, password_config);
 /**
  * @brief Instanciate the button task
  */
-ButtonTask button_task(rfidoor::pinout::button, button_config);
+ButtonTask button_task(rfidoor::pinout::inside_button, rfidoor::pinout::door_button, button_config);
 
 /**
  * @brief Instanciate the display task
