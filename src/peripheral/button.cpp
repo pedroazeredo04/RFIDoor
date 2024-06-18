@@ -51,9 +51,9 @@ Button::Status Button::get_status() {
   this->previous_state = this->current_state;
   this->current_state = this->get_raw_reading();
 
-  if (this->is_rising_edge()) {
+  if (this->is_rising_edge(this->current_state, this->previous_state)) {
     this->status_timer_start_ms = get_time_ms();
-  } else if (this->is_falling_edge()) {
+  } else if (this->is_falling_edge(this->current_state, this->previous_state)) {
     float elapsed = get_time_ms() - this->status_timer_start_ms;
 
     if (elapsed < this->debounce_delay_ms) {
@@ -74,6 +74,23 @@ Button::Status Button::get_status() {
   return NO_PRESS;
 }
 
+bool Button::is_pressed() {
+  this->previous_read = this->current_read;
+  this->current_read = this->get_raw_reading();
+
+  // If the reading has changed, reset the debounce timer
+  if (this->current_read != this->previous_read) {
+    this->debounce_timer_start_ms = get_time_ms();
+  }
+
+  // If the reading is stable for longer than the debounce delay, take it as valid
+  if ((get_time_ms() - this->debounce_timer_start_ms) > this->debounce_delay_ms) {
+    return this->current_read;
+  }
+
+  return false;
+}
+
 bool Button::get_raw_reading() const {
   switch (this->pull_resistor) {
   case PullResistor::PULL_UP: {
@@ -90,11 +107,11 @@ bool Button::get_raw_reading() const {
   }
 }
 
-bool Button::is_rising_edge() const {
-  return (this->current_state and (not this->previous_state));
+bool Button::is_rising_edge(bool current_state, bool previous_state) const {
+  return (current_state and (not previous_state));
 }
 
-bool Button::is_falling_edge() const {
-  return ((not this->current_state) and this->previous_state);
+bool Button::is_falling_edge(bool current_state, bool previous_state) const {
+  return ((not current_state) and previous_state);
 }
 } // namespace rfidoor::peripheral

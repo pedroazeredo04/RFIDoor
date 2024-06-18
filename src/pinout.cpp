@@ -39,9 +39,14 @@ const uint8_t irq_pin{4};
 const uint8_t rst_pin{5};
 
 /**
- * @brief Button pin
+ * @brief Inside button pin
  */
-const uint8_t button_pin{5};
+extern const uint8_t inside_button_pin{5};
+
+/**
+ * @brief Door button pin
+ */
+extern const uint8_t door_button_pin{4};
 
 /**
  * @brief Peripheral initializations
@@ -51,6 +56,7 @@ rfidoor::peripheral::Lcd lcd(lcd_sda_pin, lcd_scl_pin);
 rfidoor::peripheral::Keyboard keyboard(keypad_row_pins, keypad_col_pins);
 rfidoor::peripheral::ServoController servo(servoPin);
 rfidoor::peripheral::Nfc nfc(irq_pin, rst_pin);
-rfidoor::peripheral::Button button(button_pin);
+rfidoor::peripheral::Button inside_button(inside_button_pin);
+rfidoor::peripheral::Button door_button(door_button_pin);
 
 } // namespace rfidoor::pinout
