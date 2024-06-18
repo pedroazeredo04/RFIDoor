@@ -56,7 +56,7 @@ void DisplayTask::default_display(state_t state) {
     case state_t::ABERTA:
         rfidoor::pinout::lcd.clear();
         rfidoor::pinout::lcd.set_cursor(0, 0);
-        rfidoor::pinout::lcd.write("Segure o botão");
+        rfidoor::pinout::lcd.write("Segure o botao");
         rfidoor::pinout::lcd.set_cursor(1, 1);
         rfidoor::pinout::lcd.write("para registrar!");
 

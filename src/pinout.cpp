@@ -46,12 +46,12 @@ const uint8_t rst_pin{5};
 /**
  * @brief Inside button pin
  */
-extern const uint8_t inside_button_pin{5};
+extern const uint8_t inside_button_pin{34};
 
 /**
  * @brief Door button pin
  */
-extern const uint8_t door_button_pin{4};
+extern const uint8_t door_button_pin{5};
 
 /**
  * @brief Peripheral initializations

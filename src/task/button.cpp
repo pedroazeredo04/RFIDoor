@@ -6,7 +6,7 @@
  * @date 06/2024
  */
 
-#include "task/button.hpp"
+#include "blackboard/task_blackboard.hpp"
 #include "blackboard/queue_blackboard.hpp"
 
 namespace rfidoor::task {
@@ -31,8 +31,17 @@ void ButtonTask::spin() {
   }
 
   if (this->door_button.is_pressed()) {
+    if (blackboard::state_machine_task.get_state() == state_t::ABERTA) {
+        rfidoor::queue::blackboard::event_queue.publish(
+            rfidoor::task::event_t::FECHAR);
+      Serial.println("oi vou fechar");
+    }
+    Serial.println("Botao da porta pressionado");
+  }
+  else if (blackboard::state_machine_task.get_state() == state_t::DESTRANCADA_FECHADA) {
     rfidoor::queue::blackboard::event_queue.publish(
-        rfidoor::task::event_t::FECHAR);
+        rfidoor::task::event_t::ABRIR);
+        Serial.println("Botao da porta despressionado");
   }
 }
 
