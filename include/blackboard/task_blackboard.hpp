@@ -11,10 +11,12 @@
 
 #include "pinout.hpp"
 #include "task/blinky.hpp"
+#include "task/bluetooth.hpp"
 #include "task/button.hpp"
 #include "task/password.hpp"
 #include "task/rfid.hpp"
 #include "task/state_machine.hpp"
+#include "task/display.hpp"
 #include "task/task.hpp"
 
 namespace rfidoor::task::blackboard {
@@ -47,6 +49,16 @@ extern PasswordTask password_task;
  * @brief Instanciate the button task
  */
 extern ButtonTask button_task;
+
+/**
+ * @brief Instanciate the display task
+ */
+extern DisplayTask display_task;
+
+/**
+ * @brief Instanciate the bluetooth task
+ */
+extern BluetoothTask bluetooth_task;
 
 }; // namespace rfidoor::task::blackboard
 

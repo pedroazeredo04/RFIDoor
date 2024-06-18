@@ -16,9 +16,9 @@
 namespace rfidoor::semaphore::blackboard {
 
 /**
- * @brief Binary semaphore example
+ * @brief Binary semaphore for the display
  */
-extern BinarySemaphore binary_semaphore_example;
+extern BinarySemaphore display_semaphore;
 
 /**
  * @brief Mutex semaphore for the registering state
