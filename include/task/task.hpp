@@ -34,6 +34,7 @@ typedef struct task_config_t {
   const char *name;
   uint32_t stack_size;
   task_priority_t priority;
+  uint32_t delay_ms;
 } task_config_t;
 
 /**
