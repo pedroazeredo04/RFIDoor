@@ -28,7 +28,7 @@ float get_time_ms() {
 /**
  * @brief Timeout to be given to the state machine
  */
-const uint32_t timeout_ms{1000};
+const uint32_t timeout_ms{5000};
 
 /**
  * @brief Open and closed servo motor position
@@ -178,7 +178,6 @@ void StateMachineTask::execute_action() {
     this->is_timeout_timer_running = false;
     break;
   case A10:
-    // comeca contagem do timeout e display porta destrancada fechada
     this->is_timeout_timer_running = true;
     this->timeout_timer_start_ms = get_time_ms();
     break;

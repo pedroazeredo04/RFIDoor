@@ -16,4 +16,8 @@ void setup() {
   // rfidoor::task::blackboard::RFID_task.create_task();
 }
 
-void loop() {}
+void loop() {
+   if (rfidoor::pinout::door_button.is_pressed()) {
+    Serial.println("Button pressed");
+   }
+}
