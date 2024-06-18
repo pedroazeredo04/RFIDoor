@@ -11,6 +11,7 @@
 
 #include "pinout.hpp"
 #include "task/blinky.hpp"
+#include "task/bluetooth.hpp"
 #include "task/button.hpp"
 #include "task/password.hpp"
 #include "task/rfid.hpp"
@@ -47,6 +48,11 @@ extern PasswordTask password_task;
  * @brief Instanciate the button task
  */
 extern ButtonTask button_task;
+
+/**
+ * @brief Instanciate the bluetooth task
+ */
+extern BluetoothTask bluetooth_task;
 
 }; // namespace rfidoor::task::blackboard
 

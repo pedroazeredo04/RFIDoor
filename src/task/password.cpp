@@ -18,7 +18,8 @@ PasswordTask::PasswordTask(rfidoor::peripheral::Keyboard &keyboard,
     : Task(config), keyboard{keyboard} {}
 
 void PasswordTask::init() {
-  //
+  this->valid_passwords.push_back({"1234"});
+  this->valid_passwords.push_back({"000000"});
 }
 
 void PasswordTask::spin() {
@@ -36,6 +37,11 @@ void PasswordTask::spin() {
     break;
   }
   }
+}
+
+std::vector<PasswordTask::password_t>
+PasswordTask::get_valid_passwords() const {
+  return this->valid_passwords;
 }
 
 void PasswordTask::read_password() {

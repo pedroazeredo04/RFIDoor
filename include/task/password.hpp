@@ -53,6 +53,13 @@ public:
    */
   virtual void spin() override;
 
+  /**
+   * @brief Get the valid passwords
+   *
+   * @return std::vector<password_t> Vector containing the valid passwords
+   */
+  std::vector<password_t> get_valid_passwords() const;
+
 private:
   /**
    * @brief Read an id from the NFC peripheral
