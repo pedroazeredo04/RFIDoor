@@ -26,7 +26,7 @@ const task_config_t password_config = {
     .name = "passwordTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
 const task_config_t display_config = {
-    .name = "displayTask", .stack_size = 1000, .priority = LOW_PRIORITY};
+    .name = "displayTask", .stack_size = 5000, .priority = LOW_PRIORITY};
 
 /**
  * @brief Frequency of the blinky task in miliseconds

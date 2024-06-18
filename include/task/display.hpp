@@ -46,9 +46,11 @@ private:
    */
   void default_display(rfidoor::task::state_t state);
 
-  const char* current_password{"oi"};
+  const char* current_password;
+
+  char password_ch;
 };
 
-}; // namespace rfidoor::task
+} // namespace rfidoor::task
 
 #endif

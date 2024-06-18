@@ -15,14 +15,14 @@ namespace rfidoor::task {
 const uint8_t open_position{90};
 const uint8_t close_position{0};
 
-const uint16_t LCD_timeout_ms{3000};
-
 StateMachineTask::StateMachineTask(rfidoor::peripheral::ServoController& servo, const task_config_t &config)
     : servo{servo}, Task(config) {}
 
 void StateMachineTask::init() {
   this->state = TRANCADA_IDLE;
   this->event = NENHUM_EVENTO;
+  this->action = NENHUMA_ACAO;
+  this->execute_action();
 
   for (int state = 0; state < NUM_STATES; state++) {
     for (int event = 0; event < NUM_EVENTS; event++) {
@@ -63,6 +63,8 @@ void StateMachineTask::init() {
   this->next_state_state_machine_table[DIGITANDO_SENHA][SENHA_VALIDA] =
       DESTRANCADA_FECHADA;
   this->action_state_machine_table[DIGITANDO_SENHA][SENHA_VALIDA] = A07;
+  this->next_state_state_machine_table[DIGITANDO_SENHA][TECLA] = DIGITANDO_SENHA;
+  this->action_state_machine_table[DIGITANDO_SENHA][TECLA] = A02;
 
   // Set the actions and next states for each event for DESTRANCADA_FECHADA
   this->next_state_state_machine_table[DESTRANCADA_FECHADA][TIMEOUT] =
@@ -84,13 +86,13 @@ void StateMachineTask::init() {
   this->action_state_machine_table[REGISTRO][SENHA_CADASTRADA] = A13;
   this->next_state_state_machine_table[REGISTRO][SEGURAR_ASTERISCO] = ABERTA;
   this->action_state_machine_table[REGISTRO][SEGURAR_ASTERISCO] = A14;
+
 }
 
 void StateMachineTask::spin() {
   if (rfidoor::queue::blackboard::event_queue.read(&(this->event))) {
     this->action = this->get_action();
     this->state = this->get_next_state();
-    rfidoor::queue::blackboard::state_queue.publish(this->state);
     this->execute_action();
   }
 }
@@ -126,7 +128,6 @@ void StateMachineTask::execute_action() {
     rfidoor::pinout::lcd.clear();
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("SENHA INVALIDA!");
-    delay(LCD_timeout_ms);
     rfidoor::pinout::lcd.clear();
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("Digite a senha ");

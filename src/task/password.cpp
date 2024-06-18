@@ -52,8 +52,8 @@ void PasswordTask::read_password() {
 
     if (key >= '0' and key <= '9') {
       this->current_password += key;
+      rfidoor::queue::blackboard::password_queue.publish(key);      
       rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
-      
     }
 
     if ((this->current_password.length() >= password_max_length) or
@@ -83,10 +83,13 @@ void PasswordTask::register_password() {
       rfidoor::semaphore::blackboard::registering_semaphore.take();
       this->is_entering_password = true;
       this->current_password.clear();
+      rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
     if (key >= '0' and key <= '9') {
       this->current_password += key;
+      rfidoor::queue::blackboard::password_queue.publish(key);
+      rfidoor::queue::blackboard::event_queue.publish(event_t::TECLA);
     }
 
     if ((this->current_password.length() >= password_max_length) or

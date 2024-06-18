@@ -21,11 +21,9 @@ namespace rfidoor::queue::blackboard {
 extern Queue<rfidoor::task::event_t> event_queue;
 
 /**
- * @brief Queue used to send the current state machine state
+ * @brief Queue used to send the current password
  */
-extern Queue<rfidoor::task::state_t> state_queue;
-
-extern Queue<rfidoor::task::password_t> password_queue;
+extern Queue<char> password_queue;
 
 } // namespace rfidoor::queue::blackboard
 
