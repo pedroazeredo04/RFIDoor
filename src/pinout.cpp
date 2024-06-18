@@ -24,29 +24,24 @@ const uint8_t internal_led_pin{2};
 /**
  * @brief Keyboard pinout
  */
-// Old config
-// uint8_t keypad_row_pins[4]{14, 13, 12, 15};
-// uint8_t keypad_col_pins[4]{19, 23, 25, 26};
-
-// New try
 uint8_t keypad_row_pins[4]{12, 14, 27, 26};
-uint8_t keypad_col_pins[4]{25, 33, 32, 35};
+uint8_t keypad_col_pins[4]{25, 33, 32, 15};
 
 /**
  * @brief Servo pinout
  */
-const uint8_t servoPin{18};
+const uint8_t servoPin{13};
 
 /**
  * @brief NFC Pinout
  */
-const uint8_t irq_pin{4};
-const uint8_t rst_pin{5};
+const uint8_t irq_pin{2};
+const uint8_t rst_pin{4};
 
 /**
  * @brief Inside button pin
  */
-extern const uint8_t inside_button_pin{34};
+extern const uint8_t inside_button_pin{18};
 
 /**
  * @brief Door button pin

@@ -7,7 +7,7 @@
     {
       "type": "wokwi-lcd1602",
       "id": "lcd1",
-      "top": -70.4,
+      "top": -60.8,
       "left": 303.2,
       "attrs": { "pins": "i2c" }
     },
@@ -33,30 +33,49 @@
       "left": 239.45,
       "rotate": 90,
       "attrs": { "value": "10000" }
+    },
+    {
+      "type": "wokwi-pushbutton",
+      "id": "btn2",
+      "top": 246.2,
+      "left": 172.8,
+      "attrs": { "color": "green", "label": "No-Bounce" }
+    },
+    {
+      "type": "wokwi-resistor",
+      "id": "r2",
+      "top": 321.05,
+      "left": 123.4,
+      "rotate": 180,
+      "attrs": { "value": "10000" }
     }
   ],
   "connections": [
     [ "esp:TX0", "$serialMonitor:RX", "", [] ],
     [ "esp:RX0", "$serialMonitor:TX", "", [] ],
-    [ "lcd1:SDA", "esp:D21", "green", [ "v-4.49", "h-28.8", "v23.89" ] ],
+    [ "lcd1:SDA", "esp:D21", "green", [ "v0.2", "h-28.8", "v10" ] ],
     [ "lcd1:GND", "esp:GND.2", "black", [ "h-76.8", "v230.4", "h-220.8", "v-115.1" ] ],
     [ "lcd1:VCC", "esp:3V3", "red", [ "h-115.2", "v115.3" ] ],
     [ "lcd1:SCL", "esp:D22", "purple", [ "h-19.2", "v-38.1", "h-96", "v9.9" ] ],
-    [ "esp:D18", "servo1:PWM", "cyan", [ "h38.1", "v-173" ] ],
     [ "esp:GND.2", "servo1:GND", "black", [ "h-38.4", "v-268.9" ] ],
     [ "esp:3V3", "servo1:V+", "red", [ "v0", "h76.5", "v-259.2" ] ],
-    [ "esp:D5", "r1:1", "green", [ "h124.5", "v105.6" ] ],
-    [ "btn1:2.l", "r1:1", "green", [ "h0" ] ],
+    [ "esp:D5", "r1:1", "white", [ "h124.5", "v105.6" ] ],
+    [ "btn1:2.l", "r1:1", "white", [ "h0" ] ],
     [ "esp:3V3", "btn1:1.r", "red", [ "h220.5", "v76.8" ] ],
     [ "esp:GND.1", "r1:2", "black", [ "h66.9", "v163.1" ] ],
-    [ "esp:D35", "keypad1:C4", "green", [ "h0" ] ],
-    [ "keypad1:C3", "esp:D32", "green", [ "v0" ] ],
-    [ "keypad1:C2", "esp:D33", "green", [ "v0" ] ],
-    [ "esp:D25", "keypad1:C1", "green", [ "h0" ] ],
-    [ "esp:D26", "keypad1:R4", "green", [ "h0" ] ],
-    [ "esp:D27", "keypad1:R3", "green", [ "h0" ] ],
+    [ "esp:D18", "r2:1", "white", [ "h18.9", "v268.8" ] ],
+    [ "esp:GND.1", "r2:2", "black", [ "h9.3", "v317.9" ] ],
+    [ "esp:3V3", "btn2:1.r", "red", [ "h95.7", "v192", "h-0.2" ] ],
+    [ "r2:1", "btn2:2.l", "white", [ "h0" ] ],
+    [ "esp:D12", "keypad1:R1", "green", [ "h0" ] ],
     [ "esp:D14", "keypad1:R2", "green", [ "h0" ] ],
-    [ "esp:D12", "keypad1:R1", "green", [ "h0" ] ]
+    [ "esp:D27", "keypad1:R3", "green", [ "h0" ] ],
+    [ "keypad1:R4", "esp:D26", "green", [ "v0" ] ],
+    [ "esp:D25", "keypad1:C1", "green", [ "h0" ] ],
+    [ "keypad1:C2", "esp:D33", "green", [ "v0" ] ],
+    [ "esp:D32", "keypad1:C3", "green", [ "h0" ] ],
+    [ "esp:D13", "servo1:PWM", "cyan", [ "h-19.2", "v-230.6", "h115.2", "v-0.2" ] ],
+    [ "keypad1:C4", "esp:D35", "green", [ "v0" ] ]
   ],
   "dependencies": {}
 }
