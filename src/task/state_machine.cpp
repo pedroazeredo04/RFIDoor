@@ -8,8 +8,23 @@
 
 #include "task/state_machine.hpp"
 #include "blackboard/queue_blackboard.hpp"
+#include <esp_timer.h>
 
 namespace rfidoor::task {
+
+/**
+ * @brief Conversion constant from microseconds to milliseconds
+ */
+const float microseconds_to_miliseconds{1e-3};
+
+/**
+ * @brief Function to get the current time in milliseconds
+ */
+float get_time_ms() {
+  return esp_timer_get_time() * microseconds_to_miliseconds;
+}
+
+const uint32_t timeout_ms{15000};
 
 StateMachineTask::StateMachineTask(const task_config_t &config)
     : Task(config) {}
@@ -81,6 +96,11 @@ void StateMachineTask::init() {
 }
 
 void StateMachineTask::spin() {
+  if (this->is_to_timeout and (get_time_ms() - this->timeout_timer_start_ms > timeout_ms)) {
+    rfidoor::queue::blackboard::event_queue.publish(TIMEOUT);
+    this->is_to_timeout = false;
+  }
+
   if (rfidoor::queue::blackboard::event_queue.read(&(this->event))) {
     this->action = this->get_action();
     this->state = this->get_next_state();
@@ -102,24 +122,34 @@ action_t StateMachineTask::get_action() {
 void StateMachineTask::execute_action() {
   switch (this->action) {
   case A01:
+    this->timeout_timer_start_ms = get_time_ms();
+    this->is_to_timeout = true;
     // destranca e display botao
     break;
   case A02:
+    this->timeout_timer_start_ms = get_time_ms();
+    this->is_to_timeout = true;
     // display padrao senha e vai pro tratamento de senha
     rfidoor::pinout::lcd.set_cursor(0, 0);
     rfidoor::pinout::lcd.write("OMG SENHA!      ");
     rfidoor::pinout::lcd.set_cursor(1, 1);
     break;
   case A03:
+    this->timeout_timer_start_ms = get_time_ms();
+    this->is_to_timeout = true;
     // display sinal invalido
     break;
   case A04:
+    this->timeout_timer_start_ms = get_time_ms();
+    this->is_to_timeout = true;
     // destranca e display sinal valido
     break;
   case A05:
+    this->is_to_timeout = false;
     // apaga display
     break;
   case A06:
+    this->is_to_timeout = false;
     // display senha invalida e display padrão
     rfidoor::pinout::lcd.clear();
     rfidoor::pinout::lcd.set_cursor(0, 0);
@@ -133,27 +163,37 @@ void StateMachineTask::execute_action() {
     rfidoor::pinout::lcd.set_cursor(0, 1);
     break;
   case A07:
+    this->timeout_timer_start_ms = get_time_ms();
+    this->is_to_timeout = true;
     // destranca e display senha valida
     break;
   case A08:
+    this->is_to_timeout = false;
     // tranca e display padrão
     break;
   case A09:
+    this->is_to_timeout = false;
     // desativa timeout e display porta aberta
     break;
   case A10:
+    this->timeout_timer_start_ms = get_time_ms();
+    this->is_to_timeout = true;
     // ativa timeout e display porta destrancada fechada
     break;
   case A11:
+    this->is_to_timeout = false;
     // habilitar registro e display registro
     break;
   case A12:
+    this->is_to_timeout = false;
     // desabilita registro e display sinal cadastrado
     break;
   case A13:
+    this->is_to_timeout = false;
     // desabilita registro e display senha cadastrado
     break;
   case A14:
+    this->is_to_timeout = false;
     // desabilita registro e display registro cancelado
     break;
   default:

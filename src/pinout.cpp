@@ -24,14 +24,6 @@ const uint8_t internal_led_pin{2};
 /**
  * @brief Keyboard pinout
  */
-// uint8_t keypad_row_pins[4]{12, 14, 27, 26};
-// uint8_t keypad_col_pins[4]{25, 33, 32, 35};
-
-// Old config
-// uint8_t keypad_row_pins[4]{14, 13, 12, 15};
-// uint8_t keypad_col_pins[4]{19, 23, 25, 26};
-
-// New try
 uint8_t keypad_row_pins[4]{35, 32, 33, 25};
 uint8_t keypad_col_pins[4]{26, 27, 14, 12};
 

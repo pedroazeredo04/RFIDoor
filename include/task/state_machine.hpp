@@ -82,6 +82,16 @@ private:
    * @brief Action of the state machine
    */
   action_t action;
+
+  /**
+   * @brief Timer to count to timeout
+   */
+  uint32_t timeout_timer_start_ms;
+
+  /**
+   * @brief Flag to indicate if is to count timeout or not
+   */
+  bool is_to_timeout;  
 };
 
 } // namespace rfidoor::task
