@@ -24,9 +24,9 @@ void BluetoothTask::spin() {
 
     if (command.startsWith("see_passwords")) {
       // Envia a lista de senhas
-      for (PasswordTask::password_t &password :
+      for (password_t &password :
            rfidoor::task::blackboard::password_task.get_valid_passwords()) {
-        this->bluetooth.println(password.password.c_str());
+        this->bluetooth.println(password.c_str());
       }
     }
   }
