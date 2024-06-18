@@ -15,7 +15,7 @@ namespace rfidoor::task {
  * Task class
  */
 const task_config_t default_config = {
-    .name = "", .stack_size = 1000, .priority = LOW_PRIORITY};
+    .name = "", .stack_size = 1000, .priority = LOW_PRIORITY, .delay_ms = 10};
 
 Task::Task(const task_config_t &config) : configuration{config} {}
 
@@ -40,6 +40,7 @@ void Task::entry_function_wrapper(void *params) {
 
   while (true) {
     p->spin();
+    task_sleep_ms(p->configuration.delay_ms);
   }
 }
 
