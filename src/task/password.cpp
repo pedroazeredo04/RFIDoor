@@ -38,11 +38,6 @@ void PasswordTask::spin() {
   }
 }
 
-std::vector<password_t>
-PasswordTask::get_valid_passwords() const {
-  return this->valid_passwords;
-}
-
 void PasswordTask::read_password() {
   char key = this->keyboard.getKey();
 
@@ -70,10 +65,13 @@ void PasswordTask::read_password() {
         if (password == this->current_password) {
           rfidoor::queue::blackboard::event_queue.publish(
               event_t::SENHA_VALIDA);
+
+          this->clear_current_password();
           return;
         }
       }
       rfidoor::queue::blackboard::event_queue.publish(event_t::SENHA_INVALIDA);
+      this->clear_current_password();
     }
   }
 }
@@ -104,11 +102,19 @@ void PasswordTask::register_password() {
       this->valid_passwords.push_back(this->current_password);
       rfidoor::queue::blackboard::event_queue.publish(
           event_t::SENHA_CADASTRADA);
+      this->clear_current_password();
       rfidoor::semaphore::blackboard::registering_semaphore.give();
     }
   }
 }
 
 password_t PasswordTask::get_current_password() { return this->current_password; }
+
+void PasswordTask::clear_current_password() { this->current_password.clear(); }
+
+std::vector<password_t>
+PasswordTask::get_valid_passwords() const {
+  return this->valid_passwords;
+}
 
 } // namespace rfidoor::task

@@ -158,6 +158,7 @@ void StateMachineTask::execute_action() {
     break;
   case A05:
     this->is_timeout_timer_running = false;
+    blackboard::password_task.clear_current_password();
     break;
   case A06:
     this->is_timeout_timer_running = false;
@@ -182,18 +183,22 @@ void StateMachineTask::execute_action() {
     this->timeout_timer_start_ms = get_time_ms();
     break;
   case A11:
+    blackboard::display_task.temporary_display("   Registro!   ");
     this->is_timeout_timer_running = false;
     // habilitar registro e display registro
     break;
   case A12:
+    blackboard::display_task.temporary_display("Sinal cadastrado");
     this->is_timeout_timer_running = false;
     // desabilita registro e display sinal cadastrado
     break;
   case A13:
+    blackboard::display_task.temporary_display("Senha cadastrada");
     this->is_timeout_timer_running = false;
     // desabilita registro e display senha cadastrado
     break;
   case A14:
+    blackboard::display_task.temporary_display("   Cancelado   ");
     this->is_timeout_timer_running = false;
     // desabilita registro e display registro cancelado
     break;

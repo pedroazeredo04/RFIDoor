@@ -31,8 +31,6 @@ void DisplayTask::default_display(state_t state) {
         rfidoor::pinout::lcd.write("Digite a senha ");
         rfidoor::pinout::lcd.write_special_char(
             rfidoor::peripheral::LOCK_SPECIAL_CHAR);
-
-        Serial.println("PADRAO TRANCADA_IDLE");
         break;
     case state_t::DIGITANDO_SENHA:
         if (not rfidoor::queue::blackboard::password_queue.read(&(this->password_ch))){
@@ -41,8 +39,6 @@ void DisplayTask::default_display(state_t state) {
         rfidoor::pinout::lcd.set_cursor(1, 1);
         this->current_password = blackboard::password_task.get_current_password().c_str();
         rfidoor::pinout::lcd.write(this->current_password);
-
-        Serial.println("PADRAO DIGITANDO_SENHA");
         break;
     case state_t::DESTRANCADA_FECHADA:
         rfidoor::pinout::lcd.clear();
@@ -50,8 +46,6 @@ void DisplayTask::default_display(state_t state) {
         rfidoor::pinout::lcd.write("     Porta     ");
         rfidoor::pinout::lcd.set_cursor(1, 1);
         rfidoor::pinout::lcd.write("  destrancada  ");
-
-        Serial.println("PADRAO DESTRANCADA_FECHADA");
         break;
     case state_t::ABERTA:
         rfidoor::pinout::lcd.clear();
@@ -59,13 +53,9 @@ void DisplayTask::default_display(state_t state) {
         rfidoor::pinout::lcd.write("Segure o botao");
         rfidoor::pinout::lcd.set_cursor(1, 1);
         rfidoor::pinout::lcd.write("para registrar!");
-
-        Serial.println("PADRAO ABERTA");
         break;
     case state_t::REGISTRO:
         this->default_display(state_t::DIGITANDO_SENHA);
-
-        Serial.println("PADRAO REGISTRO");
         break;
   }
 }

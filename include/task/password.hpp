@@ -57,6 +57,11 @@ public:
   password_t get_current_password();
 
   /**
+  * @brief Clear the current password
+  */
+  void clear_current_password();
+
+  /**
    * @brief Get the valid passwords
    *
    * @return std::vector<password_t> Vector containing the valid passwords

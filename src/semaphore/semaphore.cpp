@@ -21,8 +21,6 @@ const void Semaphore::take() {
     xSemaphoreTake(this->semaphore_handle, semaphore_delay);
     return;
   }
-
-  Serial.println("Erro: Semáforo não inicializado.");
 }
 
 } // namespace rfidoor::semaphore

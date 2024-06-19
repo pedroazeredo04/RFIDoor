@@ -22,26 +22,27 @@ void ButtonTask::init() {}
 
 void ButtonTask::spin() {
   this->inside_button_status = this->inside_button.get_status();
-  this->door_button_status = this->door_button.get_status();
 
   if (this->inside_button_status ==
       rfidoor::peripheral::Button::Status::SHORT_PRESS) {
     rfidoor::queue::blackboard::event_queue.publish(
         rfidoor::task::event_t::BOTAO);
   }
+  else if (this->inside_button_status ==
+           rfidoor::peripheral::Button::Status::LONG_PRESS) {
+    rfidoor::queue::blackboard::event_queue.publish(
+        rfidoor::task::event_t::SEGURAR_ASTERISCO);
+  }
 
   if (this->door_button.is_pressed()) {
     if (blackboard::state_machine_task.get_state() == state_t::ABERTA) {
         rfidoor::queue::blackboard::event_queue.publish(
             rfidoor::task::event_t::FECHAR);
-      Serial.println("oi vou fechar");
     }
-    Serial.println("Botao da porta pressionado");
   }
   else if (blackboard::state_machine_task.get_state() == state_t::DESTRANCADA_FECHADA) {
     rfidoor::queue::blackboard::event_queue.publish(
         rfidoor::task::event_t::ABRIR);
-        Serial.println("Botao da porta despressionado");
   }
 }
 
