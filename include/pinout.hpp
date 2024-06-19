@@ -64,7 +64,7 @@ extern rfidoor::peripheral::Led board_led;
 extern rfidoor::peripheral::Lcd lcd;
 extern rfidoor::peripheral::Keyboard keyboard;
 extern rfidoor::peripheral::ServoController servo;
-extern rfidoor::peripheral::Nfc nfc;
+extern Adafruit_PN532 nfc;
 extern rfidoor::peripheral::Button inside_button;
 extern rfidoor::peripheral::Button door_button;
 

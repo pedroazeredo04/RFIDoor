@@ -46,7 +46,7 @@ extern const uint8_t inside_button_pin{18};
 /**
  * @brief Door button pin
  */
-extern const uint8_t door_button_pin{18};
+extern const uint8_t door_button_pin{5};
 
 /**
  * @brief Peripheral initializations
@@ -55,7 +55,7 @@ rfidoor::peripheral::Led board_led(internal_led_pin);
 rfidoor::peripheral::Lcd lcd(lcd_sda_pin, lcd_scl_pin);
 rfidoor::peripheral::Keyboard keyboard(keypad_row_pins, keypad_col_pins);
 rfidoor::peripheral::ServoController servo(servoPin);
-rfidoor::peripheral::Nfc nfc(irq_pin, rst_pin);
+Adafruit_PN532 nfc(irq_pin, rst_pin);
 rfidoor::peripheral::Button inside_button(inside_button_pin);
 rfidoor::peripheral::Button door_button(door_button_pin);
 

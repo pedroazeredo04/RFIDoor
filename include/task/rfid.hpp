@@ -13,6 +13,7 @@
 #include "task/state_machine_types.hpp"
 #include "task/task.hpp"
 #include <vector>
+#include <Adafruit_PN532.h>
 
 namespace rfidoor::task {
 
@@ -27,8 +28,7 @@ public:
    * @param nfc NFC object to be controlled
    * @param config Configuration type for Task class
    */
-  RFIDTask(rfidoor::peripheral::Nfc &nfc,
-           const task_config_t &config = default_config);
+  RFIDTask(const task_config_t &config = default_config);
 
   /**
    * @brief Override of the mother class Task init function
@@ -50,11 +50,6 @@ private:
    * @brief Register a new id in the valid_ids vector
    */
   void register_id();
-
-  /**
-   * @brief NFC peripheral to be controlled
-   */
-  rfidoor::peripheral::Nfc nfc;
 
   /**
    * @brief Vector containing valid IDs

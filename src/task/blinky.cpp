@@ -21,7 +21,6 @@ void BlinkyTask::init() {
 
 void BlinkyTask::spin() {
   this->led.toggle();
-  this->task_sleep_ms(this->blinky_frequency_ms);
 }
 
 } // namespace rfidoor::task

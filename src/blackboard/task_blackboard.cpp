@@ -26,7 +26,7 @@ const task_config_t state_machine_config = {.name = "stateMachineTask",
                                             .delay_ms = 10};
 
 const task_config_t rfid_config = {.name = "RFIDTask",
-                                   .stack_size = 1000,
+                                   .stack_size = 5000,
                                    .priority = LOW_PRIORITY,
                                    .delay_ms = 10};
 
@@ -60,7 +60,7 @@ StateMachineTask state_machine_task(rfidoor::pinout::servo, state_machine_config
 /**
  * @brief Instanciate the RFID task
  */
-RFIDTask RFID_task(rfidoor::pinout::nfc, rfid_config);
+RFIDTask RFID_task(rfid_config);
 
 /**
  * @brief Instanciate the password task
