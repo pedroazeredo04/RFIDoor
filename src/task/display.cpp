@@ -55,7 +55,14 @@ void DisplayTask::default_display(state_t state) {
         rfidoor::pinout::lcd.write("para registrar!");
         break;
     case state_t::REGISTRO:
-        this->default_display(state_t::DIGITANDO_SENHA);
+        if (not rfidoor::queue::blackboard::password_queue.read(&(this->password_ch))){
+            rfidoor::pinout::lcd.clear();
+            rfidoor::pinout::lcd.set_cursor(0, 0);
+            rfidoor::pinout::lcd.write("Cadastre a senha");
+        }
+        rfidoor::pinout::lcd.set_cursor(1, 1);
+        this->current_password = blackboard::password_task.get_current_password().c_str();
+        rfidoor::pinout::lcd.write(this->current_password);
         break;
   }
 }
